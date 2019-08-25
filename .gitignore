@@ -1,0 +1,18 @@
+# folder
+exp
+data
+datalog
+archive
+directory
+
+# file type
+*.pyc
+*.npy
+*.png
+*.zip
+*.swp
+*.pt
+
+# specific file
+.DS_Store
+.directory

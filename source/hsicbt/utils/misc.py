@@ -1,0 +1,82 @@
+from .. import *
+
+def get_accuracy_epoch(model, dataloader):
+    """ Computes the precision@k for the specified values of k
+        https://github.com/pytorch/examples/blob/master/imagenet/main.py
+    """
+    output_list = []
+    target_list = []
+    acc = []
+    loss = []
+    cross_entropy_loss = torch.nn.CrossEntropyLoss()
+    device = next(model.parameters()).device
+    for batch_idx, (data, target) in enumerate(dataloader):
+        data = data.to(device)
+        target = target.to(device)
+        output, hiddens = model(data)
+        loss.append(cross_entropy_loss(output, target).cpu().detach().numpy())
+        acc.append(get_accuracy(output, target)[0].cpu().detach().numpy())
+    return np.mean(acc), np.mean(loss)
+
+
+def get_accuracy(output, target, topk=(1,)):
+    """ Computes the precision@k for the specified values of k
+        https://github.com/pytorch/examples/blob/master/imagenet/main.py
+    """
+    maxk = max(topk)
+    batch_size = target.size(0)
+    _, pred = output.topk(maxk, 1, True, True)
+    pred = pred.t()
+    correct = pred.eq(target.view(1, -1).expand_as(pred))
+    res = []
+    for k in topk:
+        correct_k = correct[:k].view(-1).float().sum(0)
+        res.append(correct_k.mul_(100.0 / batch_size))
+    return res
+
+def get_accuracy_hsic(model, dataloader):
+    """ Computes the precision@k for the specified values of k
+        https://github.com/pytorch/examples/blob/master/imagenet/main.py
+    """
+    output_list = []
+    target_list = []
+    for batch_idx, (data, target) in enumerate(dataloader):
+        output, hiddens = model(data.to(next(model.parameters()).device))
+        output = output.cpu().detach().numpy()
+        target = target.cpu().detach().numpy().reshape(-1,1)
+        output_list.append(output)
+        target_list.append(target)
+    output_arr = np.vstack(output_list)
+    target_arr = np.vstack(target_list)
+    avg_acc = 0
+    reorder_list = []
+    for i in range(10):
+        indices = np.where(target_arr==i)[0]
+        select_item = output_arr[indices]
+        out = np.array([np.argmax(vec) for vec in select_item])
+        y = np.mean(select_item, axis=0)
+        while np.argmax(y) in reorder_list:
+            y[np.argmax(y)] = 0
+        reorder_list.append(np.argmax(y))
+        num_correct = np.where(out==np.argmax(y))[0]
+        accuracy = float(num_correct.shape[0]/out.shape[0])
+        avg_acc += accuracy
+    avg_acc /= 10.
+
+    return avg_acc*100., reorder_list
+
+def get_layer_parameters(model, layer_idx, size=4):
+
+    param_out = []
+    param_out_name = []
+    for it, (name, param) in enumerate(model.named_parameters()):
+        if int(it/size) == layer_idx:
+            param_out.append(param)
+            param_out_name.append(name)
+
+    return param_out, param_out_name
+
+
+def to_categorical(y, num_classes):
+    """ 1-hot encodes a tensor """
+    return torch.squeeze(torch.eye(num_classes)[y])

@@ -1,0 +1,17 @@
+batch_size: 256
+data_code: 'mnist'
+n_layers: 5
+hidden_width: 128
+log_batch_interval: 20
+device: 'cuda'
+learning_rate: 0.001
+hsic_learning_rate: 0.0001
+sigma_hx: 30.
+sigma_hy: 30.
+lambda_x: 1.
+lambda_y: 200.
+epochs_standard: 5
+epochs_hsic: 10
+epochs_format: 5
+task: 'general'
+

@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+
+from hsicbt.core.dispatcher import job_execution
+from hsicbt.utils.io import load_yaml
+from hsicbt.utils.welcome import say_hello
+import argparse
+
+def get_args():
+    """ args from input
+    """
+    parser = argparse.ArgumentParser(description='HSIC-Bottleneck research')
+    parser.add_argument('-cfg', '--config', type=str, help='config input path')
+    args = parser.parse_args()
+
+    return args
+    
+def main():
+
+	say_hello()
+	args = get_args()
+	config_dict = load_yaml(args.config)
+	
+	job_execution(config_dict)
+
+
+if __name__ == '__main__':
+	main()
