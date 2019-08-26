@@ -9,7 +9,7 @@ def get_dataset_from_code(code, batch_size):
         (torch.utils.data.DataLoader): train loader 
         (torch.utils.data.DataLoader): test loader
     """
-    dataset_root = os.path.join(os.environ['HOME'], 'kma-workspace/project/aphrodite/assets/data')
+    dataset_root = "./assets/data"
     if code == 'mnist':
         train_loader, test_loader = get_mnist_data(batch_size=batch_size,
             data_folder_path=os.path.join(dataset_root, 'mnist-data'))
