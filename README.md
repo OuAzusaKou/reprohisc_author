@@ -1,4 +1,4 @@
-#HSIC-Bottleneck
+# HSIC-Bottleneck
 
 
 ## Environment
@@ -22,19 +22,20 @@ source env.sh
 run_hsicbt -cfg config/hsictrain.yaml # making HSIC-Bottleneck first, which will be loaded in general
 run_hsicbt -cfg config/general.yaml
 ```
-- experiment sample
+- experiment sample (general comparison between format-train and standard-train)
 <img src="./assets/samples/standard-hsic-comparison.jpg"  width="256" height="256">
 <img src="./assets/samples/standard-hsic-comparison-epoch-test-acc.jpg"  width="256" height="256">
 <img src="./assets/samples/standard-hsic-comparison-epoch-train-acc.jpg"  width="256" height="256">
 
 #### HSICSolve
 - Pure HSIC solving the classification problem
+- model 784-256-256-256-256-256-10
 - will create assets/hsic-solve-actdist.jpg, for one-hot activation visualization
 - will create assets/hsic-solve-comparison.jpg, for comparing the backprop
 ```sh
 run_hsicbt -cfg config/hsicsolve.yaml
 ```
-- experiment sample
+- experiment sample (left:hsic/standard comparison, right: one-hot hsic activation)
 <img src="./assets/samples/hsic-solve-comparison.jpg"  width="256" height="256">
 <img src="./assets/samples/hsic-solve-actdist.jpg"  width="256" height="256">
 
@@ -46,7 +47,10 @@ run_hsicbt -cfg config/hsicsolve.yaml
 ```sh
 run_hsicbt -cfg config/niddle.yaml
 ```
-- experiment sample
+- experiment sample (1d activation distribution. left:hsic; right:standard)
 <img src="./assets/samples/activation-1d-dist-hsic.jpg"  width="256" height="256">
 <img src="./assets/samples/activation-1d-dist-standard.jpg"  width="256" height="256">
 
+#### Note
+- format-train: training with single layer attached after the HSIC-trained network
+- standard-train: the training with crossentorpy plus backpropagation
