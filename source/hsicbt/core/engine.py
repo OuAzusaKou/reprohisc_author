@@ -216,16 +216,22 @@ def training_standard(config_dict):
 
     batch_log_list = []
     epoch_log_dict = {}
-    epoch_log_dict['acc'] = []
-    epoch_log_dict['loss'] = []
-    
+    epoch_log_dict['train_acc'] = []
+    epoch_log_dict['train_loss'] = []
+    epoch_log_dict['test_acc'] = []
+    epoch_log_dict['test_loss'] = []
+
     for cepoch in range(config_dict['epochs_standard']):
         log = _normal_train(cepoch, model, train_loader, optimizer, config_dict)
         batch_log_list.append(log)
-        acc, loss = misc.get_accuracy_epoch(model, train_loader)
-        epoch_log_dict['acc'].append(acc) 
-        epoch_log_dict['loss'].append(loss)
-        print_highlight("Epoch - [{:04d}]: Acc: {}".format(cepoch, acc), 'green')
+        train_acc, train_loss = misc.get_accuracy_epoch(model, train_loader)
+        epoch_log_dict['train_acc'].append(train_acc) 
+        epoch_log_dict['train_loss'].append(train_loss)
+        test_acc, test_loss = misc.get_accuracy_epoch(model, test_loader)
+        epoch_log_dict['test_acc'].append(test_acc) 
+        epoch_log_dict['test_loss'].append(test_loss)
+        print_highlight("Epoch - [{:04d}]: Training Acc: {:.2f}".format(cepoch, train_acc), 'green')
+        print_highlight("Epoch - [{:04d}]: Testing  Acc: {:.2f}".format(cepoch, test_acc), 'green')
 
     if config_dict['task'] == 'niddle':
         _activations_extraction(model, train_loader, "./assets/activation-niddle-standard.npy", 1)
@@ -252,17 +258,23 @@ def training_format(config_dict):
 
     batch_log_list = []
     epoch_log_dict = {}
-    epoch_log_dict['acc'] = []
-    epoch_log_dict['loss'] = []
+    epoch_log_dict['train_acc'] = []
+    epoch_log_dict['train_loss'] = []
+    epoch_log_dict['test_acc'] = []
+    epoch_log_dict['test_loss'] = []
 
     for cepoch in range(config_dict['epochs_format']):
         log = _normal_train(cepoch, ensemble_model, train_loader, optimizer, config_dict)
         batch_log_list.append(log)
 
-        acc, loss = misc.get_accuracy_epoch(ensemble_model, train_loader)
-        epoch_log_dict['acc'].append(acc) 
-        epoch_log_dict['loss'].append(loss)
-        print_highlight("Epoch - [{:04d}]: Acc: {}".format(cepoch, acc), 'green')
+        train_acc, train_loss = misc.get_accuracy_epoch(ensemble_model, train_loader)
+        epoch_log_dict['train_acc'].append(train_acc) 
+        epoch_log_dict['train_loss'].append(train_loss)
+        test_acc, test_loss = misc.get_accuracy_epoch(ensemble_model, test_loader)
+        epoch_log_dict['test_acc'].append(test_acc) 
+        epoch_log_dict['test_loss'].append(test_loss)
+        print_highlight("Epoch - [{:04d}]: Training Acc: {:.2f}".format(cepoch, train_acc), 'green')
+        print_highlight("Epoch - [{:04d}]: Testing  Acc: {:.2f}".format(cepoch, test_acc), 'green')
 
     return batch_log_list, epoch_log_dict
 
@@ -281,20 +293,26 @@ def training_hsic(config_dict):
 
     batch_log_list = []
     epoch_log_dict = {}
-    epoch_log_dict['acc'] = []
-
+    epoch_log_dict['train_acc'] = []
+    epoch_log_dict['test_acc'] = []
+    
     for cepoch in range(config_dict['epochs_hsic']):
         log = _hsic_train(cepoch, model, train_loader, config_dict)
         batch_log_list.append(log)
-        save_model(model, "models/hsic_weights.pt")
+
+        if config_dict['task'] == 'hsic-train':
+            save_model(model, "models/hsic_weights.pt")
 
         if (cepoch+1) % 5 == 0:
             config_dict['learning_rate'] /= 5.
     
         if config_dict['task'] == 'hsic-solve':
-            acc, reordered = misc.get_accuracy_hsic(model=model, dataloader=train_loader)
-            print_highlight("Epoch - [{:04d}]: Acc: {}".format(cepoch, acc), 'green')
-            epoch_log_dict['acc'].append(acc)            
+            train_acc, reordered = misc.get_accuracy_hsic(model=model, dataloader=train_loader)
+            test_acc, reordered = misc.get_accuracy_hsic(model=model, dataloader=test_loader)
+            print_highlight("Epoch - [{:04d}]: Training Acc: {:.2f}".format(cepoch, train_acc), 'green')
+            print_highlight("Epoch - [{:04d}]: Testing  Acc: {:.2f}".format(cepoch, test_acc), 'green')
+            epoch_log_dict['train_acc'].append(train_acc)
+            epoch_log_dict['test_acc'].append(test_acc)
 
     if config_dict['task'] == 'hsic-solve':
         _activations_extraction(model, train_loader, "./assets/activation-onehot.npy")

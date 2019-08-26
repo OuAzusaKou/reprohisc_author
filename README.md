@@ -19,8 +19,10 @@ source env.sh
 - The general comparison between our work and standard training
 - will create assets/standard-hsic-comparison.jpg
 ```sh
+run_hsicbt -cfg config/hsictrain.yaml # making HSIC-Bottleneck first, which will be loaded in general
 run_hsicbt -cfg config/general.yaml
 ```
+<img src="./"  width="256" height="256">
 
 #### HSICSolve
 - Pure HSIC solving the classification problem
