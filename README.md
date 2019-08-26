@@ -22,7 +22,10 @@ source env.sh
 run_hsicbt -cfg config/hsictrain.yaml # making HSIC-Bottleneck first, which will be loaded in general
 run_hsicbt -cfg config/general.yaml
 ```
-<img src="./"  width="256" height="256">
+- experiment sample
+<img src="./assets/samples/standard-hsic-comparison.jpg"  width="256" height="256">
+<img src="./assets/samples/standard-hsic-comparison-epoch-test-acc.jpg"  width="256" height="256">
+<img src="./assets/samples/standard-hsic-comparison-epoch-train-acc.jpg"  width="256" height="256">
 
 #### HSICSolve
 - Pure HSIC solving the classification problem
@@ -31,6 +34,9 @@ run_hsicbt -cfg config/general.yaml
 ```sh
 run_hsicbt -cfg config/hsicsolve.yaml
 ```
+- experiment sample
+<img src="./assets/samples/hsic-solve-comparison.jpg"  width="256" height="256">
+<img src="./assets/samples/hsic-solve-actdist.jpg"  width="256" height="256">
 
 #### Niddle
 - 1d output network to plot the activation distribution, in order to visualize how HSIC-bottleneck separate the class signals
@@ -40,3 +46,7 @@ run_hsicbt -cfg config/hsicsolve.yaml
 ```sh
 run_hsicbt -cfg config/niddle.yaml
 ```
+- experiment sample
+<img src="./assets/samples/activation-1d-dist-hsic.jpg"  width="256" height="256">
+<img src="./assets/samples/activation-1d-dist-standard.jpg"  width="256" height="256">
+
