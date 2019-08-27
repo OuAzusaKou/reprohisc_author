@@ -65,8 +65,10 @@ def job_execution(config_dict):
             'ylabel': 'accurarcy',
             'label': ['stadnard-training', 'hsic-solve']
         }
-        plot.plot_epoch_log([out_epoch, out_hsic_epoch], 'acc', metadata)
-        plot.save_figure("./assets/hsic-solve-comparison.jpg")
+        plot.plot_epoch_log([out_epoch, out_hsic_epoch], 'test_acc', metadata)
+        plot.save_figure("./assets/hsic-solve-comparison-test-acc.jpg")
+        plot.plot_epoch_log([out_epoch, out_hsic_epoch], 'train_acc', metadata)
+        plot.save_figure("./assets/hsic-solve-comparison-train-acc.jpg")
         plot.plot_activation_distribution()
         plot.save_figure("./assets/hsic-solve-actdist.jpg")
 
