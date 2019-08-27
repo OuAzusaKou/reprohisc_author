@@ -3,6 +3,8 @@
 
 ## Environment
 - pytorch-1.1.0
+- numpy-1.16.4
+- scipy-1.3.0
 
 ## Usage
 Depending on the task, the command will run all experiments and save the figure into assets folder
