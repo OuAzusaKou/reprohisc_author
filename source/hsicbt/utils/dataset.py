@@ -81,8 +81,8 @@ def get_cifar10_data(data_folder_path, batch_size=64):
         (torch.utils.data.DataLoader): test loader
     """
     transform_train = transforms.Compose([
-        # transforms.RandomCrop(32, padding=4),
-        # transforms.RandomHorizontalFlip(),
+        transforms.RandomCrop(32, padding=4),
+        transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
     ])
     transform_test = transforms.Compose([

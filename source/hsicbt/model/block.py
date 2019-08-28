@@ -29,18 +29,14 @@ def get_activation_functional(atype):
 
 def get_primative_block(model_type, hid_in, hid_out, atype):
     if model_type=='simple-dense':
-        is_conv = False
         block = makeblock_dense(hid_in, hid_out, atype)
     elif model_type=='simple-conv':
-        is_conv = True
         block = makeblock_conv(hid_in, hid_out, atype)
     elif model_type=='resnet-dense':
-        is_conv = False
         block = BasicResidualBlockDense(hid_in, hid_out, atype)
     elif model_type=='resnet-conv':
-        is_conv = True
         block = BasicResidualBlockConv(hid_in, hid_out, atype)
-    return is_conv, block
+    return block
 
 def makeblock_dense(in_dim, out_dim, atype):
     
@@ -53,10 +49,10 @@ def makeblock_dense(in_dim, out_dim, atype):
         out = nn.Sequential(*[layer, bn, nonlinear])
     return out
 
-def makeblock_conv(in_chs, out_chs, atype):
+def makeblock_conv(in_chs, out_chs, atype, stride=1):
 
     layer = nn.Conv2d(in_channels=in_chs, 
-        out_channels=out_chs, kernel_size=5, stride=1, padding=2)
+        out_channels=out_chs, kernel_size=5, stride=stride)
     bn = nn.BatchNorm2d(out_chs)
     nonlinear = get_activation(atype)
 

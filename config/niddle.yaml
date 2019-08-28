@@ -6,10 +6,9 @@ learning_rate: 0.0001
 hsic_learning_rate: 0.0001
 sigma_hx: 30.
 sigma_hy: 30.
-# lambda_x: 0.0001
-# lambda_y: 1.
 lambda_x: 1.
 lambda_y: 200.
 epochs_standard: 5
 epochs_hsic: 5
 task: 'niddle'
+verbose: 0

@@ -6,7 +6,7 @@ def load_yaml(filepath):
 
     with open(filepath, 'r') as stream:
         try:
-            data = yaml.load(stream)
+            data = yaml.load(stream, yaml.FullLoader)
         except yaml.YAMLError as exc:
             print(exc)
     print_highlight("Loaded [{}]".format(filepath))

@@ -1,5 +1,29 @@
 from .. import *
 
+def get_n_channels(data_code):
+    in_ch = -1
+    if data_code == 'mnist':
+        in_ch = 1
+    elif data_code == 'cifar10':
+        in_ch = 3
+    elif data_code == 'fashionmnist':
+        in_ch = 1
+    else:
+        raise ValueError("Invalid or not supported dataset [{}]".format(data_code))
+    return in_ch
+
+def get_in_dimensions(data_code):
+    in_dim = -1    
+    if data_code == 'mnist':
+        in_dim = 784
+    elif data_code == 'cifar10':
+        in_dim = 1024
+    elif data_code == 'fashionmnist':
+        in_dim = 784
+    else:
+        raise ValueError("Invalid or not supported dataset [{}]".format(data_code))
+    return in_dim
+
 def get_accuracy_epoch(model, dataloader):
     """ Computes the precision@k for the specified values of k
         https://github.com/pytorch/examples/blob/master/imagenet/main.py

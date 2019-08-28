@@ -22,37 +22,35 @@ def job_execution(config_dict):
 
     elif config_dict['task'] == 'general':
 
-        # out_hsic_batch    , out_hsic_epoch     = training_hsic(config_dict)
-        out_standard_batch, out_standard_epoch = training_standard(config_dict)
         out_format_batch  , out_format_epoch   = training_format(config_dict)
-        
+        out_standard_batch, out_standard_epoch = training_standard(config_dict)
         
         metadata = {
             'title':'comparison of format-train and standard-train',
             'xlabel': 'epochs',
             'ylabel': 'training batch accurarcy',
-            'label': ['stadnard-training', 'format-train']
+            'label': ['stadnard-train', 'format-train']
         }
         plot.plot_batches_log([out_standard_batch, out_format_batch], 'batch_acc', metadata)
-        plot.save_figure("./assets/standard-hsic-comparison.jpg")
+        plot.save_figure("./assets/standard-hsic-comparison-{}-batch.jpg".format(config_dict['model']))
 
         metadata = {
             'title':'comparison of format-train and standard-train',
             'xlabel': 'epochs',
             'ylabel': 'training accurarcy (eval at the end of epoch)',
-            'label': ['stadnard-training', 'format-train']
+            'label': ['stadnard-train', 'format-train']
         }
         plot.plot_epoch_log([out_standard_epoch, out_format_epoch], 'train_acc', metadata)
-        plot.save_figure("./assets/standard-hsic-comparison-epoch-train-acc.jpg")
+        plot.save_figure("./assets/standard-hsic-comparison-{}-epoch-train-acc.jpg".format(config_dict['model']))
 
         metadata = {
             'title':'comparison of format-train and standard-train',
             'xlabel': 'epochs',
             'ylabel': 'test accurarcy (eval at the end of epoch)',
-            'label': ['stadnard-training', 'format-train']
+            'label': ['stadnard-train', 'format-train']
         }
         plot.plot_epoch_log([out_standard_epoch, out_format_epoch], 'test_acc', metadata)
-        plot.save_figure("./assets/standard-hsic-comparison-epoch-test-acc.jpg")
+        plot.save_figure("./assets/standard-hsic-comparison-{}-epoch-test-acc.jpg".format(config_dict['model']))
 
     elif config_dict['task'] == 'hsic-solve':
         

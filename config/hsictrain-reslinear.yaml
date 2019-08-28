@@ -1,17 +1,17 @@
-batch_size: 256
+batch_size: 128
 data_code: 'mnist'
 n_layers: 5
-hidden_width: 128
+hidden_width: 256
 log_batch_interval: 20
 device: 'cuda'
-learning_rate: 0.001
+model: 'resnet-linear'
 hsic_learning_rate: 0.0001
 sigma_hx: 30.
 sigma_hy: 30.
 lambda_x: 1.
 lambda_y: 200.
-epochs_standard: 5
+model_file: hsic_weight_reslinear.pt
 epochs_hsic: 10
-epochs_format: 5
-task: 'general'
-
+task: 'hsic-train'
+last_hidden_width: 32
+verbose: 0

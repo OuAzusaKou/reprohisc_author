@@ -2,27 +2,28 @@ from .. import *
 from .block import *
 from ..utils.misc import *
 
-class ModelLinear(nn.Module):
+class ModelResLinear(nn.Module):
 
     def __init__(self, hidden_width=64, n_layers=5, atype='relu', 
         last_hidden_width=None, model_type='simple-dense', data_code='mnist', **kwargs):
-        super(ModelLinear, self).__init__()
+        super(ModelResLinear, self).__init__()
     
         block_list = []
         is_conv = False
+        
+        in_dim = get_in_dimensions(data_code)
+        in_ch = get_n_channels(data_code)
+        in_width = in_dim*in_ch
 
         last_hw = hidden_width
         if last_hidden_width:
             last_hw = last_hidden_width
         
         for i in range(n_layers):
-            block = get_primative_block('simple-dense', hidden_width, hidden_width, atype)
+            block = BasicResidualBlockDense(hidden_width, hidden_width, atype)
             block_list.append(block)
 
-        in_width = get_n_dimensions(data_code)
-        in_ch = get_n_channels(data_code)
-
-        self.input_layer    = makeblock_dense(in_width*in_ch, hidden_width, atype)
+        self.input_layer    = makeblock_dense(in_width, hidden_width, atype)
         self.sequence_layer = nn.Sequential(*block_list)
         self.output_layer   = makeblock_dense(hidden_width, last_hw, atype)
 

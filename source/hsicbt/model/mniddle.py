@@ -1,17 +1,16 @@
 from .. import *
 from .block import *
+from ..utils.misc import *
 
 class ModelNiddle(nn.Module):
 
-    def __init__(self, data_code, atype='tanh', **kwargs):
+    def __init__(self, data_code='mnist', atype='tanh', **kwargs):
         super(ModelNiddle, self).__init__()
     
-        if data_code == 'mnist':
-            self._in_width = 784
-        elif data_code == 'cifar10':
-            self._in_width = 3072
-
-
+        in_dim = get_in_dimensions(data_code)
+        in_ch = get_n_channels(data_code)
+        self._in_width = in_dim*in_ch
+        
         self.f1  = nn.Linear(self._in_width, 64)
         self.b1  = nn.BatchNorm1d(64)
         self.f2  = nn.Linear(64, 32)

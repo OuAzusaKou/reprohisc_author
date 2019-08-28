@@ -1,0 +1,13 @@
+batch_size: 256
+data_code: 'mnist'
+n_layers: 5
+hidden_width: 128
+log_batch_interval: 20
+device: 'cuda'
+model: 'linear'
+learning_rate: 0.001
+model_file: hsic_weight_linear.pt
+epochs_standard: 5
+epochs_format: 5
+task: 'general'
+verbose: 0

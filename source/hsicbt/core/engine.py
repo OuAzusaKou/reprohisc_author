@@ -3,13 +3,16 @@ from .. import *
 from ..utils import meter
 from ..utils import misc
 from ..utils.io import *
-from ..utils.color import print_highlight
+from ..utils.color import *
 from ..utils.dataset   import get_dataset_from_code
 
-from ..model.mvanilla  import ModelVanilla
-from ..model.mhlinear  import ModelLinear
-from ..model.mensemble import ModelEnsemble
-from ..model.mniddle   import ModelNiddle
+from ..model.mvanilla    import ModelVanilla
+from ..model.mhlinear    import ModelLinear
+from ..model.mhconv      import ModelConv
+from ..model.mreslinear  import ModelResLinear
+from ..model.mresconv    import ModelResConv
+from ..model.mensemble   import ModelEnsemble
+from ..model.mniddle     import ModelNiddle
 
 from ..math.hsic import *
 
@@ -65,9 +68,10 @@ def _normal_train(cepoch, model, data_loader, optimizer, config_dict):
 
     n_data = config_dict['batch_size'] * len(data_loader)
     
+    pbar = tqdm(enumerate(data_loader), total=n_data/config_dict['batch_size'], ncols=150)
+    # for batch_idx, (data, target) in enumerate(data_loader):
+    for batch_idx, (data, target) in pbar:
 
-    for batch_idx, (data, target) in enumerate(data_loader):
-        
         data   = data.to(config_dict['device'])
         target = target.to(config_dict['device'])
         output, hiddens = model(data)
@@ -102,29 +106,32 @@ def _normal_train(cepoch, model, data_loader, optimizer, config_dict):
         batch_hischx.update(hx_l)
         batch_hischy.update(hy_l)
 
-        # # # preparation log information and print progress # # #
-        if ((batch_idx+1) % config_dict['log_batch_interval'] == 0):
-            print( 'Train Epoch: {cepoch} [ {cidx:5d}/{tolidx:5d} ({perc:2d}%)] Loss:{loss:.4f} Acc:{acc:.4f} H_hx:{H_hx:.4f} H_hy:{H_hy:.4f}'.format(
+        msg = 'Train Epoch: {cepoch} [ {cidx:5d}/{tolidx:5d} ({perc:2d}%)] Loss:{loss:.4f} Acc:{acc:.4f} H_hx:{H_hx:.4f} H_hy:{H_hy:.4f}'.format(
                         cepoch = cepoch,  
-                        cidx = (batch_idx+1)*len(data), 
+                        cidx = (batch_idx+1)*config_dict['batch_size'], 
                         tolidx = n_data,
-                        perc = int(100. * (batch_idx+1)*len(data)/n_data), 
+                        perc = int(100. * (batch_idx+1)*config_dict['batch_size']/n_data), 
                         loss = batch_loss.avg, 
                         acc  = batch_acc.avg,
                         H_hx = batch_hischx.avg, 
                         H_hy = batch_hischy.avg,
-                    ))
+                    )
 
+
+        # # # preparation log information and print progress # # #
+        if ((batch_idx+1) % config_dict['log_batch_interval'] == 0):
+            
             batch_log['batch_acc'].append(batch_acc.avg)
             batch_log['batch_loss'].append(batch_loss.avg)
             batch_log['batch_hsic_hx'].append(batch_hischx.avg)
             batch_log['batch_hsic_hy'].append(batch_hischy.avg)
 
+        pbar.set_description(msg)
+
     return batch_log
 
 def _hsic_train(cepoch, model, data_loader, config_dict):
 
-    print("learning rate:",config_dict['learning_rate'])
 
     cross_entropy_loss = torch.nn.CrossEntropyLoss()
     prec1 = total_loss = hx_l = hy_l = -1
@@ -145,7 +152,9 @@ def _hsic_train(cepoch, model, data_loader, config_dict):
     n_data = config_dict['batch_size'] * len(data_loader)
     
 
-    for batch_idx, (data, target) in enumerate(data_loader):
+    # for batch_idx, (data, target) in enumerate(data_loader):
+    pbar = tqdm(enumerate(data_loader), total=n_data/config_dict['batch_size'], ncols=130)
+    for batch_idx, (data, target) in pbar:
 
         data   = data.to(config_dict['device'])
         target = target.to(config_dict['device'])
@@ -160,6 +169,9 @@ def _hsic_train(cepoch, model, data_loader, config_dict):
             params, param_names = misc.get_layer_parameters(model=model, layer_idx=i) # so we only optimize one layer at a time
             optimizer = optim.SGD(params, lr = config_dict['hsic_learning_rate'], momentum=.9, weight_decay=0.001)
             optimizer.zero_grad()
+            if len(hiddens[i].size()) > 2:
+                hiddens[i] = hiddens[i].view(-1, np.prod(hiddens[i].size()[1:]))
+
             hx_l, hy_l = _hsic_objective(
                     hiddens[i], 
                     h_target=h_target.float(), 
@@ -180,37 +192,56 @@ def _hsic_train(cepoch, model, data_loader, config_dict):
         batch_hischy.update(hy_l)
 
         # # # preparation log information and print progress # # #
-        if ((batch_idx+1) % config_dict['log_batch_interval'] == 0):
-            print( 'Train Epoch: {cepoch} [ {cidx:5d}/{tolidx:5d} ({perc:2d}%)] Loss:{loss:.4f} Acc:{acc:.4f} H_hx:{H_hx:.4f} H_hy:{H_hy:.4f}'.format(
+
+        msg = 'Train Epoch: {cepoch} [ {cidx:5d}/{tolidx:5d} ({perc:2d}%)] H_hx:{H_hx:.4f} H_hy:{H_hy:.4f}'.format(
                         cepoch = cepoch,  
-                        cidx = (batch_idx+1)*len(data), 
+                        cidx = (batch_idx+1)*config_dict['batch_size'], 
                         tolidx = n_data,
-                        perc = int(100. * (batch_idx+1)*len(data)/n_data), 
-                        loss = batch_loss.avg, 
-                        acc  = batch_acc.avg,
+                        perc = int(100. * (batch_idx+1)*config_dict['batch_size']/n_data), 
                         H_hx = batch_hischx.avg, 
                         H_hy = batch_hischy.avg,
-                    ))
+                )
 
+        if ((batch_idx+1) % config_dict['log_batch_interval'] == 0):
             batch_log['batch_acc'].append(batch_loss.avg)
             batch_log['batch_loss'].append(batch_acc.avg)
             batch_log['batch_hsic_hx'].append(batch_hischx.avg)
             batch_log['batch_hsic_hy'].append(batch_hischy.avg)
-
+        
+        pbar.set_description(msg)
+        
     return batch_log
 
+def _model_distribution(config_dict):
+
+    if config_dict['model'] == 'niddle':
+        model = ModelNiddle(**config_dict)
+    elif config_dict['model'] == 'conv':
+        model = ModelConv(**config_dict)
+    elif config_dict['model'] == 'linear':
+        model = ModelLinear(**config_dict)
+    elif config_dict['model'] == 'resnet-linear':
+        model = ModelResLinear(**config_dict)
+    elif config_dict['model'] == 'resnet-conv':
+        model = ModelResConv(**config_dict)
+    else:
+        raise ValueError("Unknown model name or not support [{}]".format(config_dict['model']))
+
+    return model
+
 def training_standard(config_dict):
+
+    print_emph("Standard training")
 
     train_loader, test_loader = get_dataset_from_code(
         config_dict['data_code'], config_dict['batch_size'])
 
-    if config_dict['task'] == 'niddle':
-        model = ModelNiddle(**config_dict)
-    else:
-        vanilla_model  = ModelVanilla(**config_dict)
-        hsic_model     = ModelLinear(**config_dict)
-        model          = ModelEnsemble(hsic_model, vanilla_model)
-    print(model)
+    vanilla_model  = ModelVanilla(**config_dict)
+    hsic_model     = _model_distribution(config_dict)
+    model          = ModelEnsemble(hsic_model, vanilla_model)
+    if config_dict['verbose']:
+        print(model)
+
     optimizer = optim.SGD( filter(lambda p: p.requires_grad, model.parameters()), 
             lr = config_dict['learning_rate'], momentum=.9, weight_decay=0.001)
 
@@ -240,21 +271,25 @@ def training_standard(config_dict):
 
 def training_format(config_dict):
 
+    print_emph("Format training")
+
     train_loader, test_loader = get_dataset_from_code(
         config_dict['data_code'], config_dict['batch_size'])
-    vanilla_model = ModelVanilla(**config_dict)
-    hsic_model    = ModelLinear(**config_dict)
     
-
+    vanilla_model = ModelVanilla(**config_dict)
+    hsic_model = _model_distribution(config_dict)
+    
     optimizer = optim.SGD( filter(lambda p: p.requires_grad, hsic_model.parameters()), 
             lr = config_dict['learning_rate'], momentum=.9, weight_decay=0.001)
 
-    model = load_model("models/hsic_weights.pt")
+    model = load_model("models/{}".format(config_dict['model_file']))
+
     hsic_model.load_state_dict(model)
     hsic_model.eval()
 
     ensemble_model = ModelEnsemble(hsic_model, vanilla_model)
-    print(ensemble_model)
+    if config_dict['verbose']:
+        print(ensemble_model)
 
     batch_log_list = []
     epoch_log_dict = {}
@@ -280,16 +315,14 @@ def training_format(config_dict):
 
 def training_hsic(config_dict):
 
+    print_emph("HSIC-Bottleneck training")
+
     train_loader, test_loader = get_dataset_from_code(
         config_dict['data_code'], config_dict['batch_size'])
 
-
-    if config_dict['task'] == 'niddle':
-        model = ModelNiddle(**config_dict)
-    else:
-        model = ModelLinear(**config_dict)
-    print(model)
-
+    model = _model_distribution(config_dict)
+    if config_dict['verbose']:
+        print(model)
 
     batch_log_list = []
     epoch_log_dict = {}
@@ -301,10 +334,11 @@ def training_hsic(config_dict):
         batch_log_list.append(log)
 
         if config_dict['task'] == 'hsic-train':
-            save_model(model, "models/hsic_weights.pt")
+            save_model(model, "models/{}".format(config_dict['model_file']))
+            filename = os.path.splitext(config_dict['model_file'])[0]
+            filename = "{}-{:04d}.pt".format(filename, cepoch)
+            save_model(model, "models/{}".format(filename))
 
-        if (cepoch+1) % 5 == 0:
-            config_dict['learning_rate'] /= 5.
     
         if config_dict['task'] == 'hsic-solve':
             train_acc, reordered = misc.get_accuracy_hsic(model=model, dataloader=train_loader)

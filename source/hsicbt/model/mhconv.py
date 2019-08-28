@@ -2,29 +2,28 @@ from .. import *
 from .block import *
 from ..utils.misc import *
 
-class ModelLinear(nn.Module):
+class ModelConv(nn.Module):
 
-    def __init__(self, hidden_width=64, n_layers=5, atype='relu', 
+    def __init__(self, in_width=784, hidden_width=64, n_layers=5, atype='relu', 
         last_hidden_width=None, model_type='simple-dense', data_code='mnist', **kwargs):
-        super(ModelLinear, self).__init__()
+        super(ModelConv, self).__init__()
     
         block_list = []
         is_conv = False
+
+        in_ch = get_n_channels(data_code)
 
         last_hw = hidden_width
         if last_hidden_width:
             last_hw = last_hidden_width
         
         for i in range(n_layers):
-            block = get_primative_block('simple-dense', hidden_width, hidden_width, atype)
+            block = get_primative_block('simple-conv', hidden_width, hidden_width, atype)
             block_list.append(block)
 
-        in_width = get_n_dimensions(data_code)
-        in_ch = get_n_channels(data_code)
-
-        self.input_layer    = makeblock_dense(in_width*in_ch, hidden_width, atype)
+        self.input_layer    = makeblock_conv(in_ch, hidden_width, atype)
         self.sequence_layer = nn.Sequential(*block_list)
-        self.output_layer   = makeblock_dense(hidden_width, last_hw, atype)
+        self.output_layer   = makeblock_dense(128, last_hw, atype)
 
         self.is_conv = is_conv
         self.in_width = in_width
@@ -32,13 +31,16 @@ class ModelLinear(nn.Module):
     def forward(self, x):
 
         output_list = []
-        x = x.view(-1, self.in_width)
+        
         x = self.input_layer(x)
         output_list.append(x)
         
         for block in self.sequence_layer:
             x = block(x)
             output_list.append(x)
+            
+        x = x.view(-1, np.prod(x.size()[1:]))
+
         x = self.output_layer(x)
         output_list.append(x)
 
