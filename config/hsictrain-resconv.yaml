@@ -1,5 +1,5 @@
 batch_size: 128
-data_code: 'cifar10'
+data_code: 'fashionmnist'
 n_layers: 5
 hidden_width: 10
 log_batch_interval: 20

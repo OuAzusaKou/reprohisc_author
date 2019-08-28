@@ -26,7 +26,9 @@ class ModelResConv(nn.Module):
         self.pooling = nn.MaxPool2d((2,2))
 
         if data_code == 'mnist':
-            dim = 288
+            dim = 360
+        elif data_code == 'fashionmnist':
+            dim = 360
         elif data_code == 'cifar10':
             dim = 490
 
