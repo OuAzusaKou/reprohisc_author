@@ -23,7 +23,7 @@ def plot_batches_log(curve_list, ptype, metadata):
 
     n = len(curve_list[0][0][ptype])
     
-    xticks_idx = np.arange(0, n*len(curve_list[0])+1, n)
+    xticks_idx = np.arange(0, n*len(curve_list[0]), n)
     xticks_val = np.arange(len(xticks_idx))
 
     for i, curve_dict in enumerate(curve_list):
