@@ -12,7 +12,7 @@ class ModelResLinear(nn.Module):
         is_conv = False
         
         in_dim = get_in_dimensions(data_code)
-        in_ch = get_n_channels(data_code)
+        in_ch = get_in_channels(data_code)
         in_width = in_dim*in_ch
 
         last_hw = hidden_width

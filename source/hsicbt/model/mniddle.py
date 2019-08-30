@@ -8,7 +8,7 @@ class ModelNiddle(nn.Module):
         super(ModelNiddle, self).__init__()
     
         in_dim = get_in_dimensions(data_code)
-        in_ch = get_n_channels(data_code)
+        in_ch = get_in_channels(data_code)
         self._in_width = in_dim*in_ch
         
         self.f1  = nn.Linear(self._in_width, 64)

@@ -1,6 +1,6 @@
 from .. import *
 
-def get_n_channels(data_code):
+def get_in_channels(data_code):
     in_ch = -1
     if data_code == 'mnist':
         in_ch = 1

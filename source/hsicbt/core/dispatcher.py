@@ -32,7 +32,7 @@ def job_execution(config_dict):
             'label': ['stadnard-train', 'format-train']
         }
         plot.plot_batches_log([out_standard_batch, out_format_batch], 'batch_acc', metadata)
-        plot.save_figure("./assets/standard-hsic-comparison-{}-batch.jpg".format(config_dict['model']))
+        plot.save_figure("./assets/standard-hsic-comparison-{}-{}-batch.jpg".format(config_dict['data_code'], config_dict['model']))
 
         metadata = {
             'title':'comparison of format-train and standard-train',
@@ -41,7 +41,7 @@ def job_execution(config_dict):
             'label': ['stadnard-train', 'format-train']
         }
         plot.plot_epoch_log([out_standard_epoch, out_format_epoch], 'train_acc', metadata)
-        plot.save_figure("./assets/standard-hsic-comparison-{}-epoch-train-acc.jpg".format(config_dict['model']))
+        plot.save_figure("./assets/standard-hsic-comparison-{}-{}-epoch-train-acc.jpg".format(config_dict['data_code'], config_dict['model']))
 
         metadata = {
             'title':'comparison of format-train and standard-train',
@@ -50,7 +50,7 @@ def job_execution(config_dict):
             'label': ['stadnard-train', 'format-train']
         }
         plot.plot_epoch_log([out_standard_epoch, out_format_epoch], 'test_acc', metadata)
-        plot.save_figure("./assets/standard-hsic-comparison-{}-epoch-test-acc.jpg".format(config_dict['model']))
+        plot.save_figure("./assets/standard-hsic-comparison-{}-{}-epoch-test-acc.jpg".format(config_dict['data_code'], config_dict['model']))
 
     elif config_dict['task'] == 'hsic-solve':
         

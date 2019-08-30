@@ -11,7 +11,7 @@ class ModelConv(nn.Module):
         block_list = []
         is_conv = False
 
-        in_ch = get_n_channels(data_code)
+        in_ch = get_in_channels(data_code)
 
         last_hw = hidden_width
         if last_hidden_width:
@@ -23,7 +23,14 @@ class ModelConv(nn.Module):
 
         self.input_layer    = makeblock_conv(in_ch, hidden_width, atype)
         self.sequence_layer = nn.Sequential(*block_list)
-        self.output_layer   = makeblock_dense(128, last_hw, atype)
+        if data_code == 'mnist':
+            dim = 128
+        elif data_code == 'cifar10':
+            dim = 512
+        elif data_code == 'fashionmnist':
+            dim = 128
+            
+        self.output_layer   = makeblock_dense(dim, last_hw, atype)
 
         self.is_conv = is_conv
         self.in_width = in_width

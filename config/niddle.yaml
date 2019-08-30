@@ -1,5 +1,6 @@
 batch_size: 256
 data_code: 'mnist'
+model: 'niddle'
 log_batch_interval: 50
 device: 'cuda'
 learning_rate: 0.0001

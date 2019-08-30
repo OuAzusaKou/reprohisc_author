@@ -1,12 +1,12 @@
 batch_size: 512
-data_code: 'mnist'
+data_code: cifar10
 n_layers: 5
 hidden_width: 256
 log_batch_interval: 50
 device: 'cuda'
 model: 'resnet-linear'
 learning_rate: 0.001
-model_file: hsic_weight_reslinear.pt
+model_file: hsic_weight_reslinear_cifar10.pt
 epochs_standard: 5
 epochs_format: 5
 task: 'general'

@@ -11,7 +11,7 @@ class ModelResConv(nn.Module):
         block_list = []
         is_conv = False
 
-        in_ch = get_n_channels(data_code)
+        in_ch = get_in_channels(data_code)
 
         last_hw = hidden_width
         if last_hidden_width:

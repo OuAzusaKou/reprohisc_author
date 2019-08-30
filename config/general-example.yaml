@@ -10,4 +10,5 @@ model_file: hsic_weight_linear.pt
 epochs_standard: 5
 epochs_format: 5
 task: 'general'
+last_hidden_width: 32
 verbose: 0

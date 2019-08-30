@@ -1,14 +1,14 @@
 batch_size: 64
-data_code: 'mnist'
+data_code: cifar10
 n_layers: 5
 hidden_width: 8
 log_batch_interval: 50
 device: 'cuda'
 model: 'conv'
 learning_rate: 0.001
-model_file: hsic_weight_conv.pt
+model_file: hsic_weight_conv_cifar10.pt
 epochs_standard: 5
 epochs_format: 5
 task: 'general'
-last_hidden_width: 32
+last_hidden_width: 256
 verbose: 0

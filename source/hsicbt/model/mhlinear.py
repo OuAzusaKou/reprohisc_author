@@ -19,15 +19,15 @@ class ModelLinear(nn.Module):
             block = get_primative_block('simple-dense', hidden_width, hidden_width, atype)
             block_list.append(block)
 
-        in_width = get_n_dimensions(data_code)
-        in_ch = get_n_channels(data_code)
+        in_width = get_in_dimensions(data_code)
+        in_ch = get_in_channels(data_code)
 
         self.input_layer    = makeblock_dense(in_width*in_ch, hidden_width, atype)
         self.sequence_layer = nn.Sequential(*block_list)
         self.output_layer   = makeblock_dense(hidden_width, last_hw, atype)
 
         self.is_conv = is_conv
-        self.in_width = in_width
+        self.in_width = in_width*in_ch
 
     def forward(self, x):
 
