@@ -4,39 +4,48 @@ from .color import *
 
 def plot_epoch_log(curve_list, ptype, metadata):
 
+
+    fig = plt.figure(constrained_layout=True, figsize=(10,10))
+    ax = fig.add_subplot()
+
     n = len(curve_list[0][ptype])
-    xticks_idx = np.arange(n)
-    xticks_val = np.arange(n)
+    xticks_idx = np.arange(n).tolist()
+    xticks_val = np.arange(1,n+1).tolist()
     for i, curve_dict in enumerate(curve_list):
-        plt.plot(curve_dict[ptype], label=metadata['label'][i])
-        
-    plt.legend()
-    plt.title(metadata['title'])
-    plt.xticks(xticks_idx, xticks_val)
-    plt.xlabel(metadata['xlabel'])
-    plt.ylabel(metadata['ylabel'])
+        ax.plot(curve_dict[ptype], label=metadata['label'][i])
+
+    plt.legend(fontsize=18) 
+    ax.set_title(metadata['title'], fontsize=18)
+    ax.set_xticks(xticks_idx)
+    ax.set_xticklabels(xticks_val)
+    ax.set_xlabel(metadata['xlabel'], fontsize=18)
+    ax.set_ylabel(metadata['ylabel'], fontsize=18)
 
 
 def plot_batches_log(curve_list, ptype, metadata):
 
     assert len(curve_list)>1, "this is for multiple curve plotting"
 
+    fig = plt.figure(constrained_layout=True, figsize=(10,10))
+    ax = fig.add_subplot()
+
     n = len(curve_list[0][0][ptype])
     
-    xticks_idx = np.arange(0, n*len(curve_list[0]), n)
-    xticks_val = np.arange(len(xticks_idx))
+    xticks_idx = np.arange(0, n*len(curve_list[0]), n).tolist()
+    xticks_val = np.arange(len(xticks_idx)).tolist()
 
     for i, curve_dict in enumerate(curve_list):
 
         val = [x[ptype] for x in curve_dict]
         val = [y for x in val for y in x]
-        plt.plot(val, label=metadata['label'][i])
+        ax.plot(val, label=metadata['label'][i])
         
-    plt.legend()
-    plt.title(metadata['title'])
-    plt.xticks(xticks_idx, xticks_val)
-    plt.xlabel(metadata['xlabel'])
-    plt.ylabel(metadata['ylabel'])
+    plt.legend(fontsize=18)
+    ax.set_title(metadata['title'], fontsize=18)
+    ax.set_xticks(xticks_idx)
+    ax.set_xticklabels(xticks_val)
+    ax.set_xlabel(metadata['xlabel'], fontsize=18)
+    ax.set_ylabel(metadata['ylabel'], fontsize=18)
     
 
 def plot_activation_distribution():
@@ -115,9 +124,12 @@ def plot_1d_activation_kde(datapath):
     xticks_val = list(sample_idx[::25]) + [sample_idx[-1]]
     xticks_val = [int(x) for x in xticks_val]
     plt.xticks(xticks_idx, xticks_val)
-    plt.legend()
+    plt.title('class signals of MNIST')
+    plt.xlabel('tanh activation')
+    plt.ylabel('KDE density')
+    plt.legend(fontsize=8)
 
 def save_figure(filepath):
-    plt.savefig(filepath)
+    plt.savefig(filepath, bbox_inches='tight')
     plt.clf()
     print_highlight("Saved [{}]".format(filepath))

@@ -82,14 +82,16 @@ def _normal_train(cepoch, model, data_loader, optimizer, config_dict):
         h_data = data.view(-1, np.prod(data.size()[1:]))
 
         # # # if want to monitor hsic
-        # for i in range(len(hiddens)):
-        #     hx_l, hy_l = hsic_objective(
-        #             hiddens[i], 
-        #             h_target=h_target.float(), 
-        #             h_data=h_data,
-        #             sigma_hx=config_dict['sigma_hx'],
-        #             sigma_hy=config_dict['sigma_hy']
-        #         )
+        if config_dict['task'] == 'varied-activation' or config_dict['task'] == 'varied-depth':
+            hx_l, hy_l = _hsic_objective(
+                    hiddens[-1], 
+                    h_target=h_target.float(), 
+                    h_data=h_data,
+                    sigma_hx=config_dict['sigma_hx'],
+                    sigma_hy=config_dict['sigma_hy']
+                )
+            hx_l = hx_l.cpu().detach().numpy()
+            hy_l = hy_l.cpu().detach().numpy()
 
         optimizer.zero_grad()
         loss = cross_entropy_loss(output, target)
@@ -106,21 +108,20 @@ def _normal_train(cepoch, model, data_loader, optimizer, config_dict):
         batch_hischx.update(hx_l)
         batch_hischy.update(hy_l)
 
-        msg = 'Train Epoch: {cepoch} [ {cidx:5d}/{tolidx:5d} ({perc:2d}%)] Loss:{loss:.4f} Acc:{acc:.4f} H_hx:{H_hx:.4f} H_hy:{H_hy:.4f}'.format(
+        msg = 'Train Epoch: {cepoch} [ {cidx:5d}/{tolidx:5d} ({perc:2d}%)] Loss:{loss:.4f} Acc:{acc:.4f} hsic_xz:{hsic_zx:.4f} hsic_yz:{hsic_zy:.4f}'.format(
                         cepoch = cepoch,  
                         cidx = (batch_idx+1)*config_dict['batch_size'], 
                         tolidx = n_data,
                         perc = int(100. * (batch_idx+1)*config_dict['batch_size']/n_data), 
                         loss = batch_loss.avg, 
                         acc  = batch_acc.avg,
-                        H_hx = batch_hischx.avg, 
-                        H_hy = batch_hischy.avg,
+                        hsic_zx = batch_hischx.avg,
+                        hsic_zy = batch_hischy.avg,
                     )
 
 
         # # # preparation log information and print progress # # #
-        if ((batch_idx+1) % config_dict['log_batch_interval'] == 0):
-            
+        if ((batch_idx+1) % config_dict['log_batch_interval'] == 0): 
             batch_log['batch_acc'].append(batch_acc.avg)
             batch_log['batch_loss'].append(batch_loss.avg)
             batch_log['batch_hsic_hx'].append(batch_hischx.avg)
@@ -153,7 +154,7 @@ def _hsic_train(cepoch, model, data_loader, config_dict):
     
 
     # for batch_idx, (data, target) in enumerate(data_loader):
-    pbar = tqdm(enumerate(data_loader), total=n_data/config_dict['batch_size'], ncols=130)
+    pbar = tqdm(enumerate(data_loader), total=n_data/config_dict['batch_size'], ncols=120)
     for batch_idx, (data, target) in pbar:
 
         data   = data.to(config_dict['device'])
@@ -186,10 +187,10 @@ def _hsic_train(cepoch, model, data_loader, config_dict):
         # if config_dict['hsic_solve']:
         #     prec1, reorder_list = misc.get_accuracy_hsic(model, data_loader)
     
-        batch_acc.update(prec1)   
-        batch_loss.update(total_loss)  
-        batch_hischx.update(hx_l)
-        batch_hischy.update(hy_l)
+        batch_acc.update(prec1)
+        batch_loss.update(total_loss)
+        batch_hischx.update(hx_l.cpu().detach().numpy())
+        batch_hischy.update(hy_l.cpu().detach().numpy())
 
         # # # preparation log information and print progress # # #
 
@@ -209,7 +210,7 @@ def _hsic_train(cepoch, model, data_loader, config_dict):
             batch_log['batch_hsic_hy'].append(batch_hischy.avg)
         
         pbar.set_description(msg)
-        
+    
     return batch_log
 
 def _model_distribution(config_dict):
@@ -333,7 +334,7 @@ def training_hsic(config_dict):
         log = _hsic_train(cepoch, model, train_loader, config_dict)
         batch_log_list.append(log)
 
-        if config_dict['task'] == 'hsic-train':
+        if config_dict['task'] == 'hsic-train' or config_dict['task'] == 'activation':
             save_model(model, "models/{}".format(config_dict['model_file']))
             filename = os.path.splitext(config_dict['model_file'])[0]
             filename = "{}-{:04d}.pt".format(filename, cepoch)

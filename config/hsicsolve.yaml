@@ -1,10 +1,10 @@
 batch_size: 256
-data_code: 'mnist'
+data_code: cifar10
 n_layers: 5
 hidden_width: 128
 log_batch_interval: 25
-device: 'cpu'
-model: 'linear'
+device: cuda
+model: linear
 learning_rate: 0.0001
 hsic_learning_rate: 0.0001
 sigma_hx: 30.
@@ -13,5 +13,6 @@ lambda_x: 1
 lambda_y: 200.
 epochs_standard: 5
 epochs_hsic: 5
-task: 'hsic-solve'
-verbose: 1
+task: hsic-solve
+verbose: 0
+ext: pdf

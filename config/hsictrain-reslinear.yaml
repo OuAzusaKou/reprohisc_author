@@ -1,10 +1,11 @@
 batch_size: 128
-data_code: 'fashionmnist'
+data_code: fashionmnist
 n_layers: 5
 hidden_width: 256
 log_batch_interval: 20
-device: 'cpu'
-model: 'resnet-linear'
+device: cpu
+model: resnet-linear
+atype: relu
 hsic_learning_rate: 0.0001
 sigma_hx: 30.
 sigma_hy: 30.
@@ -12,6 +13,6 @@ lambda_x: 1.
 lambda_y: 200.
 model_file: hsic_weight_reslinear_fmnist.pt
 epochs_hsic: 10
-task: 'hsic-train'
+task: hsic-train
 last_hidden_width: 32
 verbose: 0

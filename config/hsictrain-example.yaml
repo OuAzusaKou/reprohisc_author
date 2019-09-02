@@ -1,10 +1,11 @@
 batch_size: 256
-data_code: 'mnist'
+data_code: mnist
 n_layers: 5
 hidden_width: 128
 log_batch_interval: 20
-device: 'cuda'
-model: 'linear'
+device: cuda
+model: linear
+atype: relu
 hsic_learning_rate: 0.0001
 sigma_hx: 30.
 sigma_hy: 30.
@@ -12,5 +13,5 @@ lambda_x: 1.
 lambda_y: 200.
 model_file: hsic_weight_linear.pt
 epochs_hsic: 10
-task: 'hsic-train'
+task: hsic-train
 verbose: 0
