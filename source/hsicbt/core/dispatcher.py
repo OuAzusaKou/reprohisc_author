@@ -80,7 +80,7 @@ def job_execution(config_dict):
     elif config_dict['task'] == 'niddle':
 
         out_standard_batch, out_standard_epoch = training_standard(config_dict)
-        # out_hsic_batch    , out_hsic_epoch     = training_hsic(config_dict)
+        out_hsic_batch    , out_hsic_epoch     = training_hsic(config_dict)
 
         plot.plot_1d_activation_kde('assets/activation-niddle-hsic.npy')
         plot.save_figure("./assets/activation-1d-dist-hsic.{}".format(config_dict['ext']))
