@@ -12,9 +12,14 @@ def training_standard(config_dict):
     train_loader, test_loader = get_dataset_from_code(
         config_dict['data_code'], config_dict['batch_size'])
 
+    torch.manual_seed(1234)
     vanilla_model  = ModelVanilla(**config_dict)
+    torch.manual_seed(1234)
     hsic_model     = model_distribution(config_dict)
     model          = ModelEnsemble(hsic_model, vanilla_model)
+
+
+   
     if config_dict['verbose']:
         print(model)
 
@@ -48,6 +53,7 @@ def training_standard(config_dict):
     save_logs(epoch_log_dict, get_epoch_log_filepath(
         config_dict['task'], TTYPE_STANDARD, config_dict['data_code'], config_dict['exp_index']))
 
+    del model
     return batch_log_list, epoch_log_dict
 
 def training_format_combined(config_dict):
@@ -108,8 +114,9 @@ def training_format(config_dict):
 
     train_loader, test_loader = get_dataset_from_code(
         config_dict['data_code'], config_dict['batch_size'])
-    
+    torch.manual_seed(1234)
     vanilla_model = ModelVanilla(**config_dict)
+    torch.manual_seed(1234)
     hsic_model = model_distribution(config_dict)
     
     optimizer = optim.SGD( filter(lambda p: p.requires_grad, vanilla_model.parameters()), 
@@ -150,7 +157,7 @@ def training_format(config_dict):
     save_logs(epoch_log_dict, get_epoch_log_filepath(
         config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], config_dict['exp_index']))
 
-
+    del ensemble_model
     return batch_log_list, epoch_log_dict
 
 def training_hsic(config_dict):

@@ -8,8 +8,8 @@ model: conv
 atype: relu
 learning_rate: 0.001
 model_file: hsic_weight_conv_mnist.pt
-epochs_standard: 5
-epochs_format: 5
+epochs_standard: 2
+epochs_format: 2
 task: general
 last_hidden_width: 32
 verbose: 0

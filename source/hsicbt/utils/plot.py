@@ -7,7 +7,7 @@ def plot_epoch_log(curve_list, ptype, metadata):
 
 
     fig = plt.figure(constrained_layout=True, figsize=(10,10))
-    ax = fig.add_subplot()
+    ax = fig.add_subplot(111)
 
     n = len(curve_list[0][ptype])
     xticks_idx = np.arange(n).tolist()
@@ -39,7 +39,8 @@ def plot_batches_log(curve_list, ptype, metadata):
     assert len(curve_list)>1, "this is for multiple curve plotting"
 
     fig = plt.figure(constrained_layout=True, figsize=(10,10))
-    ax = fig.add_subplot()
+    ax = fig.add_subplot(111)
+
 
     n = len(curve_list[0][0][ptype])
     
@@ -121,7 +122,7 @@ def plot_1d_activation_kde(datapath):
     from scipy.stats import gaussian_kde
 
     fig = plt.figure(constrained_layout=True, figsize=(10,10))
-    ax = fig.add_subplot()
+    ax = fig.add_subplot(111)
 
     sample_idx = np.linspace(-3,3,150)
     for i in range(10):

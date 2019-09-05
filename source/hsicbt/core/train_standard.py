@@ -21,6 +21,7 @@ def standard_train(cepoch, model, data_loader, optimizer, config_dict):
     model = model.to(config_dict['device'])
 
 
+
     n_data = config_dict['batch_size'] * len(data_loader)
     
     pbar = tqdm(enumerate(data_loader), total=n_data/config_dict['batch_size'], ncols=150)
