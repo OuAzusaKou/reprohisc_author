@@ -3,6 +3,7 @@ from . import *
 def task_varieddepth_func(config_dict):
 
     if config_dict['do_training']:
+        
         config_dict['n_layers'] = 5
         config_dict['exp_index'] = 1
         training_standard(config_dict) 

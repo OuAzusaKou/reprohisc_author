@@ -16,12 +16,13 @@ def plot_epoch_log(curve_list, ptype, metadata):
     min_y = 1E5
     for i, curve_dict in enumerate(curve_list):
         ax.plot(curve_dict[ptype], linewidth=4, label=metadata['label'][i])
-        max_y = np.max(curve_dict[ptype])
-        min_y = np.min(curve_dict[ptype])
+        max_y = max(max_y, np.max(curve_dict[ptype]))
+        min_y = min(min_y, np.min(curve_dict[ptype]))
     plt.legend(fontsize=FONTSIZE_LEDEND)
     margin = 5
     max_y += margin
     min_y -= margin
+    
     yticks_idx = np.linspace(min_y, max_y, 100)[::10]
     yticks_val = [np.round(x, 1) for x in np.linspace(min_y, max_y, 100)[::10]]
 
@@ -44,7 +45,7 @@ def plot_batches_log(curve_list, ptype, metadata):
 
     n = len(curve_list[0][0][ptype])
     
-    xticks_idx = np.arange(0, n*len(curve_list[0]), n).tolist()
+    xticks_idx = np.arange(0, n*(len(curve_list[0])+1), n).tolist()
     xticks_val = np.arange(len(xticks_idx)).tolist()
 
     for i, curve_dict in enumerate(curve_list):

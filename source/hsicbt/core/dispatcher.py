@@ -7,6 +7,7 @@ from ..task.task_variedact   import *
 from ..task.task_variedep    import *
 from ..task.task_varieddepth import *
 from ..task.task_sigmacomb   import *
+from ..task.task_varieddim   import *
 
 def job_execution(config_dict):
 
@@ -39,6 +40,9 @@ def job_execution(config_dict):
 
     elif config_dict['task'] == 'varied-epoch':
         task_variedep_func(config_dict)
+
+    elif config_dict['task'] == 'varied-dim':
+        task_varieddim_func(config_dict)
 
     else:
         raise ValueError("Unknown given task [{}], please check \

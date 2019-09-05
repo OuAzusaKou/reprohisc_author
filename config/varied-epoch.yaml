@@ -7,7 +7,7 @@ device: cuda
 model: linear
 atype: relu
 learning_rate: 0.0001
-hsic_learning_rate: 0.0001
+hsic_learning_rate: 0.001
 sigma_hx: 30.
 sigma_hy: 30.
 lambda_x: 1.
@@ -15,9 +15,12 @@ lambda_y: 200.
 epochs_format: 1
 epochs_hsic: null # determined by task.task_variedep
 model_file: hsic_weight_varied_epoch_mnist.pt # will be modified by task.task_variedep
+checkpoint: null
 task: varied-epoch
 last_hidden_width: 32
 verbose: 0
 ext: pdf
 exp_index: null # determined by task.task_variedep
-do_training: True
+do_training_hsic: False
+do_training_format: False
+do_plot: True

@@ -20,13 +20,19 @@ def task_hsicsolve_func(config_dict):
         'title':'{} test performance'.format(config_dict['data_code']),
         'xlabel': 'epochs',
         'ylabel': 'test accurarcy',
-        'label': ['backpropagation', 'pure-hsic solve']
+        'label': ['backpropagation', 'unformatted-training']
     }
     filename = ""
     plot.plot_epoch_log([out_epoch, out_hsic_epoch], 'test_acc', metadata)
     plot.save_figure(get_exp_path("{}-test-acc.{}".format(
         get_plot_filename(config_dict), config_dict['ext'])))
-    
+
+    metadata = {
+        'title':'{} test performance'.format(config_dict['data_code']),
+        'xlabel': 'epochs',
+        'ylabel': 'training accurarcy',
+        'label': ['backpropagation', 'unformatted-training']
+    }
     plot.plot_epoch_log([out_epoch, out_hsic_epoch], 'train_acc', metadata)
     plot.save_figure(get_exp_path("{}-train-acc.{}".format(
         get_plot_filename(config_dict), config_dict['ext'])))

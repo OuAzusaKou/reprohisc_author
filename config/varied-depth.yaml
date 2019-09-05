@@ -15,4 +15,3 @@ last_hidden_width: 64
 verbose: 0
 ext: pdf
 exp_index: null # determined by task.task_varieddepth
-do_training: True

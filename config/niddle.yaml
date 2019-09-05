@@ -16,4 +16,4 @@ task: niddle
 verbose: 0
 ext: pdf
 exp_index: null
-do_training: True
+do_training: False

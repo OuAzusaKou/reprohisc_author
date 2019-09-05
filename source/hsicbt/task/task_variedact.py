@@ -3,6 +3,7 @@ from . import *
 def task_variedact_func(config_dict):
 
     if config_dict['do_training']:
+        
         config_dict['atype'] = 'relu'
         config_dict['exp_index'] = 1
         training_standard(config_dict) 

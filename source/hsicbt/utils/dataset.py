@@ -89,6 +89,7 @@ def get_cifar10_data(data_folder_path, batch_size=64):
     ])
     transform_test = transforms.Compose([
         transforms.ToTensor(),
+        transforms.Normalize((0.4913, 0.4821, 0.4465), (0.2470, 0.2434, 0.2615)),
     ])
 
     train_data = datasets.CIFAR10(data_folder_path, train=True, 

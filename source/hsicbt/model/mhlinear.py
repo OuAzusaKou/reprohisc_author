@@ -10,7 +10,7 @@ class ModelLinear(nn.Module):
     
         block_list = []
         is_conv = False
-
+        
         last_hw = hidden_width
         if last_hidden_width:
             last_hw = last_hidden_width

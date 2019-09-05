@@ -188,9 +188,10 @@ def training_hsic(config_dict):
         log = hsic_train(cepoch, model, train_loader, config_dict)
         batch_log_list.append(log)
 
-        if  config_dict['task'] == 'hsic-train' or \
-            config_dict['task'] == 'activation' or \
+        if  config_dict['task'] == 'hsic-train'     or \
+            config_dict['task'] == 'activation'     or \
             config_dict['task'] == 'sigma-combined' or \
+            config_dict['task'] == 'varied-dim'     or \
             config_dict['task'] == 'varied-epoch':
             # save with same filename for convenience
             save_model(model, get_model_path("{}".format(
