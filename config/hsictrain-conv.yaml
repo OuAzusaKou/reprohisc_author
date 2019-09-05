@@ -1,5 +1,5 @@
 batch_size: 128
-data_code: mnist
+data_code: fmnist
 n_layers: 5
 hidden_width: 8
 log_batch_interval: 20
@@ -11,7 +11,7 @@ sigma_hx: 30.
 sigma_hy: 30.
 lambda_x: 1.
 lambda_y: 200.
-model_file: hsic_weight_conv_cifar10.pt
+model_file: hsic_weight_conv_fmnist.pt
 epochs_hsic: 20
 task: hsic-train
 last_hidden_width: 256

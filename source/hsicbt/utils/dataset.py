@@ -16,7 +16,7 @@ def get_dataset_from_code(code, batch_size):
     elif code == 'cifar10':
         train_loader, test_loader = get_cifar10_data(batch_size=batch_size,
             data_folder_path=os.path.join(dataset_root, 'cifar10-data'))
-    elif code == 'fashionmnist':
+    elif code == 'fmnist':
         train_loader, test_loader = get_fasionmnist_data(batch_size=batch_size,
             data_folder_path=os.path.join(dataset_root, 'fasionmnist-data'))
     else:
@@ -28,7 +28,7 @@ def get_dataset_from_code(code, batch_size):
 def get_fasionmnist_data(data_folder_path, batch_size=64):
     # Define a transform to normalize the data
     transform = transforms.Compose([transforms.ToTensor(),
-                                   transforms.Normalize((0.5,), (0.5,)),
+                                   transforms.Normalize((0.2860,), (0.3530,)),
                                  ])
     # Download and load the training data
     trainset = datasets.FashionMNIST(data_folder_path, download=True, train=True, transform=transform)
@@ -52,14 +52,14 @@ def get_mnist_data(data_folder_path, batch_size=64):
     train_data = datasets.MNIST(data_folder_path, train=True,  download=True, 
         transform=transforms.Compose([
             transforms.ToTensor(), 
-            # transforms.Normalize((0.1307,), (0.3081,))
+            transforms.Normalize((0.1307,), (0.3081,))
             ])
         )
 
     test_data  = datasets.MNIST(data_folder_path, train=False, download=True, 
         transform=transforms.Compose([
             transforms.ToTensor(), 
-            # transforms.Normalize((0.1307,), (0.3081,))
+            transforms.Normalize((0.1307,), (0.3081,))
             ])
         )
 
@@ -81,9 +81,11 @@ def get_cifar10_data(data_folder_path, batch_size=64):
         (torch.utils.data.DataLoader): test loader
     """
     transform_train = transforms.Compose([
-        transforms.RandomCrop(32, padding=4),
-        transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
+        # transforms.RandomCrop(32, padding=4),
+        # transforms.RandomHorizontalFlip(),
+        transforms.Normalize((0.4913, 0.4821, 0.4465), (0.2470, 0.2434, 0.2615)),
+        
     ])
     transform_test = transforms.Compose([
         transforms.ToTensor(),

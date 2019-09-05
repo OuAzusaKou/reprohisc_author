@@ -27,7 +27,7 @@ class ModelResConv(nn.Module):
 
         if data_code == 'mnist':
             dim = 360
-        elif data_code == 'fashionmnist':
+        elif data_code == 'fmnist':
             dim = 360
         elif data_code == 'cifar10':
             dim = 490

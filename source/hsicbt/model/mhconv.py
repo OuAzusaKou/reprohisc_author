@@ -27,7 +27,7 @@ class ModelConv(nn.Module):
             dim = 128
         elif data_code == 'cifar10':
             dim = 512
-        elif data_code == 'fashionmnist':
+        elif data_code == 'fmnist':
             dim = 128
             
         self.output_layer   = makeblock_dense(dim, last_hw, atype)

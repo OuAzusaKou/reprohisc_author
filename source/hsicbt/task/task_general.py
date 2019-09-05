@@ -3,7 +3,7 @@ from . import *
 def task_general_func(config_dict):
 
     if config_dict['do_training']:
-        #training_format(config_dict)
+        training_format(config_dict)
         training_standard(config_dict)
 
 
