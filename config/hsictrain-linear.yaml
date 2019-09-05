@@ -15,3 +15,5 @@ model_file: hsic_weight_linear_fmnist.pt
 epochs_hsic: 10
 task: hsic-train
 verbose: 0
+exp_index: null
+do_training: True

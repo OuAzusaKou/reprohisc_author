@@ -1,16 +1,18 @@
-batch_size: 256
+batch_size: 128
 data_code: mnist
-n_layers: null # determined by engine.core.dispatcher
+n_layers: null # determined by task.task_varieddepth
 hidden_width: 64
 log_batch_interval: 20
 device: cuda
 model: linear
 atype: relu
 learning_rate: 0.0005
-sigma_hx: 30.
-sigma_hy: 30.
+sigma_hx: 15.
+sigma_hy: 15.
 epochs_standard: 5
 task: varied-depth
 last_hidden_width: 64
 verbose: 0
 ext: pdf
+exp_index: null # determined by task.task_varieddepth
+do_training: True

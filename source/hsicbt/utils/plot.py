@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from .color import *
+from .const import *
 
 def plot_epoch_log(curve_list, ptype, metadata):
 
@@ -11,15 +12,26 @@ def plot_epoch_log(curve_list, ptype, metadata):
     n = len(curve_list[0][ptype])
     xticks_idx = np.arange(n).tolist()
     xticks_val = np.arange(1,n+1).tolist()
+    max_y = -1
+    min_y = 1E5
     for i, curve_dict in enumerate(curve_list):
-        ax.plot(curve_dict[ptype], label=metadata['label'][i])
+        ax.plot(curve_dict[ptype], linewidth=4, label=metadata['label'][i])
+        max_y = np.max(curve_dict[ptype])
+        min_y = np.min(curve_dict[ptype])
+    plt.legend(fontsize=FONTSIZE_LEDEND)
+    margin = 5
+    max_y += margin
+    min_y -= margin
+    yticks_idx = np.linspace(min_y, max_y, 100)[::10]
+    yticks_val = [np.round(x, 1) for x in np.linspace(min_y, max_y, 100)[::10]]
 
-    plt.legend(fontsize=18) 
-    ax.set_title(metadata['title'], fontsize=18)
+    ax.set_title(metadata['title'], fontsize=FONTSIZE_TITLE)
     ax.set_xticks(xticks_idx)
-    ax.set_xticklabels(xticks_val)
-    ax.set_xlabel(metadata['xlabel'], fontsize=18)
-    ax.set_ylabel(metadata['ylabel'], fontsize=18)
+    ax.set_xticklabels(xticks_val, fontsize=FONTSIZE_LEDEND)
+    ax.set_yticks(yticks_idx)
+    ax.set_yticklabels(yticks_val,  fontsize=FONTSIZE_YTICKS)
+    ax.set_xlabel(metadata['xlabel'], fontsize=FONTSIZE_XLABEL)
+    ax.set_ylabel(metadata['ylabel'], fontsize=FONTSIZE_YLABEL)
 
 
 def plot_batches_log(curve_list, ptype, metadata):
@@ -38,20 +50,20 @@ def plot_batches_log(curve_list, ptype, metadata):
 
         val = [x[ptype] for x in curve_dict]
         val = [y for x in val for y in x]
-        ax.plot(val, label=metadata['label'][i])
+        ax.plot(val, linewidth=4, label=metadata['label'][i])
         
-    plt.legend(fontsize=18)
-    ax.set_title(metadata['title'], fontsize=18)
+    plt.legend(fontsize=FONTSIZE_LEDEND)
+    ax.set_title(metadata['title'], fontsize=FONTSIZE_TITLE)
     ax.set_xticks(xticks_idx)
-    ax.set_xticklabels(xticks_val)
-    ax.set_xlabel(metadata['xlabel'], fontsize=18)
-    ax.set_ylabel(metadata['ylabel'], fontsize=18)
+    ax.set_xticklabels(xticks_val, fontsize=FONTSIZE_LEDEND)
+    ax.set_xlabel(metadata['xlabel'], fontsize=FONTSIZE_XLABEL)
+    ax.set_ylabel(metadata['ylabel'], fontsize=FONTSIZE_YLABEL)
     
 
 def plot_activation_distribution():
 
 
-    data = np.load('assets/activation-onehot.npy', allow_pickle=True)[()]
+    data = np.load('assets/tmp/activation-onehot.npy', allow_pickle=True)[()]
     activation_data = data['activation']
     label_data = data['label']
     label_index = []
@@ -90,13 +102,15 @@ def plot_activation_distribution():
         shuffled_list.append(int(np.argmax(y)))
         subplot.plot(y)
         subplot.fill_between(np.arange(10), y-e, y+e, alpha=0.5, edgecolor='#CC4F1B', facecolor='#FF9848')
-        subplot.set_title("img class/argmax: {}/{}; category acc {:.2f}".format(i,int(np.argmax(y)), accuracy, ))
+        subplot.set_title("img class/argmax: {}/{}; category acc {:.2f}".format(i,int(np.argmax(y)), accuracy))
         subplot.set_xticks(idx, idx)
         subplot.set_ylim(ylim_min-2, ylim_max)
-        subplot.set_xlabel('10 dimension output activation indices')
-        subplot.set_ylabel('activation value')
-    fig.suptitle("Output of HSIC network activations \n shuffled argmax list {} Avg acc {:.2f}".format(shuffled_list, avg_acc), fontsize=18)
+        # subplot.set_xlabel('10 dimension output activation indices')
+        # subplot.set_ylabel('activation value')
 
+    fig.suptitle("Output of HSIC network activations", fontsize=FONTSIZE_TITLE)
+    fig.text(0.15, 0.05, "10 dimension output activation indices; shuffled argmax list {} Avg acc {:.2f}".format(shuffled_list, avg_acc), fontsize=FONTSIZE_XLABEL)
+    fig.text(0.1, 0.3, "activation value", fontsize=FONTSIZE_YLABEL, rotation='vertical')
 
 def plot_1d_activation_kde(datapath):
 
@@ -105,6 +119,9 @@ def plot_1d_activation_kde(datapath):
     label_data = data['label']
 
     from scipy.stats import gaussian_kde
+
+    fig = plt.figure(constrained_layout=True, figsize=(10,10))
+    ax = fig.add_subplot()
 
     sample_idx = np.linspace(-3,3,150)
     for i in range(10):
@@ -115,19 +132,21 @@ def plot_1d_activation_kde(datapath):
 
         sampling = kernel(sample_idx)
 
-        plt.plot(sampling, label="class:{} mean:{:.2f}".format(i, float(np.mean(select_item))))
-
+        plt.plot(sampling, linewidth=3, label="c:{} m:{:.2f}".format(i, float(np.mean(select_item))))
 
 
     xticks_idx = np.arange(len(sample_idx))
     xticks_idx = list(xticks_idx[::25]) + [xticks_idx[-1]]
     xticks_val = list(sample_idx[::25]) + [sample_idx[-1]]
     xticks_val = [int(x) for x in xticks_val]
-    plt.xticks(xticks_idx, xticks_val)
-    plt.title('class signals of MNIST')
-    plt.xlabel('tanh activation')
-    plt.ylabel('KDE density')
-    plt.legend(fontsize=8)
+
+    # plt.legend(fontsize=22) 
+    ax.set_title('class signals of dataset', fontsize=FONTSIZE_TITLE)
+    ax.set_xticks(xticks_idx)
+    ax.set_xticklabels(xticks_val,  fontsize=FONTSIZE_XTICKS)
+    ax.set_yticklabels(np.arange(10),  fontsize=FONTSIZE_YTICKS)
+    ax.set_xlabel('tanh activation', fontsize=FONTSIZE_XLABEL)
+    ax.set_ylabel('KDE density', fontsize=FONTSIZE_YLABEL)
 
 def save_figure(filepath):
     plt.savefig(filepath, bbox_inches='tight')

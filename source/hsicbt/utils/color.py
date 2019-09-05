@@ -1,8 +1,10 @@
 
 TEXT_BLACK = "\033[0;30;40m"
+TEXT_RED = "\033[1;31;40m"
 TEXT_GREEN = "\033[1;32;40m"
 TEXT_YELLOW = "\033[1;33;40m"
 TEXT_WHITE = "\033[1;37;40m"
+TEXT_BLUE  = "\033[1;34;40m"
 TEXT_RESET = "\033[0;0m"
 
 def get_color(ctype):
@@ -11,6 +13,14 @@ def get_color(ctype):
         color = TEXT_YELLOW
     elif ctype == 'green':
         color = TEXT_GREEN
+    elif ctype == 'white':
+        color = TEXT_WHITE
+    elif ctype == 'black':
+        color = TEXT_BLACK
+    elif ctype == 'blue':
+        color = TEXT_BLUE
+    elif ctype == 'red':
+        color = TEXT_RED
 
     return color
 

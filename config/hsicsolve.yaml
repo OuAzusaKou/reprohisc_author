@@ -1,5 +1,5 @@
 batch_size: 256
-data_code: cifar10
+data_code: fashionmnist
 n_layers: 5
 hidden_width: 128
 log_batch_interval: 25
@@ -16,3 +16,5 @@ epochs_hsic: 5
 task: hsic-solve
 verbose: 0
 ext: pdf
+exp_index: null
+do_training: False

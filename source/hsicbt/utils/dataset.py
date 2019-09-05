@@ -28,7 +28,7 @@ def get_dataset_from_code(code, batch_size):
 def get_fasionmnist_data(data_folder_path, batch_size=64):
     # Define a transform to normalize the data
     transform = transforms.Compose([transforms.ToTensor(),
-                                  # transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+                                  transforms.Normalize((0.5,), (0.5,)),
                                  ])
     # Download and load the training data
     trainset = datasets.FashionMNIST(data_folder_path, download=True, train=True, transform=transform)
