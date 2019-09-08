@@ -17,4 +17,4 @@ ext: pdf
 
 verbose: 0
 exp_index: null
-do_training: False
+do_training: True
