@@ -1,6 +1,7 @@
 from .. import *
 from .  import *
 from .train_misc     import *
+from ..utils.const   import *
 
 def hsic_train(cepoch, model, data_loader, config_dict):
 
@@ -27,6 +28,10 @@ def hsic_train(cepoch, model, data_loader, config_dict):
     pbar = tqdm(enumerate(data_loader), total=n_data/config_dict['batch_size'], ncols=120)
     for batch_idx, (data, target) in pbar:
 
+        if DEBUG_MODE:
+            if batch_idx > 5:
+                break
+                
         data   = data.to(config_dict['device'])
         target = target.to(config_dict['device'])
         output, hiddens = model(data)
