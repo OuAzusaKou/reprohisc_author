@@ -14,8 +14,8 @@ import yaml
 import scipy as sp
 import os
 
-if not os.path.exists("./models"):
-    os.makedirs("./models")
+if not os.path.exists("./assets/models"):
+    os.makedirs("./assets/models")
 if not os.path.exists("./assets"):
     os.makedirs("./assets")
 if not os.path.exists("./assets/data"):
