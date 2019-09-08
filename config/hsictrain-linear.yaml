@@ -12,6 +12,7 @@ sigma_hy: 30.
 lambda_x: 1.
 lambda_y: 200.
 model_file: hsic_weight_linear_fmnist.pt
+checkpoint: null
 epochs_hsic: 10
 task: hsic-train
 verbose: 0
