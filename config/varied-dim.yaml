@@ -21,6 +21,6 @@ last_hidden_width: null
 verbose: 1
 ext: pdf
 exp_index: null # determined by task.task_varieddim
-do_training_hsic: False
-do_training_format: False
+do_training_hsic: True
+do_training_format: True
 do_plot: True

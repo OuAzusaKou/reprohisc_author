@@ -7,7 +7,7 @@ device: cuda
 model: linear
 atype: relu
 learning_rate: 0.0001
-hsic_learning_rate: 0.001
+hsic_learning_rate: 0.0001
 sigma_hx: 30.
 sigma_hy: 30.
 lambda_x: 1.
@@ -21,6 +21,6 @@ last_hidden_width: 32
 verbose: 0
 ext: pdf
 exp_index: null # determined by task.task_variedep
-do_training_hsic: False
-do_training_format: False
+do_training_hsic: True
+do_training_format: True
 do_plot: True

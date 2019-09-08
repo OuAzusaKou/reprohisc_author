@@ -1,39 +1,30 @@
 #!/bin/bash
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # 
-#	General experiment: 
-# 		HSIC-Bottleneck training and the comparison of format/standard training
-#		will produce train/valid performance comparison
-# # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # 
+# Batch-running: 
+#	please see config/README.md for more information
+# # # # # # # # # # # # # # # 
 
-# ResNet with linear model
 run_hsicbt -cfg config/hsictrain-reslinear.yaml
 run_hsicbt -cfg config/general-reslinear.yaml
 
-# Linear model
-run_hsicbt -cfg config/hsictrain-linear.yaml
-run_hsicbt -cfg config/general-linear.yaml
+# fig2a-c
+run_hsicbt -cfg config/varied-activation.yaml 
 
-# ResNet with Conv model
-run_hsicbt -cfg config/hsictrain-resconv.yaml
-run_hsicbt -cfg config/general-resconv.yaml
+# fig2d-f
+run_hsicbt -cfg config/varied-depth.yaml 
 
-# Conv model
-run_hsicbt -cfg config/hsictrain-conv.yaml
-run_hsicbt -cfg config/general-conv.yaml
+# fig3
+run_hsicbt -cfg config/needle.yaml 
 
+# fig4-5
+run_hsicbt -cfg config/hsicsolve.yaml 
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # 
-#	HSIC-Bottleneck solve:
-#		pure HSIC-Bottleneck solve the classification, compared with standard training
-# 		will produce one-hot activation footage and training acc comparison
-# # # # # # # # # # # # # # # # # # # # # # # # # # # 
-run_hsicbt -cfg config/hsicsolve.yaml
+# fig6-b
+run_hsicbt -cfg config/varied-epoch.yaml 
 
+# fig7a
+run_hsicbt -cfg config/varied-dim.yaml
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # 
-#	Niddle:
-#		a niddle model that making single scalar output, this will show the comparison
-#		of class activation distribution separation between HISC-Bottleneck/standard
-# # # # # # # # # # # # # # # # # # # # # # # # # # # 
-run_hsicbt -cfg config/niddle.yaml
+# fig7b
+run_hsicbt -cfg config/sigma-combined.yaml

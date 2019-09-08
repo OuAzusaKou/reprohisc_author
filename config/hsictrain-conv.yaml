@@ -1,4 +1,4 @@
-batch_size: 128
+batch_size: 256
 data_code: fmnist
 n_layers: 5
 hidden_width: 8

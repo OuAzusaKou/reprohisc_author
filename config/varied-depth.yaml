@@ -1,4 +1,4 @@
-batch_size: 128
+batch_size: 256
 data_code: mnist
 n_layers: null # determined by task.task_varieddepth
 hidden_width: 64
@@ -15,4 +15,4 @@ last_hidden_width: 64
 verbose: 0
 ext: pdf
 exp_index: null # determined by task.task_varieddepth
-do_training: False
+do_training: True
