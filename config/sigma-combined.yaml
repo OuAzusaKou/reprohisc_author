@@ -14,6 +14,7 @@ lambda_x: 1.
 lambda_y: 200.
 epochs_format: 5
 epochs_hsic: 5
+checkpoint: null
 model_file: hsic_weight_sigmacomb_mnist.pt # will be modified by task.task_sigmacomb
 task: sigma-combined
 last_hidden_width: 64
