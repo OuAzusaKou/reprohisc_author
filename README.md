@@ -3,6 +3,7 @@ This is the released repo for our work entitled `The HSIC Bottleneck: Deep Learn
 
 ### Environment
 - pytorch-1.1.0
+- torchvision-0.3.0
 - numpy-1.16.4
 - scipy-1.3.0
 - tqdm-4.33.0

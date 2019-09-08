@@ -4,6 +4,7 @@ from .  import *
 from .train_misc     import *
 from .train_hsic     import *
 from .train_standard import *
+from ..utils.const   import *
 
 def training_standard(config_dict):
 
@@ -32,8 +33,12 @@ def training_standard(config_dict):
     epoch_log_dict['train_loss'] = []
     epoch_log_dict['test_acc'] = []
     epoch_log_dict['test_loss'] = []
+    nepoch = config_dict['epochs_standard']
 
-    for cepoch in range(1, config_dict['epochs_standard']+1):
+    if DEBUG_MODE:
+        nepoch = 2
+
+    for cepoch in range(1, nepoch+1):
         log = standard_train(cepoch, model, train_loader, optimizer, config_dict)
         batch_log_list.append(log)
         train_acc, train_loss = misc.get_accuracy_epoch(model, train_loader)
@@ -87,7 +92,12 @@ def training_format_combined(config_dict):
     epoch_log_dict['test_acc'] = []
     epoch_log_dict['test_loss'] = []
 
-    for cepoch in range(1, config_dict['epochs_format']+1):
+    nepoch = config_dict['epochs_format']
+
+    if DEBUG_MODE:
+        nepoch = 2
+
+    for cepoch in range(1, nepoch+1):
         log = standard_train(cepoch, ensemble_model, train_loader, optimizer, config_dict)
         batch_log_list.append(log)
 
@@ -139,7 +149,12 @@ def training_format(config_dict):
     epoch_log_dict['test_acc'] = []
     epoch_log_dict['test_loss'] = []
 
-    for cepoch in range(1, config_dict['epochs_format']+1):
+    nepoch = config_dict['epochs_format']
+
+    if DEBUG_MODE:
+        nepoch = 2
+
+    for cepoch in range(1, nepoch+1):
         log = standard_train(cepoch, ensemble_model, train_loader, optimizer, config_dict)
         batch_log_list.append(log)
 
@@ -171,7 +186,12 @@ def training_hsic(config_dict):
     if config_dict['verbose']:
         print(model)
 
-    epoch_range = range(1, config_dict['epochs_hsic']+1)
+    nepoch = config_dict['epochs_hsic']
+
+    if DEBUG_MODE:
+        nepoch = 2
+
+    epoch_range = range(1, nepoch+1)
     if config_dict['checkpoint']:
         model_dict = load_model(get_model_path("{}".format(
             config_dict['model_file']), config_dict['checkpoint']))
@@ -183,6 +203,8 @@ def training_hsic(config_dict):
     epoch_log_dict = {}
     epoch_log_dict['train_acc'] = []
     epoch_log_dict['test_acc'] = []
+
+
     
     for cepoch in epoch_range:
         log = hsic_train(cepoch, model, train_loader, config_dict)
