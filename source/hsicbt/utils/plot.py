@@ -65,7 +65,7 @@ def plot_batches_log(curve_list, ptype, metadata):
 def plot_activation_distribution():
 
 
-    data = np.load('assets/activation-onehot.npy', allow_pickle=True)[()]
+    data = np.load('assets/tmp/activation-onehot.npy', allow_pickle=True)[()]
     activation_data = data['activation']
     label_data = data['label']
     label_index = []

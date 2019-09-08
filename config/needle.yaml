@@ -1,6 +1,6 @@
 batch_size: 512
 data_code: mnist
-model: niddle
+model: needle
 log_batch_interval: 50
 device: cuda
 learning_rate: 0.0002
@@ -12,7 +12,7 @@ lambda_y: 200.
 epochs_standard: 1
 epochs_hsic: 1
 last_hidden_width: 10
-task: niddle
+task: needle
 verbose: 0
 ext: pdf
 exp_index: null

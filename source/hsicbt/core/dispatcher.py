@@ -2,7 +2,7 @@ from .. import *
 
 from ..task.task_general     import *
 from ..task.task_hsicsolve   import *
-from ..task.task_niddle      import *
+from ..task.task_needle      import *
 from ..task.task_variedact   import *
 from ..task.task_variedep    import *
 from ..task.task_varieddepth import *
@@ -20,8 +20,8 @@ def job_execution(config_dict):
     elif config_dict['task'] == 'format-train':
         out_batch, out_epoch = training_format(config_dict)
 
-    elif config_dict['task'] == 'niddle':
-        task_niddle_func(config_dict)
+    elif config_dict['task'] == 'needle':
+        task_needle_func(config_dict)
 
     elif config_dict['task'] == 'general':
         task_general_func(config_dict)

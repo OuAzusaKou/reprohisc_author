@@ -70,27 +70,27 @@ def task_varieddim_func(config_dict):
         input_epoch_list = [out_standard_epoch_001, out_standard_epoch_005, out_standard_epoch_010]
         label_list = ['dim-8', 'dim-32', 'dim-64']
 
-        metadata = {
-            #'title':'HSIC(X, Z_L) of Varied-dim',
-            'title':'',
-            'xlabel': 'epochs',
-            'ylabel': 'HSIC(X, Z_L)',
-            'label': label_list
-        }
-        plot.plot_batches_log(input_batch_list, 'batch_hsic_hx', metadata)
-        plot.save_figure(get_exp_path("varied-dim-hsic_xz-{}.{}".format(
-            config_dict['data_code'], config_dict['ext'])))
+        # metadata = {
+        #     #'title':'HSIC(X, Z_L) of Varied-dim',
+        #     'title':'',
+        #     'xlabel': 'epochs',
+        #     'ylabel': 'HSIC(X, Z_L)',
+        #     'label': label_list
+        # }
+        # plot.plot_batches_log(input_batch_list, 'batch_hsic_hx', metadata)
+        # plot.save_figure(get_exp_path("varied-dim-hsic_xz-{}.{}".format(
+        #     config_dict['data_code'], config_dict['ext'])))
 
-        metadata = {
-            #'title':'HSIC(Y, Z_L) of Varied-dim',
-            'title': '',
-            'xlabel': 'epochs',
-            'ylabel': 'HSIC(Y, Z_L)',
-            'label': label_list
-        }
-        plot.plot_batches_log(input_batch_list, 'batch_hsic_hy', metadata)
-        plot.save_figure(get_exp_path("varied-dim-hsic_yz-{}.{}".format(
-            config_dict['data_code'], config_dict['ext'])))
+        # metadata = {
+        #     #'title':'HSIC(Y, Z_L) of Varied-dim',
+        #     'title': '',
+        #     'xlabel': 'epochs',
+        #     'ylabel': 'HSIC(Y, Z_L)',
+        #     'label': label_list
+        # }
+        # plot.plot_batches_log(input_batch_list, 'batch_hsic_hy', metadata)
+        # plot.save_figure(get_exp_path("varied-dim-hsic_yz-{}.{}".format(
+        #     config_dict['data_code'], config_dict['ext'])))
 
         metadata = {
             #'title':'format-train of Varied-dim',
@@ -100,27 +100,27 @@ def task_varieddim_func(config_dict):
             'label': label_list
         }
         plot.plot_batches_log(input_batch_list, 'batch_acc', metadata)
-        plot.save_figure(get_exp_path("varied-dim-acc-{}.{}".format(
+        plot.save_figure(get_exp_path("fig7a-varied-dim-acc-{}.{}".format(
             config_dict['data_code'], config_dict['ext'])))
 
-        metadata = {
-            #'title':'format-train of Varied-dim',
-            'title': '',
-            'xlabel': 'epochs',
-            'ylabel': 'training loss',
-            'label': label_list
-        }
-        plot.plot_batches_log(input_batch_list, 'batch_loss', metadata)
-        plot.save_figure(get_exp_path("varied-dim-loss-{}.{}".format(
-            config_dict['data_code'], config_dict['ext'])))
+        # metadata = {
+        #     #'title':'format-train of Varied-dim',
+        #     'title': '',
+        #     'xlabel': 'epochs',
+        #     'ylabel': 'training loss',
+        #     'label': label_list
+        # }
+        # plot.plot_batches_log(input_batch_list, 'batch_loss', metadata)
+        # plot.save_figure(get_exp_path("varied-dim-loss-{}.{}".format(
+        #     config_dict['data_code'], config_dict['ext'])))
 
-        metadata = {
-            #'title':'{} test performance of Varied-dim'.format(config_dict['data_code']),
-            'title': '',
-            'xlabel': 'epochs',
-            'ylabel': 'test accurarcy',
-            'label': label_list
-        }
-        plot.plot_epoch_log(input_epoch_list, 'test_acc', metadata)
-        plot.save_figure(get_exp_path("{}-epoch-test-acc.{}".format(
-            get_plot_filename(config_dict), config_dict['ext'])))
+        # metadata = {
+        #     #'title':'{} test performance of Varied-dim'.format(config_dict['data_code']),
+        #     'title': '',
+        #     'xlabel': 'epochs',
+        #     'ylabel': 'test accurarcy',
+        #     'label': label_list
+        # }
+        # plot.plot_epoch_log(input_epoch_list, 'test_acc', metadata)
+        # plot.save_figure(get_exp_path("{}-epoch-test-acc.{}".format(
+        #     get_plot_filename(config_dict), config_dict['ext'])))

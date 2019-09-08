@@ -1,38 +1,20 @@
 batch_size: 256
+learning_rate: 0.001
 n_layers: 1
 hidden_width: 3
+last_hidden_width: 64
 log_batch_interval: 2
+epochs_standard: 1
+epochs_format: 1
+
 device: cuda
 model: resnet-conv
 atype: relu
-learning_rate: 0.001
 data_code: cifar10
 model_file: hsic_weight_resconv_cifar10.pt
-# data_code: fmnist
-# model_file: hsic_weight_resconv_fmnist.pt
-epochs_standard: 1
-epochs_format: 1
 task: general
-last_hidden_width: 64
-verbose: 0
 ext: pdf
+
+verbose: 0
 exp_index: null
-do_training: True
-
-
-# Loaded [./assets/models/hsic_weight_resconv_cifar10.pt]
-# Train Epoch: 1 [ 50176/50176 (100%)] Loss:2.2327 Acc:18.4052 hsic_xz:-1.0000 hsic_yz:-1.0000: 100%|███████████████| 196/196.0 [00:04<00:00, 47.39it/s]
-# Epoch - [0001]: Training Acc: 27.28
-# Epoch - [0001]: Testing  Acc: 27.24
-# Train Epoch: 2 [ 50176/50176 (100%)] Loss:2.0913 Acc:32.4769 hsic_xz:-1.0000 hsic_yz:-1.0000: 100%|███████████████| 196/196.0 [00:04<00:00, 45.06it/s]
-# Epoch - [0002]: Training Acc: 36.02
-# Epoch - [0002]: Testing  Acc: 36.13
-# Train Epoch: 3 [ 50176/50176 (100%)] Loss:1.9883 Acc:37.7922 hsic_xz:-1.0000 hsic_yz:-1.0000: 100%|███████████████| 196/196.0 [00:04<00:00, 44.96it/s]
-# Epoch - [0003]: Training Acc: 39.40
-# Epoch - [0003]: Testing  Acc: 39.40
-# Train Epoch: 4 [ 50176/50176 (100%)] Loss:1.9097 Acc:40.2164 hsic_xz:-1.0000 hsic_yz:-1.0000: 100%|███████████████| 196/196.0 [00:04<00:00, 44.93it/s]
-# Epoch - [0004]: Training Acc: 40.96
-# Epoch - [0004]: Testing  Acc: 40.90
-# Train Epoch: 5 [ 50176/50176 (100%)] Loss:1.8495 Acc:41.4489 hsic_xz:-1.0000 hsic_yz:-1.0000: 100%|███████████████| 196/196.0 [00:04<00:00, 42.16it/s]
-# Epoch - [0005]: Training Acc: 41.89
-# Epoch - [0005]: Testing  Acc: 41.73
+do_training: False

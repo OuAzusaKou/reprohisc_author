@@ -12,7 +12,7 @@ from ..model.mhconv        import ModelConv
 from ..model.mreslinear    import ModelResLinear
 from ..model.mresconv      import ModelResConv
 from ..model.mensemble     import ModelEnsemble
-from ..model.mniddle       import ModelNiddle
+from ..model.mneedle       import ModelNeedle
 from ..model.mensemblecomb import ModelEnsembleComb
 
 from ..math.hsic import *

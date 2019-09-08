@@ -36,9 +36,9 @@ def task_hsicsolve_func(config_dict):
         'label': ['backpropagation', 'unformatted-training']
     }
     plot.plot_epoch_log([out_epoch, out_hsic_epoch], 'train_acc', metadata)
-    plot.save_figure(get_exp_path("{}-train-acc.{}".format(
+    plot.save_figure(get_exp_path("fig5-{}-train-acc.{}".format(
         get_plot_filename(config_dict), config_dict['ext'])))
 
     plot.plot_activation_distribution()
-    plot.save_figure(get_exp_path("hsic-solve-actdist-{}.{}".format(
+    plot.save_figure(get_exp_path("fig4-hsic-solve-actdist-{}.{}".format(
         config_dict['data_code'], config_dict['ext'])))

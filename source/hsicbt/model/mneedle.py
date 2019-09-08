@@ -2,10 +2,10 @@ from .. import *
 from .block import *
 from ..utils.misc import *
 
-class ModelNiddle(nn.Module):
+class ModelNeedle(nn.Module):
 
     def __init__(self, data_code='mnist', atype='tanh', **kwargs):
-        super(ModelNiddle, self).__init__()
+        super(ModelNeedle, self).__init__()
     
         in_dim = get_in_dimensions(data_code)
         in_ch = get_in_channels(data_code)

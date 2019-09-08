@@ -45,8 +45,8 @@ def training_standard(config_dict):
         print_highlight("Epoch - [{:04d}]: Training Acc: {:.2f}".format(cepoch, train_acc), 'green')
         print_highlight("Epoch - [{:04d}]: Testing  Acc: {:.2f}".format(cepoch, test_acc), 'green')
 
-    if config_dict['task'] == 'niddle':
-        activations_extraction(model, train_loader, get_tmp_path("activation-niddle-standard.npy"), 1)
+    if config_dict['task'] == 'needle':
+        activations_extraction(model, train_loader, get_tmp_path("activation-needle-standard.npy"), 1)
 
     save_logs(batch_log_list, get_batch_log_filepath(
         config_dict['task'], TTYPE_STANDARD, config_dict['data_code'], config_dict['exp_index']))
@@ -213,8 +213,8 @@ def training_hsic(config_dict):
 
     if config_dict['task'] == 'hsic-solve':
         activations_extraction(model, train_loader, "./assets/activation-onehot.npy")
-    if config_dict['task'] == 'niddle':
-        activations_extraction(model, train_loader, "./assets/activation-niddle-hsic.npy", 1)
+    if config_dict['task'] == 'needle':
+        activations_extraction(model, train_loader, "./assets/activation-needle-hsic.npy", 1)
 
     save_logs(batch_log_list, get_batch_log_filepath(
         config_dict['task'], TTYPE_HSICTRAIN, config_dict['data_code'], config_dict['exp_index']))

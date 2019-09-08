@@ -18,4 +18,4 @@ task: hsic-solve
 verbose: 1
 ext: pdf
 exp_index: null
-do_training: True
+do_training: False

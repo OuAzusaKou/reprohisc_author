@@ -33,8 +33,8 @@ def hsic_objective(hidden, h_target, h_data, sigma_hy, sigma_hx):
   
 def model_distribution(config_dict):
 
-    if config_dict['model'] == 'niddle':
-        model = ModelNiddle(**config_dict)
+    if config_dict['model'] == 'needle':
+        model = ModelNeedle(**config_dict)
     elif config_dict['model'] == 'conv':
         model = ModelConv(**config_dict)
     elif config_dict['model'] == 'linear':
