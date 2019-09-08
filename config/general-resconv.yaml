@@ -10,8 +10,8 @@ epochs_format: 1
 device: cuda
 model: resnet-conv
 atype: relu
-data_code: cifar10
-model_file: hsic_weight_resconv_cifar10.pt
+data_code: mnist
+model_file: hsic_weight_resconv_mnist.pt
 task: general
 ext: pdf
 
