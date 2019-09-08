@@ -12,13 +12,16 @@ from ..task.task_varieddim   import *
 def job_execution(config_dict):
 
     if config_dict['task'] == 'standard-train':
-        out_batch, out_epoch = training_standard(config_dict)
+        if config_dict['do_training']:
+            out_batch, out_epoch = training_standard(config_dict)
 
     elif config_dict['task'] == 'hsic-train':
-        out_batch, out_epoch = training_hsic(config_dict)
+        if config_dict['do_training']:
+            out_batch, out_epoch = training_hsic(config_dict)
 
     elif config_dict['task'] == 'format-train':
-        out_batch, out_epoch = training_format(config_dict)
+        if config_dict['do_training']:
+            out_batch, out_epoch = training_format(config_dict)
 
     elif config_dict['task'] == 'needle':
         task_needle_func(config_dict)

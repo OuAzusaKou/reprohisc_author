@@ -234,9 +234,9 @@ def training_hsic(config_dict):
             epoch_log_dict['test_acc'].append(test_acc)
 
     if config_dict['task'] == 'hsic-solve':
-        activations_extraction(model, train_loader, "./assets/activation-onehot.npy")
+        activations_extraction(model, train_loader, "./assets/tmp/activation-onehot.npy")
     if config_dict['task'] == 'needle':
-        activations_extraction(model, train_loader, "./assets/activation-needle-hsic.npy", 1)
+        activations_extraction(model, train_loader, "./assets/tmp/activation-needle-hsic.npy", 1)
 
     save_logs(batch_log_list, get_batch_log_filepath(
         config_dict['task'], TTYPE_HSICTRAIN, config_dict['data_code'], config_dict['exp_index']))
