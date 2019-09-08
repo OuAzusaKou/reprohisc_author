@@ -17,7 +17,8 @@ def task_hsicsolve_func(config_dict):
         quit()
 
     metadata = {
-        'title':'{} test performance'.format(config_dict['data_code']),
+        #'title':'{} test performance'.format(config_dict['data_code']),
+        'title': '',
         'xlabel': 'epochs',
         'ylabel': 'test accurarcy',
         'label': ['backpropagation', 'unformatted-training']
@@ -28,7 +29,8 @@ def task_hsicsolve_func(config_dict):
         get_plot_filename(config_dict), config_dict['ext'])))
 
     metadata = {
-        'title':'{} test performance'.format(config_dict['data_code']),
+        #'title':'{} test performance'.format(config_dict['data_code']),
+        'title': '',
         'xlabel': 'epochs',
         'ylabel': 'training accurarcy',
         'label': ['backpropagation', 'unformatted-training']

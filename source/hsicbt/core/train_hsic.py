@@ -45,7 +45,7 @@ def hsic_train(cepoch, model, data_loader, config_dict):
 
             hx_l, hy_l = hsic_objective(
                     hiddens[i], 
-                    h_target=h_target.float(), 
+                    h_target=h_target.float(),
                     h_data=h_data,
                     sigma_hx=config_dict['sigma_hx'],
                     sigma_hy=config_dict['sigma_hy']

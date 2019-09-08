@@ -38,7 +38,8 @@ def task_variedact_func(config_dict):
     label_list = ['relu', 'tanh', 'elu', 'sigmoid']
 
     metadata = {
-        'title':'nHSIC(X, Z_L) of Varied-activation',
+        #'title':'nHSIC(X, Z_L) of Varied-activation',
+        'title': '',
         'xlabel': 'epochs',
         'ylabel': 'nHSIC(X, Z_L)',
         'label': label_list
@@ -48,7 +49,8 @@ def task_variedact_func(config_dict):
         config_dict['data_code'], config_dict['ext'])))
 
     metadata = {
-        'title':'nHSIC(Y, Z_L) of Varied-activation',
+        #'title':'nHSIC(Y, Z_L) of Varied-activation',
+        'title':'',
         'xlabel': 'epochs',
         'ylabel': 'nHSIC(Y, Z_L)',
         'label': label_list
@@ -58,7 +60,8 @@ def task_variedact_func(config_dict):
         config_dict['data_code'], config_dict['ext'])))
 
     metadata = {
-        'title':'performance of Varied-activation',
+        #'title':'performance of Varied-activation',
+        'title':'',
         'xlabel': 'epochs',
         'ylabel': 'training accuracy',
         'label': label_list

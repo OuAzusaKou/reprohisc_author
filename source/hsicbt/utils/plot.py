@@ -65,7 +65,7 @@ def plot_batches_log(curve_list, ptype, metadata):
 def plot_activation_distribution():
 
 
-    data = np.load('assets/tmp/activation-onehot.npy', allow_pickle=True)[()]
+    data = np.load('assets/activation-onehot.npy', allow_pickle=True)[()]
     activation_data = data['activation']
     label_data = data['label']
     label_index = []
@@ -97,14 +97,16 @@ def plot_activation_distribution():
         out = np.array([np.argmax(vec) for vec in select_item]) # find the maximum arg of activation dist
 
         y = np.mean(select_item, axis=0)
+
         num_correct = np.where(out==np.argmax(y))[0]
         accuracy = float(num_correct.shape[0]/out.shape[0])
+
         e = np.std(select_item, axis=0)
         idx = np.arange(10).tolist()
         shuffled_list.append(int(np.argmax(y)))
         subplot.plot(y)
         subplot.fill_between(np.arange(10), y-e, y+e, alpha=0.5, edgecolor='#CC4F1B', facecolor='#FF9848')
-        subplot.set_title("img class/argmax: {}/{}; category acc {:.2f}".format(i,int(np.argmax(y)), accuracy))
+        #subplot.set_title("img class/argmax: {}/{}; category acc {:.2f}".format(i,int(np.argmax(y)), accuracy))
         subplot.set_xticks(idx, idx)
         subplot.set_ylim(ylim_min-2, ylim_max)
         # subplot.set_xlabel('10 dimension output activation indices')
@@ -112,7 +114,7 @@ def plot_activation_distribution():
 
     fig.suptitle("Output of HSIC network activations", fontsize=FONTSIZE_TITLE)
     fig.text(0.15, 0.05, "10 dimension output activation indices; shuffled argmax list {} Avg acc {:.2f}".format(shuffled_list, avg_acc), fontsize=FONTSIZE_XLABEL)
-    fig.text(0.1, 0.3, "activation value", fontsize=FONTSIZE_YLABEL, rotation='vertical')
+    fig.text(0.1, 0.6, "activation value", fontsize=FONTSIZE_YLABEL, rotation='vertical')
 
 def plot_1d_activation_kde(datapath):
 

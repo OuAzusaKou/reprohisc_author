@@ -71,7 +71,8 @@ def task_varieddim_func(config_dict):
         label_list = ['dim-8', 'dim-32', 'dim-64']
 
         metadata = {
-            'title':'HSIC(X, Z_L) of Varied-dim',
+            #'title':'HSIC(X, Z_L) of Varied-dim',
+            'title':'',
             'xlabel': 'epochs',
             'ylabel': 'HSIC(X, Z_L)',
             'label': label_list
@@ -81,7 +82,8 @@ def task_varieddim_func(config_dict):
             config_dict['data_code'], config_dict['ext'])))
 
         metadata = {
-            'title':'HSIC(Y, Z_L) of Varied-dim',
+            #'title':'HSIC(Y, Z_L) of Varied-dim',
+            'title': '',
             'xlabel': 'epochs',
             'ylabel': 'HSIC(Y, Z_L)',
             'label': label_list
@@ -91,7 +93,8 @@ def task_varieddim_func(config_dict):
             config_dict['data_code'], config_dict['ext'])))
 
         metadata = {
-            'title':'format-train of Varied-dim',
+            #'title':'format-train of Varied-dim',
+            'title': '',
             'xlabel': 'epochs',
             'ylabel': 'training accuracy',
             'label': label_list
@@ -101,7 +104,8 @@ def task_varieddim_func(config_dict):
             config_dict['data_code'], config_dict['ext'])))
 
         metadata = {
-            'title':'format-train of Varied-dim',
+            #'title':'format-train of Varied-dim',
+            'title': '',
             'xlabel': 'epochs',
             'ylabel': 'training loss',
             'label': label_list
@@ -111,7 +115,8 @@ def task_varieddim_func(config_dict):
             config_dict['data_code'], config_dict['ext'])))
 
         metadata = {
-            'title':'{} test performance of Varied-dim'.format(config_dict['data_code']),
+            #'title':'{} test performance of Varied-dim'.format(config_dict['data_code']),
+            'title': '',
             'xlabel': 'epochs',
             'ylabel': 'test accurarcy',
             'label': label_list

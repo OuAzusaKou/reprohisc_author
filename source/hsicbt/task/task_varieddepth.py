@@ -37,7 +37,7 @@ def task_varieddepth_func(config_dict):
     label_list = ['depth-05', 'depth-10', 'depth-15', 'depth-20']
 
     metadata = {
-        'title':'HSIC(X, Z_L) of Varied-depth',
+        'title':'',
         'xlabel': 'epochs',
         'ylabel': 'HSIC(X, Z_L)',
         'label': label_list
@@ -47,7 +47,7 @@ def task_varieddepth_func(config_dict):
         config_dict['data_code'], config_dict['ext'])))
 
     metadata = {
-        'title':'HSIC(Y, Z_L) of Varied-depth',
+        'title':'',
         'xlabel': 'epochs',
         'ylabel': 'HSIC(Y, Z_L)',
         'label': label_list
@@ -57,7 +57,7 @@ def task_varieddepth_func(config_dict):
         config_dict['data_code'], config_dict['ext'])))
 
     metadata = {
-        'title':'performance of Varied-depth',
+        'title':'',
         'xlabel': 'epochs',
         'ylabel': 'training accuracy',
         'label': label_list

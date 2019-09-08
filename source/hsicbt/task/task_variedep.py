@@ -67,7 +67,8 @@ def task_variedep_func(config_dict):
     label_list = ['epoch-001', 'epoch-005', 'epoch-010']
 
     metadata = {
-        'title':'HSIC(X, Z_L) of Varied-epoch',
+        #'title':'HSIC(X, Z_L) of Varied-epoch',
+        'title': '',
         'xlabel': 'epochs',
         'ylabel': 'HSIC(X, Z_L)',
         'label': label_list
@@ -77,7 +78,8 @@ def task_variedep_func(config_dict):
         config_dict['data_code'], config_dict['ext'])))
 
     metadata = {
-        'title':'HSIC(Y, Z_L) of Varied-epoch',
+        #'title':'HSIC(Y, Z_L) of Varied-epoch',
+        'title': '',
         'xlabel': 'epochs',
         'ylabel': 'HSIC(Y, Z_L)',
         'label': label_list
@@ -87,7 +89,8 @@ def task_variedep_func(config_dict):
         config_dict['data_code'], config_dict['ext'])))
 
     metadata = {
-        'title':'format-train of Varied-epoch',
+        #'title':'format-train of Varied-epoch',
+        'title': '',
         'xlabel': 'epochs',
         'ylabel': 'training accuracy',
         'label': label_list
@@ -97,7 +100,8 @@ def task_variedep_func(config_dict):
         config_dict['data_code'], config_dict['ext'])))
 
     metadata = {
-        'title':'format-train of Varied-epoch',
+        #'title':'format-train of Varied-epoch',
+        'title': '',
         'xlabel': 'epochs',
         'ylabel': 'training loss',
         'label': label_list
@@ -107,7 +111,8 @@ def task_variedep_func(config_dict):
         config_dict['data_code'], config_dict['ext'])))
 
     metadata = {
-        'title':'{} test performance of Varied-epoch'.format(config_dict['data_code']),
+        #'title':'{} test performance of Varied-epoch'.format(config_dict['data_code']),
+        'title': '',
         'xlabel': 'epochs',
         'ylabel': 'test accurarcy',
         'label': label_list

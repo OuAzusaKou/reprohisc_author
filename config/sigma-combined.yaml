@@ -21,5 +21,5 @@ verbose: 0
 ext: pdf
 exp_index: null # determined by task.task_sigmacomb
 do_training_hsic: False
-do_training_format: True
+do_training_format: False
 do_plot: True

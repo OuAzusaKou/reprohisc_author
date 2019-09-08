@@ -79,7 +79,8 @@ def task_sigmacomb_func(config_dict):
         input_list = [out_standard_batch_1, out_standard_batch_2, out_standard_batch_3, out_standard_batch_4]
         label_list = ['sigma=5', 'sigma=10', 'sigma=15', 'sigma-combined']
         metadata = {
-            'title':'{} training perf of sigma-combined net'.format(config_dict['data_code']),
+            #'title':'{} training perf of sigma-combined net'.format(config_dict['data_code']),
+            'title': '',
             'xlabel': 'epochs',
             'ylabel': 'training accurarcy',
             'label': label_list
@@ -91,7 +92,8 @@ def task_sigmacomb_func(config_dict):
         input_list = [out_standard_epoch_1, out_standard_epoch_2, out_standard_epoch_3, out_standard_epoch_4]
         label_list = ['sigma=5', 'sigma=10', 'sigma=15', 'sigma-combined']
         metadata = {
-            'title':'{} test perf of sigma-combined net'.format(config_dict['data_code']),
+            #'title':'{} test perf of sigma-combined net'.format(config_dict['data_code']),
+            'title': '',
             'xlabel': 'epochs',
             'ylabel': 'test accurarcy',
             'label': label_list
