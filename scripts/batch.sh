@@ -5,8 +5,8 @@
 #	please see config/README.md for more information
 # # # # # # # # # # # # # # # 
 
-run_hsicbt -cfg config/hsictrain-reslinear.yaml
-run_hsicbt -cfg config/general-reslinear.yaml
+run_hsicbt -cfg config/hsictrain-linear.yaml
+run_hsicbt -cfg config/general-linear.yaml
 
 # fig2a-c
 run_hsicbt -cfg config/varied-activation.yaml 
