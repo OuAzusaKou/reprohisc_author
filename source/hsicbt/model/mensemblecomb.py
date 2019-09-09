@@ -15,11 +15,9 @@ class ModelEnsembleComb(nn.Module):
             h, hiddens = hsic_model(x)
             x_list.append(torch.unsqueeze(h, dim=0))
     
-        # x = torch.mean(torch.cat(x_list), dim=0)
-        x = x_list[-1][0]
-        
-        
+        x = torch.sum(torch.cat(x_list), dim=0)        
         bn = nn.BatchNorm1d(x.size()[1]).to('cuda')
         x = bn(x)
         x = self._vanilla_model(x)
-        return x, hiddens
+        
+        return F.log_softmax(x, dim=1), hiddens
