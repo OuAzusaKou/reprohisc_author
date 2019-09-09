@@ -6,7 +6,7 @@ log_batch_interval: 20
 device: cuda
 model: linear
 atype: relu
-learning_rate: 0.0001
+learning_rate: 0.0005
 hsic_learning_rate: 0.0001
 sigma_hx: 30.
 sigma_hy: 30.

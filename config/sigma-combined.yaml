@@ -12,7 +12,7 @@ sigma_hx: null # determined by task.task_sigmacomb
 sigma_hy: null # determined by task.task_sigmacomb
 lambda_x: 1.
 lambda_y: 200.
-epochs_format: 5
+epochs_format: 10
 epochs_hsic: 5
 checkpoint: null
 model_file: hsic_weight_sigmacomb_mnist.pt # will be modified by task.task_sigmacomb
@@ -21,6 +21,6 @@ last_hidden_width: 64
 verbose: 0
 ext: pdf
 exp_index: null # determined by task.task_sigmacomb
-do_training_hsic: True
+do_training_hsic: False
 do_training_format: True
 do_plot: True

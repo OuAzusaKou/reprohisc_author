@@ -16,6 +16,6 @@ class ModelEnsembleComb(nn.Module):
             x_list.append(torch.unsqueeze(h, dim=0))
     
         x = torch.mean(torch.cat(x_list), dim=0)
-        x = F.relu(x)
+        x = F.elu(x)
         x = self._vanilla_model(x)
         return x, hiddens

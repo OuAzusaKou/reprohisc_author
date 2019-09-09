@@ -1,4 +1,4 @@
-batch_size: 256
+batch_size: 512
 data_code: mnist
 model: needle
 log_batch_interval: 50
@@ -10,7 +10,7 @@ sigma_hy: 40.
 lambda_x: 1.
 lambda_y: 200.
 epochs_standard: 1
-epochs_hsic: 1
+epochs_hsic: 5
 checkpoint: null
 last_hidden_width: 10
 task: needle

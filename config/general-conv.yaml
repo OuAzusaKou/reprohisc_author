@@ -11,7 +11,7 @@ model_file: hsic_weight_conv_mnist.pt
 epochs_standard: 2
 epochs_format: 2
 task: general
-last_hidden_width: 32
+last_hidden_width: 32 # it is for last dense layer
 verbose: 0
 ext: pdf
 exp_index: null

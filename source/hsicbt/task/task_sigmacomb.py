@@ -33,12 +33,12 @@ def task_sigmacomb_func(config_dict):
         config_dict['exp_index'] = 1
         config_dict['model_file'] = "{}-{:04d}.pt".format(
             os.path.splitext(model_filename)[0], config_dict['exp_index'])
-        training_format(config_dict)
+        #training_format(config_dict)
 
         config_dict['exp_index'] = 2
         config_dict['model_file'] = "{}-{:04d}.pt".format(
             os.path.splitext(model_filename)[0], config_dict['exp_index'])
-        training_format(config_dict)
+        #training_format(config_dict)
 
         config_dict['exp_index'] = 3
         config_dict['model_file'] = "{}-{:04d}.pt".format(
