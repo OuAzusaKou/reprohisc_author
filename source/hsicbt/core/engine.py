@@ -79,7 +79,7 @@ def training_format_combined(config_dict):
         hsic_models.append(hsic_model)
     
     optimizer = optim.SGD( filter(lambda p: p.requires_grad, vanilla_model.parameters()), 
-            lr = config_dict['learning_rate'], momentum=.9, weight_decay=0.001)
+            lr = config_dict['learning_rate'], momentum=.9, weight_decay=0.0001)
 
     ensemble_model = ModelEnsembleComb(hsic_models, vanilla_model)
     if config_dict['verbose']:

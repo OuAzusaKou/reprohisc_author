@@ -1,4 +1,4 @@
-batch_size: 256
+batch_size: 64
 data_code: mnist
 n_layers: 5
 hidden_width: 128
@@ -6,14 +6,14 @@ log_batch_interval: 20
 device: cuda
 model: linear
 atype: relu
-learning_rate: 0.0005
+learning_rate: 0.0001
 hsic_learning_rate: 0.0001
 sigma_hx: null # determined by task.task_sigmacomb
 sigma_hy: null # determined by task.task_sigmacomb
 lambda_x: 1.
 lambda_y: 200.
-epochs_format: 10
-epochs_hsic: 5
+epochs_format: 5
+epochs_hsic: 10
 checkpoint: null
 model_file: hsic_weight_sigmacomb_mnist.pt # will be modified by task.task_sigmacomb
 task: sigma-combined
