@@ -52,14 +52,14 @@ def get_mnist_data(data_folder_path, batch_size=64):
     train_data = datasets.MNIST(data_folder_path, train=True,  download=True, 
         transform=transforms.Compose([
             transforms.ToTensor(), 
-            #transforms.Normalize((0.1307,), (0.3081,))
+            transforms.Normalize((0.1307,), (0.3081,))
             ])
         )
 
     test_data  = datasets.MNIST(data_folder_path, train=False, download=True, 
         transform=transforms.Compose([
             transforms.ToTensor(), 
-            #transforms.Normalize((0.1307,), (0.3081,))
+            transforms.Normalize((0.1307,), (0.3081,))
             ])
         )
 
