@@ -1,7 +1,7 @@
 batch_size: 256
 data_code: cifar10
 n_layers: 5
-hidden_width: 10
+hidden_width: 20
 log_batch_interval: 20
 device: cuda
 model: resnet-conv
@@ -10,7 +10,7 @@ hsic_learning_rate: 0.0001
 sigma_hx: 30.
 sigma_hy: 30.
 lambda_x: 1.
-lambda_y: 250.
+lambda_y: 10.
 model_file: hsic_weight_resconv_cifar10.pt
 checkpoint: null
 epochs_hsic: 60
