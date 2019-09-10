@@ -1,4 +1,4 @@
-batch_size: 256
+batch_size: 512
 data_code: mnist
 model: needle
 log_batch_interval: 50
