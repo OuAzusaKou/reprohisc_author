@@ -1,20 +1,21 @@
-batch_size: 256
-learning_rate: 0.001
-n_layers: 1
-hidden_width: 3
-last_hidden_width: 64
-log_batch_interval: 2
-epochs_standard: 1
-epochs_format: 1
+batch_size: 1024
+learning_rate: 0.0001
+n_layers: 5
+hidden_width: 20
+last_hidden_width: 256
+epochs_standard: 2
+epochs_format: 2
+seed: 1234
 
 device: cuda
 model: resnet-conv
 atype: relu
-data_code: mnist
-model_file: hsic_weight_resconv_mnist.pt
+data_code: cifar10
+model_file: hsic_weight_resconv_cifar10.pt
 task: general
 ext: pdf
 
+log_batch_interval: 2
 verbose: 0
 exp_index: null
 do_training: True

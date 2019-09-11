@@ -43,7 +43,7 @@ def hsic_train(cepoch, model, data_loader, config_dict):
         for i in range(len(hiddens)):
             output, hiddens = model(data)
             params, param_names = misc.get_layer_parameters(model=model, layer_idx=i) # so we only optimize one layer at a time
-            optimizer = optim.SGD(params, lr = config_dict['hsic_learning_rate'], momentum=.9, weight_decay=0.001)
+            optimizer = optim.SGD(params, lr = config_dict['learning_rate'], momentum=.9, weight_decay=0.001)
             optimizer.zero_grad()
             if len(hiddens[i].size()) > 2:
                 hiddens[i] = hiddens[i].view(-1, np.prod(hiddens[i].size()[1:]))

@@ -1,18 +1,21 @@
 batch_size: 512
-data_code: mnist
+learning_rate: 0.001
 n_layers: 5
 hidden_width: 256
-log_batch_interval: 50
+last_hidden_width: 32
+epochs_standard: 5
+epochs_format: 5
+seed: 1234
+
 device: cuda
 model: resnet-linear
 atype: relu
-learning_rate: 0.001
+data_code: mnist
 model_file: hsic_weight_reslinear_mnist.pt
-epochs_standard: 5
-epochs_format: 5
 task: general
-last_hidden_width: 32
-verbose: 0
 ext: pdf
+
+log_batch_interval: 50
+verbose: 0
 exp_index: null
 do_training: True

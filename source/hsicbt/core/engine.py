@@ -24,8 +24,8 @@ def training_standard(config_dict):
     if config_dict['verbose']:
         print(model)
 
-    optimizer = optim.SGD( filter(lambda p: p.requires_grad, model.parameters()), 
-            lr = config_dict['learning_rate'], momentum=.9, weight_decay=1E-5)
+    optimizer = optim.Adam( filter(lambda p: p.requires_grad, model.parameters()), 
+            lr = config_dict['learning_rate'], weight_decay=1E-5)
 
     batch_log_list = []
     epoch_log_dict = {}
@@ -33,7 +33,7 @@ def training_standard(config_dict):
     epoch_log_dict['train_loss'] = []
     epoch_log_dict['test_acc'] = []
     epoch_log_dict['test_loss'] = []
-    nepoch = config_dict['epochs_standard']
+    nepoch = config_dict['epochs']
 
     if DEBUG_MODE:
         nepoch = 2
@@ -51,7 +51,7 @@ def training_standard(config_dict):
         print_highlight("Epoch - [{:04d}]: Testing  Acc: {:.2f}".format(cepoch, test_acc), 'green')
 
     if config_dict['task'] == 'needle':
-        activations_extraction(model, train_loader, get_tmp_path("activation-needle-standard.npy"), 1)
+        activations_extraction(model, train_loader, get_tmp_path("activation-needle-{}.npy".format(config_dict['training_type'])), 1)
 
     save_logs(batch_log_list, get_batch_log_filepath(
         config_dict['task'], TTYPE_STANDARD, config_dict['data_code'], config_dict['exp_index']))
@@ -92,7 +92,7 @@ def training_format_combined(config_dict):
     epoch_log_dict['test_acc'] = []
     epoch_log_dict['test_loss'] = []
 
-    nepoch = config_dict['epochs_format']
+    nepoch = config_dict['epochs']
 
     if DEBUG_MODE:
         nepoch = 2
@@ -129,8 +129,8 @@ def training_format(config_dict):
     torch.manual_seed(1234)
     hsic_model = model_distribution(config_dict)
     
-    optimizer = optim.SGD( filter(lambda p: p.requires_grad, vanilla_model.parameters()), 
-            lr = config_dict['learning_rate'], momentum=.9, weight_decay=0.001)
+    optimizer = optim.Adam( filter(lambda p: p.requires_grad, vanilla_model.parameters()), 
+            lr = config_dict['learning_rate'], weight_decay=0.001)
 
     model = load_model(get_model_path("{}".format(
         config_dict['model_file'])))
@@ -149,7 +149,7 @@ def training_format(config_dict):
     epoch_log_dict['test_acc'] = []
     epoch_log_dict['test_loss'] = []
 
-    nepoch = config_dict['epochs_format']
+    nepoch = config_dict['epochs']
 
     if DEBUG_MODE:
         nepoch = 2
@@ -186,7 +186,7 @@ def training_hsic(config_dict):
     if config_dict['verbose']:
         print(model)
 
-    nepoch = config_dict['epochs_hsic']
+    nepoch = config_dict['epochs']
 
     if DEBUG_MODE:
         nepoch = 2
@@ -196,7 +196,7 @@ def training_hsic(config_dict):
         model_dict = load_model(get_model_path("{}".format(
             config_dict['model_file']), config_dict['checkpoint']))
         epoch_range = range(config_dict['checkpoint']+1, 
-            config_dict['checkpoint']+config_dict['epochs_hsic']+1)
+            config_dict['checkpoint']+config_dict['epochs']+1)
         model.load_state_dict(model_dict)
 
     batch_log_list = []
@@ -236,7 +236,7 @@ def training_hsic(config_dict):
     if config_dict['task'] == 'hsic-solve':
         activations_extraction(model, train_loader, "./assets/tmp/activation-onehot.npy")
     if config_dict['task'] == 'needle':
-        activations_extraction(model, train_loader, "./assets/tmp/activation-needle-hsic.npy", 1)
+        activations_extraction(model, train_loader, "./assets/tmp/activation-needle-{}.npy".format(config_dict['training_type']), 1)
 
     save_logs(batch_log_list, get_batch_log_filepath(
         config_dict['task'], TTYPE_HSICTRAIN, config_dict['data_code'], config_dict['exp_index']))

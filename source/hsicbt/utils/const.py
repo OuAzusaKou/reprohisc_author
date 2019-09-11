@@ -1,6 +1,7 @@
-TTYPE_STANDARD = 'standard'
+TTYPE_STANDARD = 'backprop'
 TTYPE_HSICTRAIN = 'hsictrain'
 TTYPE_FORMAT = 'format'
+TTYPE_UNFORMAT = 'unformat'
 
 
 FONTSIZE_TITLE  = 36
