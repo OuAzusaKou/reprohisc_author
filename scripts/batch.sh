@@ -8,8 +8,6 @@
 # genernal
 task_general.sh
 
-
-
 # fig2a-c
 task_variedact.sh
 
