@@ -3,24 +3,78 @@
 from hsicbt.core.dispatcher import job_execution
 from hsicbt.utils.io import load_yaml
 from hsicbt.utils.welcome import say_hello
+from hsicbt.utils.color import print_highlight
 import argparse
+import os
 
 def get_args():
     """ args from input
     """
     parser = argparse.ArgumentParser(description='HSIC-Bottleneck research')
-    parser.add_argument('-cfg', '--config', type=str, help='config input path')
+    
+    parser.add_argument('-cfg', '--config',
+        type=str, help='config input path')
+    parser.add_argument('-d', '--dim', default=0,
+        type=int, help='specifying dimension of hidden layers for varied-dim experiments')
+    parser.add_argument('-dt', '--depth', default=0,
+        type=int, help='specifying depth for varied-depth experiments')
+    parser.add_argument('-ei', '--exp-idx', default=0, nargs='+',
+        type=int, help='the index for varied experiments')
+    parser.add_argument('-tt', '--training-type', default='',
+        type=str, help='training types [hsictrain|format|backprop]')
+    parser.add_argument('-bs', '--batch-size', default=0,
+        type=int, help='minibatch size')
+    parser.add_argument('-ep', '--epochs', default=0,
+        type=int, help='number of training epochs')
+    parser.add_argument('-s', '--sigma', default=0,
+        type=int, help='nHSIC sigmas')
+    parser.add_argument('-at', '--activation-func', default=0,
+        type=str, help='name of the activation func [elu|tanh|relu|sigmoid]')
+    parser.add_argument('-dc', '--data-code', default='mnist',
+        type=str, help='name of the working dataset [mnist|fmnist|cifar10]')
+    parser.add_argument('-m', '--model', default=0,
+        type=str, help='name of the activation func [linear|conv|reslinear|resconv]')
+    parser.add_argument('-db', '--debug',
+        action='store_true', help='debug usage')
+    
     args = parser.parse_args()
 
     return args
     
 def main():
 
-	say_hello()
-	args = get_args()
-	config_dict = load_yaml(args.config)
-	
-	job_execution(config_dict)
+    say_hello()
+    args = get_args()
+    config_dict = load_yaml(args.config)
+
+    if args.dim:
+        config_dict['hidden_width'] = args.dim
+    if args.depth:
+        config_dict['n_layers'] = args.depth
+    if args.training_type:
+        config_dict['training_type'] = args.training_type
+    if args.exp_idx:
+        config_dict['exp_index'] = args.exp_idx
+    if args.batch_size:
+        config_dict['batch_size'] = args.batch_size
+    if args.sigma:
+        config_dict['sigma'] = args.sigma
+    if args.epochs:
+        config_dict['epochs'] = args.epochs
+    if args.activation_func:
+        config_dict['atype'] = args.activation_func
+    if args.sigma:
+        config_dict['sigma_hx'] = args.sigma
+        config_dict['sigma_hy'] = args.sigma
+    if args.data_code:
+        config_dict['data_code'] = args.data_code
+    if args.model:
+        config_dict['model'] = args.model
+    if os.environ.get('HSICBT_DEBUG'):
+        config_dict['epochs'] = 1
+        config_dict['verbose'] = 1
+        print_highlight("debug mode", 'yellow')
+    job_execution(config_dict)
 
 
 if __name__ == '__main__':

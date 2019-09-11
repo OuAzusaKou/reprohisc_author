@@ -1,25 +1,7 @@
 from . import *
 
-def task_variedact_func(config_dict):
-
-    if config_dict['do_training']:
-        
-        config_dict['atype'] = 'relu'
-        config_dict['exp_index'] = 1
-        training_standard(config_dict) 
-
-        config_dict['atype'] = 'tanh'
-        config_dict['exp_index'] = 2
-        training_standard(config_dict)
-
-        config_dict['atype'] = 'elu'
-        config_dict['exp_index'] = 3
-        training_standard(config_dict)
-
-        config_dict['atype'] = 'sigmoid'
-        config_dict['exp_index'] = 4
-        training_standard(config_dict)
-
+def plot_variedact_result(config_dict):
+    
     try:
         out_standard_batch_relu = load_logs(get_batch_log_filepath(
             config_dict['task'], TTYPE_STANDARD , config_dict['data_code'], 1))
@@ -69,3 +51,12 @@ def task_variedact_func(config_dict):
     plot.plot_batches_log(input_list, 'batch_acc', metadata)
     plot.save_figure(get_exp_path("fig2c-varied-activation-acc-{}.{}".format(
         config_dict['data_code'], config_dict['ext'])))
+    
+
+
+def task_variedact_func(config_dict):
+
+    func = task_assigner(config_dict['training_type'])
+    func(config_dict)
+
+

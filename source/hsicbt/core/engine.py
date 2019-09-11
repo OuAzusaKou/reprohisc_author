@@ -23,8 +23,10 @@ def training_standard(config_dict):
    
     if config_dict['verbose']:
         print(model)
+        print(json.dumps(config_dict, sort_keys=True,
+                 indent=4, separators=(',', ': ')))
 
-    optimizer = optim.Adam( filter(lambda p: p.requires_grad, model.parameters()), 
+    optimizer = optim.SGD( filter(lambda p: p.requires_grad, model.parameters()), 
             lr = config_dict['learning_rate'], weight_decay=1E-5)
 
     batch_log_list = []
@@ -84,6 +86,8 @@ def training_format_combined(config_dict):
     ensemble_model = ModelEnsembleComb(hsic_models, vanilla_model)
     if config_dict['verbose']:
         print(ensemble_model)
+        print(json.dumps(config_dict, sort_keys=True,
+                 indent=4, separators=(',', ': ')))
 
     batch_log_list = []
     epoch_log_dict = {}
@@ -129,7 +133,7 @@ def training_format(config_dict):
     torch.manual_seed(1234)
     hsic_model = model_distribution(config_dict)
     
-    optimizer = optim.Adam( filter(lambda p: p.requires_grad, vanilla_model.parameters()), 
+    optimizer = optim.SGD( filter(lambda p: p.requires_grad, vanilla_model.parameters()), 
             lr = config_dict['learning_rate'], weight_decay=0.001)
 
     model = load_model(get_model_path("{}".format(
@@ -141,7 +145,9 @@ def training_format(config_dict):
     ensemble_model = ModelEnsemble(hsic_model, vanilla_model)
     if config_dict['verbose']:
         print(ensemble_model)
-
+        print(json.dumps(config_dict, sort_keys=True,
+                 indent=4, separators=(',', ': ')))
+        
     batch_log_list = []
     epoch_log_dict = {}
     epoch_log_dict['train_acc'] = []
@@ -185,7 +191,9 @@ def training_hsic(config_dict):
     model = model_distribution(config_dict)
     if config_dict['verbose']:
         print(model)
-
+        print(json.dumps(config_dict, sort_keys=True,
+                 indent=4, separators=(',', ': ')))
+        
     nepoch = config_dict['epochs']
 
     if DEBUG_MODE:

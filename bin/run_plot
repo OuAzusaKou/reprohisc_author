@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+
+from hsicbt.core.dispatcher import plot_execution
+from hsicbt.utils.io import load_yaml
+from hsicbt.utils.welcome import say_hello
+import argparse
+
+def get_args():
+    """ args from input
+    """
+    parser = argparse.ArgumentParser(description='HSIC-Bottleneck Plots')
+    parser.add_argument('-t', '--task', default="general",
+        type=str, help='task name')
+    parser.add_argument('-e', '--ext', default="pdf",
+        type=str, help='plot file format')
+    parser.add_argument('-dc', '--data-code', default="mnist",
+        type=str, help='training data name: [mnist|fmnist|cifar10]')
+    parser.add_argument('-tt', '--training-type', default="hsictrain",
+        type=str, help='training type name: [hsictrain|format|backprop]')
+    args = parser.parse_args()
+
+    return args
+    
+def main():
+
+
+    args = get_args()
+
+    config_dict = {}
+    config_dict['task'] = args.task
+    config_dict['data_code'] = args.data_code
+    config_dict['ext'] = args.ext
+    config_dict['training_type'] = args.training_type
+        
+    plot_execution(config_dict)
+
+
+if __name__ == '__main__':
+    main()

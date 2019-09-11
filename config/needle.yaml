@@ -13,7 +13,7 @@ log_batch_interval: 50
 device: cuda
 ext: pdf
 task: needle
-training_type: hsictrain # hsictrain/backprop two options
+training_type: backprop # hsictrain/backprop two options
 
 checkpoint: null
 verbose: 0

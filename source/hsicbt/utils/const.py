@@ -1,8 +1,10 @@
+from time import gmtime, strftime
+
 TTYPE_STANDARD = 'backprop'
 TTYPE_HSICTRAIN = 'hsictrain'
 TTYPE_FORMAT = 'format'
 TTYPE_UNFORMAT = 'unformat'
-
+TTYPE_PLOT = 'plot'
 
 FONTSIZE_TITLE  = 36
 FONTSIZE_XLABEL = 34
@@ -12,3 +14,5 @@ FONTSIZE_YTICKS = 22
 FONTSIZE_LEDEND = 28
 
 DEBUG_MODE = 0
+
+TIME_STAMP = strftime("%d%m%y_%H%M%S")

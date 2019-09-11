@@ -1,12 +1,9 @@
 from . import *
 
-def task_general_func(config_dict):
 
-    if config_dict['do_training']:
-        training_format(config_dict)
-        training_standard(config_dict)
+def plot_general_result(config_dict):
 
-
+    
     try:
         out_standard_batch = load_logs(get_batch_log_filepath(
             config_dict['task'], TTYPE_STANDARD , config_dict['data_code']))
@@ -17,7 +14,7 @@ def task_general_func(config_dict):
         out_format_epoch = load_logs(get_epoch_log_filepath(
             config_dict['task'], TTYPE_FORMAT, config_dict['data_code']))
     except IOError as e:
-        print_highlight("{}.\nPlease do training by setting do_training key to True in config. Program quits.".format(e), 'red')
+        print_highlight("{}.\nNo plot produced unless all backprop/format training has been done. (by altering \'training_type\' in config)".format(e), 'red')
         quit()
 
     metadata = {
@@ -51,3 +48,12 @@ def task_general_func(config_dict):
     plot.plot_epoch_log([out_standard_epoch, out_format_epoch], 'test_acc', metadata)
     plot.save_figure(get_exp_path("{}-epoch-test-acc.{}".format(
         get_plot_filename(config_dict), config_dict['ext'])))
+    
+
+
+def task_general_func(config_dict):
+
+    if config_dict['do_training']:
+        func = task_assigner(config_dict['training_type'])
+        func(config_dict)
+        

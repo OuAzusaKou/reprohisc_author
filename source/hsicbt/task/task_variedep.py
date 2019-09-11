@@ -1,49 +1,6 @@
 from . import *
 
-def task_variedep_func(config_dict):
-
-    model_filename = config_dict['model_file']
-
-    if config_dict['do_training_hsic']:
-
-        config_dict['epochs_hsic'] = 1
-        config_dict['exp_index'] = 1
-        config_dict['model_file'] = "{}-{:04d}.pt".format(
-            os.path.splitext(model_filename)[0], config_dict['exp_index'])
-        training_hsic(config_dict) 
-
-        config_dict['epochs_hsic'] = 5
-        config_dict['exp_index'] = 2
-        config_dict['model_file'] = "{}-{:04d}.pt".format(
-            os.path.splitext(model_filename)[0], config_dict['exp_index'])
-        training_hsic(config_dict) 
-
-        config_dict['epochs_hsic'] = 10
-        config_dict['exp_index'] = 3
-        config_dict['model_file'] = "{}-{:04d}.pt".format(
-            os.path.splitext(model_filename)[0], config_dict['exp_index'])
-        training_hsic(config_dict) 
-
-    if config_dict['do_training_format']:
-
-        config_dict['batch_size'] = 32
-        config_dict['exp_index'] = 1
-        config_dict['model_file'] = "{}-{:04d}.pt".format(
-            os.path.splitext(model_filename)[0], config_dict['exp_index'])
-        training_format(config_dict)
-
-        config_dict['exp_index'] = 2
-        config_dict['model_file'] = "{}-{:04d}.pt".format(
-            os.path.splitext(model_filename)[0], config_dict['exp_index'])
-        training_format(config_dict)
-
-        config_dict['exp_index'] = 3
-        config_dict['model_file'] = "{}-{:04d}.pt".format(
-            os.path.splitext(model_filename)[0], config_dict['exp_index'])
-        training_format(config_dict)
-
-        pass
-
+def plot_variedep_result(config_dict):
     try:
         out_standard_batch_001 = load_logs(get_batch_log_filepath(
             config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 1))
@@ -119,4 +76,14 @@ def task_variedep_func(config_dict):
     # }
     # plot.plot_epoch_log(input_epoch_list, 'test_acc', metadata)
     # plot.save_figure(get_exp_path("{}-epoch-train-acc.{}".format(
-    #     get_plot_filename(config_dict), config_dict['ext'])))
+    #     get_plot_filename(config_dict), config_dict['ext'])))    
+
+def task_variedep_func(config_dict):
+
+    model_filename = config_dict['model_file']
+    func = task_assigner(config_dict['training_type'])
+    config_dict['model_file'] = "{}-{:04d}.pt".format(
+        os.path.splitext(model_filename)[0], config_dict['exp_index'])
+    func(config_dict) 
+
+

@@ -1,26 +1,25 @@
 batch_size: 256 # for hsic-training, task.task_variedep determines format-trainin batchsize
-data_code: mnist
+learning_rate: 0.0001
 n_layers: 5
 hidden_width: null # determined by task.task_varieddim
 log_batch_interval: 20
-device: cuda
-model: linear
-atype: relu
-learning_rate: 0.0005
-hsic_learning_rate: 0.0001
 sigma_hx: 30.
 sigma_hy: 30.
 lambda_x: 1.
 lambda_y: 200.
-epochs_format: 5
-epochs_hsic: 5
+last_hidden_width: null
+epochs: 5
+
+device: cuda
+model: linear
+atype: relu
+data_code: mnist
 model_file: hsic_weight_varied_dim_mnist.pt # will be modified by task.task_varieddim
 checkpoint: null
 task: varied-dim
-last_hidden_width: null
-verbose: 1
 ext: pdf
+training_type: hsictrain # script
+
+verbose: 0
 exp_index: null # determined by task.task_varieddim
-do_training_hsic: True
-do_training_format: True
-do_plot: True
+

@@ -6,14 +6,14 @@ log_batch_interval: 20
 device: cpu
 model: linear
 atype: relu
-hsic_learning_rate: 0.0001
+learning_rate: 0.0001
 sigma_hx: 30.
 sigma_hy: 30.
 lambda_x: 1.
 lambda_y: 200.
 model_file: hsic_weight_linear_mnist.pt
 checkpoint: null
-epochs_hsic: 10
+epochs: 10
 task: hsic-train
 verbose: 0
 exp_index: null

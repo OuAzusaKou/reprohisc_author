@@ -1,11 +1,6 @@
 from . import *
 
-def task_hsicsolve_func(config_dict):
-
-    if config_dict['do_training']:
-        training_standard(config_dict)
-        config_dict['last_hidden_width'] = 10 # since we are using hsic to solve classification
-        training_hsic(config_dict)
+def plot_hsicsolve_result(config_dict):
 
     try:
         out_epoch      = load_logs(get_epoch_log_filepath(
@@ -42,3 +37,12 @@ def task_hsicsolve_func(config_dict):
     plot.plot_activation_distribution()
     plot.save_figure(get_exp_path("fig4-hsic-solve-actdist-{}.{}".format(
         config_dict['data_code'], config_dict['ext'])))
+    
+
+def task_hsicsolve_func(config_dict):
+
+    if config_dict['do_training']:
+        func = task_assigner(config_dict['training_type'])
+        if config_dict['training_type'] == TTYPE_HSICTRAIN:
+            config_dict['last_hidden_width'] = 10 # since we are using hsic to solve classification            
+        func(config_dict)

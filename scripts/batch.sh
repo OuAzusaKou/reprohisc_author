@@ -5,30 +5,29 @@
 #	please see config/README.md for more information
 # # # # # # # # # # # # # # # 
 
-
-# run_hsicbt -cfg config/hsictrain-linear.yaml
-# run_hsicbt -cfg config/general-linear.yaml
+# genernal
+task_general.sh
 
 # fig2a-c
-# run_hsicbt -cfg config/varied-activation.yaml 
+task_variedact.sh
 
 # fig2d-f
-# run_hsicbt -cfg config/varied-depth.yaml 
+task_varieddep.sh
 
 # fig3
-# run_hsicbt -cfg config/needle.yaml 
+task_needle.sh
 
 # fig4-5
-# run_hsicbt -cfg config/hsicsolve.yaml 
+task_hsicsolve.sh
 
 # fig6-b
-# run_hsicbt -cfg config/varied-epoch.yaml 
+task_variedep.sh
 
 # fig7a
-# run_hsicbt -cfg config/varied-dim.yaml
+task_varieddim.sh
 
 # fig7b
-run_hsicbt -cfg config/sigma-combined.yaml
+task_combsig.sh
 
 
 

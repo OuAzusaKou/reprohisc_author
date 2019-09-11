@@ -10,3 +10,6 @@ from ..utils.io import *
 from ..utils.const import *
 from ..utils.path import *
 from ..utils.color import *
+from ..utils.misc import *
+
+from .utils import *
