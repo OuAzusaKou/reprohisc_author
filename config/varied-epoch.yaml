@@ -19,6 +19,5 @@ training_type:
 task: varied-epoch
 
 verbose: 0
-ext: pdf
 log_batch_interval: 20
 exp_index: null # determined by task.task_variedep

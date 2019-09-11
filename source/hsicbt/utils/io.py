@@ -1,5 +1,6 @@
 from .. import *
 from .color import *
+from .misc import get_current_timestamp
 import yaml
 
 def load_yaml(filepath):
@@ -22,8 +23,19 @@ def load_model(filepath):
     return model
 
 def save_logs(logs, filepath):
-    np.save(filepath, logs)
-    print_highlight("Saved [{}]".format(filepath), ctype="blue")
+    timestamp = get_current_timestamp()
+    filename = os.path.basename(filepath)
+    dirname = os.path.dirname(filepath)
+    filename_time = "{}_{}.npy".format(timestamp, os.path.splitext(filename)[0])
+    timestamp_path = os.path.join(dirname, filename_time)
+    np.save(timestamp_path, logs)
+    
+    if os.path.exists(filepath):
+        os.remove(filepath)
+        
+    os.symlink(timestamp_path, filepath)
+    print_highlight("Saved [{}]".format(timestamp_path), ctype="blue")
+    print_highlight("Symlink [{}]".format(filepath), ctype="blue")
 
 def load_logs(filepath):
     logs = np.load(filepath, allow_pickle=True)[()]

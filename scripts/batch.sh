@@ -8,6 +8,8 @@
 # genernal
 task_general.sh
 
+
+
 # fig2a-c
 task_variedact.sh
 
@@ -29,7 +31,8 @@ task_varieddim.sh
 # fig7b
 task_combsig.sh
 
-
+# fig8
+task_general-resconv.sh
 
 
 

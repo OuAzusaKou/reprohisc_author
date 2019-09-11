@@ -3,14 +3,14 @@ from . import *
 
 def plot_varieddepth_result(config_dict):
     try:
-        out_standard_batch_05 = load_logs(get_batch_log_filepath(
-            config_dict['task'], TTYPE_STANDARD , config_dict['data_code'], 1))
-        out_standard_batch_10 = load_logs(get_batch_log_filepath(
-            config_dict['task'], TTYPE_STANDARD , config_dict['data_code'], 2))
-        out_standard_batch_15 = load_logs(get_batch_log_filepath(
-            config_dict['task'], TTYPE_STANDARD , config_dict['data_code'], 3))
-        out_standard_batch_20 = load_logs(get_batch_log_filepath(
-            config_dict['task'], TTYPE_STANDARD , config_dict['data_code'], 4))
+        out_standard_batch_05 = load_logs(get_log_filepath(
+            config_dict['task'], TTYPE_STANDARD , config_dict['data_code'], 1))['batch_log_list']
+        out_standard_batch_10 = load_logs(get_log_filepath(
+            config_dict['task'], TTYPE_STANDARD , config_dict['data_code'], 2))['batch_log_list']
+        out_standard_batch_15 = load_logs(get_log_filepath(
+            config_dict['task'], TTYPE_STANDARD , config_dict['data_code'], 3))['batch_log_list']
+        out_standard_batch_20 = load_logs(get_log_filepath(
+            config_dict['task'], TTYPE_STANDARD , config_dict['data_code'], 4))['batch_log_list']
     except IOError as e:
         print_highlight("{}.\nPlease do training by setting do_training key to True in config. Program quits.".format(e), 'red')
         quit()

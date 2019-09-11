@@ -30,7 +30,7 @@ class ModelResConv(nn.Module):
         elif data_code == 'fmnist':
             dim = 360
         elif data_code == 'cifar10':
-            dim = 980
+            dim = 735
 
         self.output_layer   = makeblock_dense(dim, last_hw, atype)
 

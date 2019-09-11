@@ -3,18 +3,18 @@ from . import *
 def plot_varieddim_result(config_dict):
 
     try:
-        out_standard_batch_001 = load_logs(get_batch_log_filepath(
-            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 1))
-        out_standard_batch_005 = load_logs(get_batch_log_filepath(
-            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 2))
-        out_standard_batch_010 = load_logs(get_batch_log_filepath(
-            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 3))
-        out_standard_epoch_001 = load_logs(get_epoch_log_filepath(
-            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 1))
-        out_standard_epoch_005 = load_logs(get_epoch_log_filepath(
-            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 2))
-        out_standard_epoch_010 = load_logs(get_epoch_log_filepath(
-            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 3))
+        out_standard_batch_001 = load_logs(get_log_filepath(
+            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 1))['batch_log_list']
+        out_standard_batch_005 = load_logs(get_log_filepath(
+            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 2))['batch_log_list']
+        out_standard_batch_010 = load_logs(get_log_filepath(
+            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 3))['batch_log_list']
+        out_standard_epoch_001 = load_logs(get_log_filepath(
+            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 1))['epoch_log_dict']
+        out_standard_epoch_005 = load_logs(get_log_filepath(
+            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 2))['epoch_log_dict']
+        out_standard_epoch_010 = load_logs(get_log_filepath(
+            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], 3))['epoch_log_dict']
 
     except IOError as e:
         print_highlight("{}.\nPlease do training by setting do_training key to True in config. Program quits.".format(e), 'red')

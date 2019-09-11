@@ -3,10 +3,10 @@ from . import *
 def plot_hsicsolve_result(config_dict):
 
     try:
-        out_epoch      = load_logs(get_epoch_log_filepath(
-            config_dict['task'], TTYPE_STANDARD , config_dict['data_code']))
-        out_hsic_epoch = load_logs(get_epoch_log_filepath(
-            config_dict['task'], TTYPE_HSICTRAIN, config_dict['data_code']))
+        out_epoch      = load_logs(get_log_filepath(
+            config_dict['task'], TTYPE_STANDARD , config_dict['data_code']))['epoch_log_dict']
+        out_hsic_epoch = load_logs(get_log_filepath(
+            config_dict['task'], TTYPE_HSICTRAIN, config_dict['data_code']))['epoch_log_dict']
     except IOError as e:
         print_highlight("{}.\nPlease do training by setting do_training key to True in config. Program quits.".format(e), 'red')
         quit()

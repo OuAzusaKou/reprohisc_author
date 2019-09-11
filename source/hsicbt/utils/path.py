@@ -2,23 +2,23 @@ import os
 
 def get_batch_log_filepath(task, ttype, dtype, idx=None):
     if idx:
-        filepath = "./assets/logs/{}-batch-{}-{}-{:04d}.npy".format(task, ttype, dtype, idx)
+        filepath = "{}/assets/logs/{}-batch-{}-{}-{:04d}.npy".format(os.getcwd(), task, ttype, dtype, idx)
     else:
-        filepath = "./assets/logs/{}-batch-{}-{}.npy".format(task, ttype, dtype)
+        filepath = "{}/assets/logs/{}-batch-{}-{}.npy".format(os.getcwd(),task, ttype, dtype)
     return filepath
 
 def get_epoch_log_filepath(task, ttype, dtype, idx=None):
     if idx:
-        filepath = "./assets/logs/{}-epoch-{}-{}-{:04d}.npy".format(task, ttype, dtype, idx)
+        filepath = "{}/assets/logs/{}-epoch-{}-{}-{:04d}.npy".format(os.getcwd(),task, ttype, dtype, idx)
     else:
-        filepath = "./assets/logs/{}-epoch-{}-{}.npy".format(task, ttype, dtype)
+        filepath = "{}/assets/logs/{}-epoch-{}-{}.npy".format(os.getcwd(),task, ttype, dtype)
     return filepath
 
 def get_log_filepath(task, ttype, dtype, idx=None):
     if idx:
-        filepath = "./assets/logs/{}-{}-{}-{:04d}.npy".format(task, ttype, dtype, idx)
+        filepath = "{}/assets/logs/{}-{}-{}-{:04d}.npy".format(os.getcwd(),task, ttype, dtype, idx)
     else:
-        filepath = "./assets/logs/{}-{}-{}.npy".format(task, ttype, dtype)
+        filepath = "{}/assets/logs/{}-{}-{}.npy".format(os.getcwd(),task, ttype, dtype)
     return filepath
 
 def get_plot_filename(config_dict):
