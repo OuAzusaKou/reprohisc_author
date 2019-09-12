@@ -22,10 +22,9 @@ def plot_general_result(config_dict):
         'label': ['stadnard-train', 'format-train']
     }
 
-
     plot.plot_batches_log([log_backprop['batch_log_list'], log_format['batch_log_list']], 'batch_acc', metadata)
-    plot.save_figure(get_exp_path("{}-batch.{}".format(
-        get_plot_filename(config_dict), config_dict['ext'])))
+    plot.save_figure(get_exp_path("{}-batch-{}.{}".format(
+        get_plot_filename(config_dict), os.environ[TIMESTAMP], config_dict['ext'])))
 
     metadata = {
         'title':'{} training performance'.format(config_dict['data_code']),

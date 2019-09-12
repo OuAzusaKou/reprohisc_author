@@ -1,6 +1,6 @@
 from .. import *
+from .const import *
 from .color import *
-from .misc import get_current_timestamp
 import yaml
 
 def load_yaml(filepath):
@@ -23,10 +23,9 @@ def load_model(filepath):
     return model
 
 def save_logs(logs, filepath):
-    timestamp = get_current_timestamp()
     filename = os.path.basename(filepath)
     dirname = os.path.dirname(filepath)
-    filename_time = "{}_{}.npy".format(timestamp, os.path.splitext(filename)[0])
+    filename_time = "{}_{}.npy".format(os.environ[TIMESTAMP], os.path.splitext(filename)[0])
     timestamp_path = os.path.join(dirname, filename_time)
     np.save(timestamp_path, logs)
     

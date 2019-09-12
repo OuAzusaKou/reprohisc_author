@@ -4,6 +4,7 @@ from hsicbt.core.dispatcher import job_execution
 from hsicbt.utils.io import load_yaml
 from hsicbt.utils.welcome import say_hello
 from hsicbt.utils.color import print_highlight
+from hsicbt.utils.const import *
 import argparse
 import os
 
@@ -16,6 +17,8 @@ def get_args():
         type=str, help='config input path')
     parser.add_argument('-d', '--dim', default=0,
         type=int, help='specifying dimension of hidden layers for varied-dim experiments')
+    parser.add_argument('-lhw', '--last-hidden-width', default=0,
+        type=int, help='the last hidden dense layer width of HSIC-trained network')
     parser.add_argument('-dt', '--depth', default=0,
         type=int, help='specifying depth for varied-depth experiments')
     parser.add_argument('-ei', '--exp-idx', default=0, nargs='+',
@@ -33,7 +36,9 @@ def get_args():
     parser.add_argument('-s', '--sigma', default=0,
         type=int, help='nHSIC sigmas')
     parser.add_argument('-sd', '--seed', default=0,
-        type=int, help='random seed for the trial')    
+        type=int, help='random seed for the trial')
+    parser.add_argument('-vb', '--verbose',
+        action='store_true', help='printing the model/config description')
     parser.add_argument('-at', '--activation-func', default=0,
         type=str, help='name of the activation func [elu|tanh|relu|sigmoid]')
     parser.add_argument('-dc', '--data-code', default='mnist',
@@ -55,6 +60,10 @@ def main():
     args = get_args()
     config_dict = load_yaml(args.config)
 
+    if args.last_hidden_width:
+        config_dict['last_hidden_width'] = args.last_hidden_width
+    if args.verbose:
+        config_dict['verbose'] = 1
     if args.lambda_y:
         config_dict['lambda_y'] = args.lambda_y
     if args.seed:
@@ -104,6 +113,8 @@ def main():
     if args.exp_idx and len(args.exp_idx)==1:
         config_dict['exp_index'] = config_dict['exp_index'][0]
 
+    config_dict[TIMESTAMP] = os.environ[TIMESTAMP]
+    
     job_execution(config_dict)
 
 

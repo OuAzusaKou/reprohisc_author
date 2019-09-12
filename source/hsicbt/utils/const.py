@@ -1,3 +1,5 @@
+from .misc import get_current_timestamp
+import os
 
 TTYPE_STANDARD = 'backprop'
 TTYPE_HSICTRAIN = 'hsictrain'
@@ -13,4 +15,7 @@ FONTSIZE_YTICKS = 22
 FONTSIZE_LEDEND = 28
 
 DEBUG_MODE = 0
-
+TIMESTAMP = 'HSICBT_TIMESTAMP'
+if not os.environ.get(TIMESTAMP):
+    os.environ[TIMESTAMP] = get_current_timestamp()
+TIMESTAMP_CODE = os.environ[TIMESTAMP]

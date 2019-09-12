@@ -13,8 +13,8 @@ def get_fig_number(ttype):
 def plot_needle_result(config_dict):
     try:
         plot.plot_1d_activation_kde(get_tmp_path('activation-needle-{}.npy').format(config_dict['training_type']))
-        plot.save_figure(get_exp_path("{}-needle-1d-dist-{}.{}".format(get_fig_number(
-            config_dict['training_type']), config_dict['training_type'], config_dict['ext'])))
+        plot.save_figure(get_exp_path("{}-needle-1d-dist-{}-{}.{}".format(get_fig_number(
+            config_dict['training_type']), config_dict['training_type'], TIMESTAMP_CODE, config_dict['ext'])))
     except IOError as e:
         print_highlight("{}.\nPlease do training by setting do_training key to True in config. Program exits.".format(e), 'red')
         quit()    

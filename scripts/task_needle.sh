@@ -1,20 +1,22 @@
 #!/bin/bash
 
-#run_hsicbt -cfg config/needle.yaml -tt hsictrain
-#run_hsicbt -cfg config/needle.yaml -tt backprop
+export HSICBT_TIMESTAMP=`date +"%d%m%y_%H%M%S"`
+
+
+run_hsicbt -cfg config/needle.yaml -tt hsictrain -ep 1
+run_hsicbt -cfg config/needle.yaml -tt backprop -ep 1
+run_plot -t needle -dc mnist -e pdf -tt hsictrain
+run_plot -t needle -dc mnist -e pdf -tt backprop
+
+
+#run_hsicbt -cfg config/needle.yaml -tt hsictrain -sd 1234 -ep 1
 #run_plot -t needle -dc mnist -e pdf -tt hsictrain
-#run_plot -t needle -dc mnist -e pdf -tt backprop
-
-
-run_hsicbt -cfg config/needle.yaml -tt hsictrain -sd 1234 -ep 1
-run_plot -t needle -dc mnist -e pdf -tt hsictrain
-mv ./assets/exp/fig3b-needle-1d-dist-hsictrain.pdf ./assets/exp/fig3b-needle-1d-dist-hsictrain-1234-1.pdf
-
-run_hsicbt -cfg config/needle.yaml -tt hsictrain -sd 1234 -ep 1
-run_plot -t needle -dc mnist -e pdf -tt hsictrain
-mv ./assets/exp/fig3b-needle-1d-dist-hsictrain.pdf ./assets/exp/fig3b-needle-1d-dist-hsictrain-1234-2.pdf
-
-
+#mv ./assets/exp/fig3b-needle-1d-dist-hsictrain.pdf ./assets/exp/fig3b-needle-1d-dist-hsictrain-1234-1.pdf
+#
+#run_hsicbt -cfg config/needle.yaml -tt hsictrain -sd 1234 -ep 1
+#run_plot -t needle -dc mnist -e pdf -tt hsictrain
+#mv ./assets/exp/fig3b-needle-1d-dist-hsictrain.pdf ./assets/exp/fig3b-needle-1d-dist-hsictrain-1234-2.pdf
+#
 #run_hsicbt -cfg config/needle.yaml -tt hsictrain -sd 1235
 #run_plot -t needle -dc mnist -e pdf -tt hsictrain
 #mv ./assets/exp/fig3b-needle-1d-dist-hsictrain.pdf ./assets/exp/fig3b-needle-1d-dist-hsictrain-1235.pdf
