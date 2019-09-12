@@ -92,12 +92,12 @@ def get_accuracy_hsic(model, dataloader):
 
     return avg_acc*100., reorder_list
 
-def get_layer_parameters(model, layer_idx, size=4):
+def get_layer_parameters(model, idx_range):
 
     param_out = []
     param_out_name = []
     for it, (name, param) in enumerate(model.named_parameters()):
-        if int(it/size) == layer_idx:
+        if it in idx_range:
             param_out.append(param)
             param_out_name.append(name)
 

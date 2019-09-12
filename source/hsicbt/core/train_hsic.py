@@ -40,9 +40,27 @@ def hsic_train(cepoch, model, data_loader, config_dict):
         h_target = misc.to_categorical(h_target, num_classes=10).float()
         h_data = data.view(-1, np.prod(data.size()[1:]))
 
+     
+        idx_range = []
+        it = 0
+        if config_dict['model']=='resnet-conv':
+            for i in range(len(hiddens)):
+                if i==0 or i==len(hiddens)-1:
+                    idx_range.append(np.arange(it,it+4).tolist())
+                    it += 4
+                else:
+                    idx_range.append(np.arange(it,it+8).tolist())
+                    it += 8
+        else:
+            for i in range(len(hiddens)):
+                idx_range.append(np.arange(it, it+4).tolist())
+                it += 4
+    
         for i in range(len(hiddens)):
+            
             output, hiddens = model(data)
-            params, param_names = misc.get_layer_parameters(model=model, layer_idx=i) # so we only optimize one layer at a time
+            params, param_names = misc.get_layer_parameters(model=model, idx_range=idx_range[i]) # so we only optimize one layer at a time
+                
             optimizer = optim.SGD(params, lr = config_dict['learning_rate'], momentum=.9, weight_decay=0.001)
             optimizer.zero_grad()
             if len(hiddens[i].size()) > 2:

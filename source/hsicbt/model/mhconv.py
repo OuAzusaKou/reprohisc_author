@@ -26,7 +26,7 @@ class ModelConv(nn.Module):
         if data_code == 'mnist':
             dim = 128
         elif data_code == 'cifar10':
-            dim = 147
+            dim = 960
         elif data_code == 'fmnist':
             dim = 128
             
