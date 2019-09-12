@@ -25,8 +25,8 @@ def plot_varieddepth_result(config_dict):
         'label': label_list
     }
     plot.plot_batches_log(input_list, 'batch_hsic_hx', metadata)
-    plot.save_figure(get_exp_path("fig2d-varied-depth-hsic_xz-{}.{}".format(
-        config_dict['data_code'], config_dict['ext'])))
+    plot.save_figure(get_exp_path("fig2d-varied-depth-hsic_xz-{}-{}.{}".format(
+        config_dict['data_code'], TIMESTAMP_CODE, config_dict['ext'])))
 
     metadata = {
         'title':'',
@@ -35,8 +35,8 @@ def plot_varieddepth_result(config_dict):
         'label': label_list
     }
     plot.plot_batches_log(input_list, 'batch_hsic_hy', metadata)
-    plot.save_figure(get_exp_path("fig2e-varied-depth-hsic_yz-{}.{}".format(
-        config_dict['data_code'], config_dict['ext'])))
+    plot.save_figure(get_exp_path("fig2e-varied-depth-hsic_yz-{}-{}.{}".format(
+        config_dict['data_code'], TIMESTAMP_CODE, config_dict['ext'])))
 
     metadata = {
         'title':'',
@@ -45,8 +45,8 @@ def plot_varieddepth_result(config_dict):
         'label': label_list
     }
     plot.plot_batches_log(input_list, 'batch_acc', metadata)
-    plot.save_figure(get_exp_path("fig2f-varied-depth-acc-{}.{}".format(
-        config_dict['data_code'], config_dict['ext'])))
+    plot.save_figure(get_exp_path("fig2f-varied-depth-acc-{}-{}.{}".format(
+        config_dict['data_code'], TIMESTAMP_CODE, config_dict['ext'])))
     
 
 def task_varieddepth_func(config_dict):

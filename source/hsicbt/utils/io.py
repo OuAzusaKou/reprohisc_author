@@ -25,7 +25,7 @@ def load_model(filepath):
 def save_logs(logs, filepath):
     filename = os.path.basename(filepath)
     dirname = os.path.dirname(filepath)
-    filename_time = "{}_{}.npy".format(os.environ[TIMESTAMP], os.path.splitext(filename)[0])
+    filename_time = "{}_{}.npy".format(TIMESTAMP_CODE, os.path.splitext(filename)[0])
     timestamp_path = os.path.join(dirname, filename_time)
     np.save(timestamp_path, logs)
     

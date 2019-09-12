@@ -33,8 +33,8 @@ def plot_sigmacomb_result(config_dict):
         'label': label_list
     }
     plot.plot_batches_log(input_list, 'batch_acc', metadata)
-    plot.save_figure(get_exp_path("fig7b-{}-sigmacomb-train-acc.{}".format(
-        get_plot_filename(config_dict), config_dict['ext'])))
+    plot.save_figure(get_exp_path("fig7b-{}-sigmacomb-train-acc-{}.{}".format(
+        get_plot_filename(config_dict), TIMESTAMP_CODE, onfig_dict['ext'])))
 
     input_list = [out_standard_epoch_1, out_standard_epoch_2, out_standard_epoch_3, out_standard_epoch_4]
     label_list = ['sigma=5', 'sigma=10', 'sigma=15', 'sigma-combined']
@@ -46,8 +46,8 @@ def plot_sigmacomb_result(config_dict):
         'label': label_list
     }
     plot.plot_epoch_log(input_list, 'test_acc', metadata)
-    plot.save_figure(get_exp_path("{}-sigmacomb-test-acc.{}".format(
-        get_plot_filename(config_dict), config_dict['ext'])))
+    plot.save_figure(get_exp_path("{}-sigmacomb-test-acc-{}.{}".format(
+        get_plot_filename(config_dict), TIMESTAMP_CODE, config_dict['ext'])))
 
 def task_sigmacomb_func(config_dict):
 

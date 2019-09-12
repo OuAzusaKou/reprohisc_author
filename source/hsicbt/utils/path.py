@@ -25,7 +25,7 @@ def get_plot_filename(config_dict):
     return "{}-{}".format(config_dict['task'], config_dict['data_code'])
 
 def get_exp_path(filename):
-    return "./assets/exp/{}".format(filename)
+    return "{}/assets/exp/{}".format(os.getcwd(), filename)
 
 def get_model_path(filename, idx=None):
     if idx:

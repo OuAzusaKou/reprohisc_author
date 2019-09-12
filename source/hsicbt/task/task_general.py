@@ -23,8 +23,8 @@ def plot_general_result(config_dict):
     }
 
     plot.plot_batches_log([log_backprop['batch_log_list'], log_format['batch_log_list']], 'batch_acc', metadata)
-    plot.save_figure(get_exp_path("{}-batch-{}.{}".format(
-        get_plot_filename(config_dict), os.environ[TIMESTAMP], config_dict['ext'])))
+    outpath = get_exp_path("{}-batch.{}".format(get_plot_filename(config_dict), config_dict['ext']))
+    save_experiment_fig(outpath)
 
     metadata = {
         'title':'{} training performance'.format(config_dict['data_code']),
@@ -33,8 +33,8 @@ def plot_general_result(config_dict):
         'label': ['backprop-train', 'format-train']
     }
     plot.plot_epoch_log([log_backprop['epoch_log_dict'], log_format['epoch_log_dict']], 'train_acc', metadata)
-    plot.save_figure(get_exp_path("{}-epoch-train-acc.{}".format(
-        get_plot_filename(config_dict), config_dict['ext'])))
+    plot.save_figure(get_exp_path("{}-epoch-train-acc-{}.{}".format(
+        get_plot_filename(config_dict), TIMESTAMP_CODE, config_dict['ext'])))
 
     metadata = {
         'title':'{} test performance'.format(config_dict['data_code']),
@@ -43,8 +43,8 @@ def plot_general_result(config_dict):
         'label': ['backprop-train', 'format-train']
     }
     plot.plot_epoch_log([log_backprop['epoch_log_dict'], log_format['epoch_log_dict']], 'test_acc', metadata)
-    plot.save_figure(get_exp_path("{}-epoch-test-acc.{}".format(
-        get_plot_filename(config_dict), config_dict['ext'])))
+    plot.save_figure(get_exp_path("{}-epoch-test-acc-{}.{}".format(
+        get_plot_filename(config_dict), TIMESTAMP_CODE, config_dict['ext'])))
     
 
 def task_general_func(config_dict):
