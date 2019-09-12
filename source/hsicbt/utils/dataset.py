@@ -32,11 +32,11 @@ def get_fasionmnist_data(data_folder_path, batch_size=64):
                                  ])
     # Download and load the training data
     trainset = datasets.FashionMNIST(data_folder_path, download=True, train=True, transform=transform)
-    trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True)
+    trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=False)
 
     # Download and load the test data
     testset = datasets.FashionMNIST(data_folder_path, download=True, train=False, transform=transform)
-    testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size, shuffle=True)
+    testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size, shuffle=False)
 
     return trainloader, testloader
 
@@ -99,7 +99,7 @@ def get_cifar10_data(data_folder_path, batch_size=64):
 
     kwargs = {'num_workers': 4, 'pin_memory': True}
     train_loader = torch.utils.data.DataLoader(train_data, 
-        batch_size=batch_size, shuffle=True, **kwargs)
+        batch_size=batch_size, shuffle=False, **kwargs)
     test_loader  = torch.utils.data.DataLoader(test_data, 
         batch_size=batch_size, shuffle=False, **kwargs)
 

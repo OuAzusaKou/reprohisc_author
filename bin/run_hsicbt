@@ -24,10 +24,16 @@ def get_args():
         type=str, help='training types [hsictrain|format|backprop]')
     parser.add_argument('-bs', '--batch-size', default=0,
         type=int, help='minibatch size')
+    parser.add_argument('-lr', '--learning-rate', default=0,
+        type=float, help='learning rate')
+    parser.add_argument('-ld', '--lambda-y', default=0,
+        type=float, help='the coefficient of the HSIC-bottleneck objective')        
     parser.add_argument('-ep', '--epochs', default=0,
         type=int, help='number of training epochs')
     parser.add_argument('-s', '--sigma', default=0,
         type=int, help='nHSIC sigmas')
+    parser.add_argument('-sd', '--seed', default=0,
+        type=int, help='random seed for the trial')    
     parser.add_argument('-at', '--activation-func', default=0,
         type=str, help='name of the activation func [elu|tanh|relu|sigmoid]')
     parser.add_argument('-dc', '--data-code', default='mnist',
@@ -49,6 +55,12 @@ def main():
     args = get_args()
     config_dict = load_yaml(args.config)
 
+    if args.lambda_y:
+        config_dict['lambda_y'] = args.lambda_y
+    if args.seed:
+        config_dict['seed'] = args.seed
+    if args.learning_rate:
+        config_dict['learning_rate'] = args.learning_rate
     if args.model_file:
         config_dict['model_file'] = args.model_file
     if args.dim:
@@ -85,11 +97,13 @@ def main():
     if debug_mode == 2:
         config_dict['epochs'] = 1
         print_highlight("debug mode - 2", 'yellow')
-
+    if debug_mode == 3:
+        config_dict['verbose'] = 1
+        print_highlight("debug mode - 3", 'yellow')
     
     if args.exp_idx and len(args.exp_idx)==1:
         config_dict['exp_index'] = config_dict['exp_index'][0]
-        
+
     job_execution(config_dict)
 
 

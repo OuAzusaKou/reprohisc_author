@@ -8,6 +8,7 @@ epochs: null # determined by script
 n_layers: 5
 hidden_width: 128
 last_hidden_width: 32
+seed: 1234
 
 device: cuda
 model: linear

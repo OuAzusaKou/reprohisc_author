@@ -9,10 +9,10 @@
 task_general.sh
 
 # fig2a-c
-task_variedact.sh
+task_varied-act.sh
 
 # fig2d-f
-task_varieddep.sh
+task_varied-depth.sh
 
 # fig3
 task_needle.sh
@@ -21,10 +21,10 @@ task_needle.sh
 task_hsicsolve.sh
 
 # fig6-b
-task_variedep.sh
+task_varied-ep.sh
 
 # fig7a
-task_varieddim.sh
+task_varied-dim.sh
 
 # fig7b
 task_combsig.sh

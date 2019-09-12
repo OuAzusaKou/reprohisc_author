@@ -49,8 +49,6 @@ def plot_general_result(config_dict):
     
 
 def task_general_func(config_dict):
-
-    if config_dict['do_training']:
-        func = task_assigner(config_dict['training_type'])
-        func(config_dict)
+    func = task_assigner(config_dict['training_type'])
+    func(config_dict)
         

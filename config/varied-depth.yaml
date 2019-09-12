@@ -1,5 +1,5 @@
 batch_size: 256
-learning_rate: 0.0005
+learning_rate: 0.05
 sigma_hx: 30.
 sigma_hy: 30.
 lambda_x: 1.
@@ -8,6 +8,7 @@ epochs: 5
 n_layers: null # determined by script/task_varieddepth.sh
 hidden_width: 64
 last_hidden_width: 64
+seed: 1234
 
 device: cuda
 model: linear

@@ -13,14 +13,12 @@ def training_standard(config_dict):
     train_loader, test_loader = get_dataset_from_code(
         config_dict['data_code'], config_dict['batch_size'])
 
-    torch.manual_seed(1234)
+    torch.manual_seed(config_dict['seed'])
     vanilla_model  = ModelVanilla(**config_dict)
-    torch.manual_seed(1234)
+    torch.manual_seed(config_dict['seed'])
     hsic_model     = model_distribution(config_dict)
     model          = ModelEnsemble(hsic_model, vanilla_model)
-
-
-   
+    
     if config_dict['verbose']:
         print(model)
         print(json.dumps(config_dict, sort_keys=True,
@@ -72,6 +70,7 @@ def training_format_combined(config_dict):
     train_loader, test_loader = get_dataset_from_code(
         config_dict['data_code'], config_dict['batch_size'])
     
+    torch.manual_seed(config_dict['seed'])
     vanilla_model = ModelVanilla(**config_dict)
     num_hsic_model = len(config_dict['model_file'])
     hsic_models = []
@@ -132,9 +131,9 @@ def training_format(config_dict):
 
     train_loader, test_loader = get_dataset_from_code(
         config_dict['data_code'], config_dict['batch_size'])
-    torch.manual_seed(1234)
+    torch.manual_seed(config_dict['seed'])
     vanilla_model = ModelVanilla(**config_dict)
-    torch.manual_seed(1234)
+    torch.manual_seed(config_dict['seed'])
     hsic_model = model_distribution(config_dict)
     
     optimizer = optim.SGD( filter(lambda p: p.requires_grad, vanilla_model.parameters()), 
@@ -194,8 +193,9 @@ def training_hsic(config_dict):
 
     train_loader, test_loader = get_dataset_from_code(
         config_dict['data_code'], config_dict['batch_size'])
-
+    #torch.manual_seed(config_dict['seed'])
     model = model_distribution(config_dict)
+
     if config_dict['verbose']:
         print(model)
         print(json.dumps(config_dict, sort_keys=True,
@@ -218,8 +218,6 @@ def training_hsic(config_dict):
     epoch_log_dict = {}
     epoch_log_dict['train_acc'] = []
     epoch_log_dict['test_acc'] = []
-
-
     
     for cepoch in epoch_range:
         log = hsic_train(cepoch, model, train_loader, config_dict)

@@ -5,8 +5,6 @@ import  torch.nn.functional as F
 from    torch.utils.data import DataLoader
 from    torchvision import datasets, transforms
 
-torch.manual_seed(1234)
-
 from tqdm import tqdm
 import numpy as np
 import yaml

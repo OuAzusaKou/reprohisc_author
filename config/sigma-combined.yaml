@@ -1,4 +1,4 @@
-batch_size: 256
+batch_size: 512
 learning_rate: 0.0001
 sigma_hx: null # determined by task.task_sigmacomb
 sigma_hy: null # determined by task.task_sigmacomb
@@ -9,6 +9,7 @@ checkpoint: null
 n_layers: 5
 hidden_width: 128
 last_hidden_width: 64
+seed: 1234
 
 device: cuda
 model: linear

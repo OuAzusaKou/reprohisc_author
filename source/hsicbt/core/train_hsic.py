@@ -58,7 +58,7 @@ def hsic_train(cepoch, model, data_loader, config_dict):
             loss = config_dict['lambda_x']*hx_l - config_dict['lambda_y']*hy_l
             loss.backward()
             optimizer.step()
-        
+
         # if config_dict['hsic_solve']:
         #     prec1, reorder_list = misc.get_accuracy_hsic(model, data_loader)
     
@@ -79,11 +79,12 @@ def hsic_train(cepoch, model, data_loader, config_dict):
                 )
 
         if ((batch_idx+1) % config_dict['log_batch_interval'] == 0):
+
             batch_log['batch_acc'].append(batch_loss.avg)
             batch_log['batch_loss'].append(batch_acc.avg)
             batch_log['batch_hsic_hx'].append(batch_hischx.avg)
             batch_log['batch_hsic_hy'].append(batch_hischy.avg)
-        
+
         pbar.set_description(msg)
-    
+
     return batch_log
