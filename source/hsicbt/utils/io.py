@@ -1,6 +1,7 @@
 from .. import *
 from .const import *
 from .color import *
+from .misc import *
 import yaml
 
 def load_yaml(filepath):
@@ -14,27 +15,21 @@ def load_yaml(filepath):
     return data
     
 def save_model(model, filepath):
-    torch.save(model.state_dict(), filepath)
-    print_highlight("Saved [{}]".format(filepath))
-
+    timestamp_path = attaching_timestamp_filepath(filepath)
+    torch.save(model.state_dict(), timestamp_path)    
+    make_symlink(timestamp_path, filepath)    
+    print_highlight("Saved [{}]".format(timestamp_path))
+    
 def load_model(filepath):
     model = torch.load(filepath)
     print_highlight("Loaded [{}]".format(filepath))
     return model
 
 def save_logs(logs, filepath):
-    filename = os.path.basename(filepath)
-    dirname = os.path.dirname(filepath)
-    filename_time = "{}_{}.npy".format(TIMESTAMP_CODE, os.path.splitext(filename)[0])
-    timestamp_path = os.path.join(dirname, filename_time)
+    timestamp_path = attaching_timestamp_filepath(filepath)
     np.save(timestamp_path, logs)
-    
-    if os.path.exists(filepath):
-        os.remove(filepath)
-        
-    os.symlink(timestamp_path, filepath)
+    make_symlink(timestamp_path, filepath)
     print_highlight("Saved [{}]".format(timestamp_path), ctype="blue")
-    print_highlight("Symlink [{}]".format(filepath), ctype="blue")
 
 def load_logs(filepath):
     logs = np.load(filepath, allow_pickle=True)[()]

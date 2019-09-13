@@ -50,17 +50,17 @@ def training_standard(config_dict):
         print_highlight("Epoch - [{:04d}]: Training Acc: {:.2f}".format(cepoch, train_acc), 'green')
         print_highlight("Epoch - [{:04d}]: Testing  Acc: {:.2f}".format(cepoch, test_acc), 'green')
 
-    if config_dict['task'] == 'needle':
-        activations_extraction(model, train_loader, get_tmp_path("activation-needle-{}.npy".format(config_dict['training_type'])), 1)
+        if config_dict['task'] == 'needle':
+            activations_extraction(model, train_loader, get_tmp_path("activation-needle-{}.npy".format(config_dict['training_type'])), 1)
 
-    log_dict = {}
-    log_dict['batch_log_list'] = batch_log_list
-    log_dict['epoch_log_dict'] = epoch_log_dict
-    log_dict['config_dict'] = config_dict    
-    save_logs(log_dict, get_log_filepath(
-        config_dict['task'], TTYPE_STANDARD, config_dict['data_code'], config_dict['exp_index']))
+        log_dict = {}
+        log_dict['batch_log_list'] = batch_log_list
+        log_dict['epoch_log_dict'] = epoch_log_dict
+        log_dict['config_dict'] = config_dict    
+        save_logs(log_dict, get_log_filepath(
+            config_dict['task'], TTYPE_STANDARD, config_dict['data_code'], config_dict['exp_index']))
 
-    del model
+
     return batch_log_list, epoch_log_dict
 
 def training_format_combined(config_dict):
@@ -115,13 +115,13 @@ def training_format_combined(config_dict):
         print_highlight("Epoch - [{:04d}]: Training Acc: {:.2f}".format(cepoch, train_acc), 'green')
         print_highlight("Epoch - [{:04d}]: Testing  Acc: {:.2f}".format(cepoch, test_acc), 'green')
 
-    log_dict = {}
-    log_dict['batch_log_list'] = batch_log_list
-    log_dict['epoch_log_dict'] = epoch_log_dict
-    log_dict['config_dict'] = config_dict    
-    save_logs(log_dict, get_log_filepath(
-        config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], config_dict['exp_index']))
-
+        log_dict = {}
+        log_dict['batch_log_list'] = batch_log_list
+        log_dict['epoch_log_dict'] = epoch_log_dict
+        log_dict['config_dict'] = config_dict    
+        save_logs(log_dict, get_log_filepath(
+            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], config_dict['exp_index']))
+    
 
     return batch_log_list, epoch_log_dict
 
@@ -176,15 +176,15 @@ def training_format(config_dict):
         print_highlight("Epoch - [{:04d}]: Training Acc: {:.2f}".format(cepoch, train_acc), 'green')
         print_highlight("Epoch - [{:04d}]: Testing  Acc: {:.2f}".format(cepoch, test_acc), 'green')
 
-
-    log_dict = {}
-    log_dict['batch_log_list'] = batch_log_list
-    log_dict['epoch_log_dict'] = epoch_log_dict
-    log_dict['config_dict'] = config_dict
-    save_logs(log_dict, get_log_filepath(
-        config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], config_dict['exp_index']))
     
-    del ensemble_model
+        log_dict = {}
+        log_dict['batch_log_list'] = batch_log_list
+        log_dict['epoch_log_dict'] = epoch_log_dict
+        log_dict['config_dict'] = config_dict
+        save_logs(log_dict, get_log_filepath(
+            config_dict['task'], TTYPE_FORMAT, config_dict['data_code'], config_dict['exp_index']))
+        
+    
     return batch_log_list, epoch_log_dict
 
 def training_hsic(config_dict):
@@ -246,16 +246,16 @@ def training_hsic(config_dict):
             epoch_log_dict['train_acc'].append(train_acc)
             epoch_log_dict['test_acc'].append(test_acc)
 
-    if config_dict['task'] == 'hsic-solve':
-        activations_extraction(model, train_loader, "./assets/tmp/activation-onehot.npy")
-    if config_dict['task'] == 'needle':
-        activations_extraction(model, train_loader, "./assets/tmp/activation-needle-{}.npy".format(config_dict['training_type']), 1)
-
-    log_dict = {}
-    log_dict['batch_log_list'] = batch_log_list
-    log_dict['epoch_log_dict'] = epoch_log_dict
-    log_dict['config_dict'] = config_dict
-    save_logs(log_dict, get_log_filepath(
-        config_dict['task'], TTYPE_HSICTRAIN, config_dict['data_code'], config_dict['exp_index']))
-
+        if config_dict['task'] == 'hsic-solve':
+            activations_extraction(model, train_loader, "./assets/tmp/activation-onehot.npy")
+        if config_dict['task'] == 'needle':
+            activations_extraction(model, train_loader, "./assets/tmp/activation-needle-{}.npy".format(config_dict['training_type']), 1)
+    
+        log_dict = {}
+        log_dict['batch_log_list'] = batch_log_list
+        log_dict['epoch_log_dict'] = epoch_log_dict
+        log_dict['config_dict'] = config_dict
+        save_logs(log_dict, get_log_filepath(
+            config_dict['task'], TTYPE_HSICTRAIN, config_dict['data_code'], config_dict['exp_index']))
+    
     return batch_log_list, epoch_log_dict

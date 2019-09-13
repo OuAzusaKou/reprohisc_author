@@ -13,8 +13,7 @@ import os
 import json
 from time import gmtime, strftime
 
-if not os.path.exists("./assets/models"):
-    os.makedirs("./assets/models")
+
 if not os.path.exists("./assets"):
     os.makedirs("./assets")
 if not os.path.exists("./assets/data"):
@@ -23,5 +22,13 @@ if not os.path.exists("./assets/logs"):
     os.makedirs("./assets/logs")
 if not os.path.exists("./assets/exp"):
     os.makedirs("./assets/exp")
+if not os.path.exists("./assets/models"):
+    os.makedirs("./assets/models")
+if not os.path.exists("./assets/logs/raw"):
+    os.makedirs("./assets/logs/raw")
+if not os.path.exists("./assets/exp/raw"):
+    os.makedirs("./assets/exp/raw")
+if not os.path.exists("./assets/models/raw"):
+    os.makedirs("./assets/models/raw")
 if not os.path.exists("./assets/tmp"):
     os.makedirs("./assets/tmp")

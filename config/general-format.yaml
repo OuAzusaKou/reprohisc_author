@@ -12,8 +12,8 @@ data_code: mnist
 model_file: hsic_weight_linear_mnist.pt
 task: general
 
-log_batch_interval: 20
-verbose: 1
+log_batch_interval: 2
+verbose: 0 
 ext: pdf
 exp_index: null
 

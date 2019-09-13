@@ -29,8 +29,8 @@ task_varied-dim.sh
 # fig7b
 task_combsig.sh
 
-# fig8
-task_general-resconv.sh
+# fig8 `command [dataset] [hsictrain_epoch] [is_hsictrain]`
+task_general-resconv.sh cifar10 50 1
 
 
 

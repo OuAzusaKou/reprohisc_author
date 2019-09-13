@@ -155,6 +155,8 @@ def plot_1d_activation_kde(datapath):
     ax.set_ylabel('KDE density', fontsize=FONTSIZE_YLABEL)
 
 def save_figure(filepath):
-    plt.savefig(filepath, bbox_inches='tight')
+    timestamp_path = attaching_timestamp_filepath(filepath)
+    plt.savefig(timestamp_path, bbox_inches='tight')
+    make_symlink(timestamp_path, filepath)
     plt.clf()
     print_highlight("Saved [{}]".format(filepath))
