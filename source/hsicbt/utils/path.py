@@ -1,10 +1,13 @@
 import os
 from .path import *
+from .const import *
+from .color import *
 
 def attaching_timestamp_filepath(filepath):
     filename = os.path.basename(filepath)
     dirname  = os.path.dirname(filepath)
-    filename_time = "{}_{}.npy".format(TIMESTAMP_CODE, os.path.splitext(filename)[0])
+    filename, ext = os.path.splitext(filename)
+    filename_time = "{}_{}.{}".format(TIMESTAMP_CODE, filename, ext)
     timestamp_path = os.path.join(dirname, 'raw', filename_time)
     return timestamp_path
 

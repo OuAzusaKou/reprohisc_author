@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from .color import *
 from .const import *
+from .misc import *
+from .path import *
 
 def plot_epoch_log(curve_list, ptype, metadata):
 
