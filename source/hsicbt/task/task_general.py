@@ -33,8 +33,8 @@ def plot_general_result(config_dict):
         'label': ['backprop-train', 'format-train']
     }
     plot.plot_epoch_log([log_backprop['epoch_log_dict'], log_format['epoch_log_dict']], 'train_acc', metadata)
-    plot.save_figure(get_exp_path("{}-epoch-train-acc-{}.{}".format(
-        get_plot_filename(config_dict), TIMESTAMP_CODE, config_dict['ext'])))
+    filepath = get_exp_path("{}-epoch-train-acc.{}".format(get_plot_filename(config_dict), config_dict['ext']))
+    save_experiment_fig(filepath)
 
     metadata = {
         'title':'{} test performance'.format(config_dict['data_code']),
@@ -43,9 +43,8 @@ def plot_general_result(config_dict):
         'label': ['backprop-train', 'format-train']
     }
     plot.plot_epoch_log([log_backprop['epoch_log_dict'], log_format['epoch_log_dict']], 'test_acc', metadata)
-    plot.save_figure(get_exp_path("{}-epoch-test-acc-{}.{}".format(
-        get_plot_filename(config_dict), TIMESTAMP_CODE, config_dict['ext'])))
-    
+    filepath = get_exp_path("{}-epoch-test-acc.{}".format(get_plot_filename(config_dict), config_dict['ext']))
+    save_experiment_fig(filepath)
 
 def task_general_func(config_dict):
     func = task_assigner(config_dict['training_type'])

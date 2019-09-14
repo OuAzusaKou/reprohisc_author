@@ -24,7 +24,7 @@ def save_experiment_fig(filepath):
     filename_noext, ext = os.path.splitext(filename)
     dirname = os.path.dirname(filepath)
     timestamp_filename = "{}-{}{}".format(filename_noext, TIMESTAMP_CODE, ext)
-    timestamp_filepath = os.path.join(dirname, timestamp_filename)
+    timestamp_filepath = get_exp_raw_path(timestamp_filename)
     if os.path.exists(filepath):
         os.remove(filepath)
     plot.save_figure(timestamp_filepath)

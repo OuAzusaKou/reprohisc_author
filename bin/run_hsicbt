@@ -102,14 +102,17 @@ def main():
     if debug_mode == 1:
         config_dict['epochs'] = 1
         config_dict['verbose'] = 1
-        print_highlight("debug mode - 1", 'yellow')
+        print_highlight("debug mode - 1: only run 1 epoch and printing models/configs", 'yellow')
     if debug_mode == 2:
         config_dict['epochs'] = 1
-        print_highlight("debug mode - 2", 'yellow')
+        print_highlight("debug mode - 2: only run 1 epoch with full batches", 'yellow')
     if debug_mode == 3:
         config_dict['verbose'] = 1
-        print_highlight("debug mode - 3", 'yellow')
-    
+        print_highlight("debug mode - 3: printing models and configs", 'yellow')
+    if debug_mode == 4:
+        config_dict['epochs'] = 1
+        print_highlight("debug mode - 4: running only 1 batch and 1 epoch", 'yellow')
+        
     if args.exp_idx and len(args.exp_idx)==1:
         config_dict['exp_index'] = config_dict['exp_index'][0]
 

@@ -20,8 +20,8 @@ def plot_hsicsolve_result(config_dict):
     }
     filename = ""
     plot.plot_epoch_log([out_epoch, out_hsic_epoch], 'test_acc', metadata)
-    plot.save_figure(get_exp_path("{}-test-acc-{}.{}".format(
-        get_plot_filename(config_dict), TIMESTAMP_CODE, config_dict['ext'])))
+    filepath = get_exp_path("{}-test-acc-{}.{}".format(get_plot_filename(config_dict), TIMESTAMP_CODE, config_dict['ext']))
+    save_experiment_fig(filepath)
 
     metadata = {
         #'title':'{} test performance'.format(config_dict['data_code']),
@@ -30,14 +30,14 @@ def plot_hsicsolve_result(config_dict):
         'ylabel': 'training accurarcy',
         'label': ['backpropagation', 'unformatted-training']
     }
-    plot.plot_epoch_log([out_epoch, out_hsic_epoch], 'train_acc', metadata)
-    plot.save_figure(get_exp_path("fig5-{}-train-acc-{}.{}".format(
-        get_plot_filename(config_dict), TIMESTAMP_CODE, config_dict['ext'])))
-
-    plot.plot_activation_distribution()
-    plot.save_figure(get_exp_path("fig4-hsic-solve-actdist-{}-{}.{}".format(
-        config_dict['data_code'], TIMESTAMP_CODE, config_dict['ext'])))
     
+    plot.plot_epoch_log([out_epoch, out_hsic_epoch], 'train_acc', metadata)
+    filepath = get_exp_path("fig5-{}-train-acc.{}".format(get_plot_filename(config_dict), config_dict['ext']))
+    save_experiment_fig(filepath)
+    
+    plot.plot_activation_distribution()
+    filepath = get_exp_path("fig4-hsic-solve-actdist-{}.{}".format(config_dict['data_code'], config_dict['ext']))
+    save_experiment_fig(filepath)
 
 def task_hsicsolve_func(config_dict):
 

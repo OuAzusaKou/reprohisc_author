@@ -54,8 +54,8 @@ def plot_varieddim_result(config_dict):
         'label': label_list
     }
     plot.plot_batches_log(input_batch_list, 'batch_acc', metadata)
-    plot.save_figure(get_exp_path("fig7a-varied-dim-acc-{}-{}.{}".format(
-        config_dict['data_code'], TIMESTAMP_CODE, config_dict['ext'])))
+    filepath = get_exp_path("fig7a-varied-dim-acc-{}.{}".format( config_dict['data_code'], config_dict['ext']))
+    save_experiment_fig(filepath)
 
     # metadata = {
     #     #'title':'format-train of Varied-dim',

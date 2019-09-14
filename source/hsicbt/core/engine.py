@@ -228,14 +228,14 @@ def training_hsic(config_dict):
             config_dict['task'] == 'sigma-combined' or \
             config_dict['task'] == 'varied-dim'     or \
             config_dict['task'] == 'varied-epoch':
-            # save with same filename for convenience
-            save_model(model, get_model_path("{}".format(
-                config_dict['model_file'])))
+
             # save with each indexed
             filename = os.path.splitext(config_dict['model_file'])[0]
             filename = "{}-{:04d}.pt".format(filename, cepoch)
-            save_model(model, get_model_path("{}".format(
-                filename)))
+            save_model(model,
+                       get_model_path("{}".format(filename)),
+                       get_model_path("{}".format(config_dict['model_file']))
+            )
 
     
         if config_dict['task'] == 'hsic-solve':

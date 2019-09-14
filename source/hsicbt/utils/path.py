@@ -7,7 +7,7 @@ def attaching_timestamp_filepath(filepath):
     filename = os.path.basename(filepath)
     dirname  = os.path.dirname(filepath)
     filename, ext = os.path.splitext(filename)
-    filename_time = "{}_{}.{}".format(TIMESTAMP_CODE, filename, ext)
+    filename_time = "{}_{}{}".format(TIMESTAMP_CODE, filename, ext)
     timestamp_path = os.path.join(dirname, 'raw', filename_time)
     return timestamp_path
 
@@ -56,21 +56,21 @@ def get_exp_raw_path(filename):
 
 def get_model_path(filename, idx=None):
     if idx:
-        filepath = "./assets/models/{}-{:04d}.pt".format(
-            os.path.splitext(filename)[0], idx)
+        filepath = "{}/assets/models/{}-{:04d}.pt".format(
+            os.getcwd(), os.path.splitext(filename)[0], idx)
     else:
-        filepath = "./assets/models/{}".format(filename)
+        filepath = "{}/assets/models/{}".format(os.getcwd(), filename)
     return filepath
 
 def get_model_raw_path(filename, idx=None):
     if idx:
-        filepath = "./assets/models/raw/{}-{:04d}.pt".format(
-            os.path.splitext(filename)[0], idx)
+        filepath = "{}/assets/models/raw/{}-{:04d}.pt".format(
+            os.getcwd(), os.path.splitext(filename)[0], idx)
     else:
-        filepath = "./assets/models/raw/{}".format(filename)
+        filepath = "{}/assets/models/raw/{}".format(os.getcwd(), filename)
     return filepath
 
 def get_tmp_path(filename):
-    return "./assets/tmp/{}".format(filename)
+    return "{}/assets/tmp/{}".format(os.getcwd(), filename)
 
 

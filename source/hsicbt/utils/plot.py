@@ -48,7 +48,8 @@ def plot_batches_log(curve_list, ptype, metadata):
 
 
     n = len(curve_list[0][0][ptype])
-    
+    if n==0:
+        n=1
     xticks_idx = np.arange(0, n*(len(curve_list[0])+1), n).tolist()
     xticks_val = np.arange(len(xticks_idx)).tolist()
 
@@ -157,8 +158,6 @@ def plot_1d_activation_kde(datapath):
     ax.set_ylabel('KDE density', fontsize=FONTSIZE_YLABEL)
 
 def save_figure(filepath):
-    timestamp_path = attaching_timestamp_filepath(filepath)
-    plt.savefig(timestamp_path, bbox_inches='tight')
-    make_symlink(timestamp_path, filepath)
+    plt.savefig(filepath, bbox_inches='tight')
     plt.clf()
-    print_highlight("Saved [{}]".format(filepath))
+    print_highlight("Saved   [{}]".format(filepath), ctype='blue')

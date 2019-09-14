@@ -53,9 +53,9 @@ def plot_variedep_result(config_dict):
         'label': label_list
     }
     plot.plot_batches_log(input_batch_list, 'batch_acc', metadata)
-    plot.save_figure(get_exp_path("fig6a-varied-epoch-acc-{}.{}".format(
-        config_dict['data_code'], config_dict['ext'])))
-
+    filepath = get_exp_path("fig6a-varied-epoch-acc-{}.{}".format(config_dict['data_code'], config_dict['ext']))
+    save_experiment_fig(filepath)
+    
     metadata = {
         #'title':'format-train of Varied-epoch',
         'title': '',
@@ -64,9 +64,8 @@ def plot_variedep_result(config_dict):
         'label': label_list
     }
     plot.plot_batches_log(input_batch_list, 'batch_loss', metadata)
-    plot.save_figure(get_exp_path("fig6b-varied-epoch-loss-{}.{}".format(
-        config_dict['data_code'], config_dict['ext'])))
-
+    filepath = get_exp_path("fig6b-varied-epoch-loss-{}.{}".format(config_dict['data_code'], config_dict['ext']))
+    save_experiment_fig(filepath)
     # metadata = {
     #     #'title':'{} test performance of Varied-epoch'.format(config_dict['data_code']),
     #     'title': '',
