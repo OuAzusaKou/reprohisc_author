@@ -29,7 +29,7 @@ def standard_train(cepoch, model, data_loader, optimizer, config_dict):
     # for batch_idx, (data, target) in enumerate(data_loader):
     for batch_idx, (data, target) in pbar:
 
-        if int(os.environ.get('HSICBT_DEBUG'))==4:
+        if os.environ.get('HSICBT_DEBUG')=='4':
             if batch_idx > 5:
                 break
 
