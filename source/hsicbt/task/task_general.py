@@ -16,7 +16,8 @@ def plot_general_result(config_dict):
         quit()
 
     metadata = {
-        'title':'{} batch training performance'.format(config_dict['data_code']),
+        #'title':'{} batch training performance'.format(config_dict['data_code']),
+        'title': '',
         'xlabel': 'epochs',
         'ylabel': 'training batch accurarcy',
         'label': ['stadnard-train', 'format-train']
@@ -27,9 +28,10 @@ def plot_general_result(config_dict):
     save_experiment_fig(outpath)
 
     metadata = {
-        'title':'{} training performance'.format(config_dict['data_code']),
+        #'title':'{} training performance'.format(config_dict['data_code']),
+        'title': '',
         'xlabel': 'epochs',
-        'ylabel': 'training accurarcy (eval at the end of epoch)',
+        'ylabel': 'training accurarcy',
         'label': ['backprop-train', 'format-train']
     }
     plot.plot_epoch_log([log_backprop['epoch_log_dict'], log_format['epoch_log_dict']], 'train_acc', metadata)
@@ -37,9 +39,10 @@ def plot_general_result(config_dict):
     save_experiment_fig(filepath)
 
     metadata = {
-        'title':'{} test performance'.format(config_dict['data_code']),
+        #'title':'{} test performance'.format(config_dict['data_code']),
+        'title': '',
         'xlabel': 'epochs',
-        'ylabel': 'test accurarcy (eval at the end of epoch)',
+        'ylabel': 'test accurarcy',
         'label': ['backprop-train', 'format-train']
     }
     plot.plot_epoch_log([log_backprop['epoch_log_dict'], log_format['epoch_log_dict']], 'test_acc', metadata)

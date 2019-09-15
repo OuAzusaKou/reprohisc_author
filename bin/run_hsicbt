@@ -112,10 +112,11 @@ def main():
     if debug_mode == 4:
         config_dict['epochs'] = 1
         print_highlight("debug mode - 4: running only 1 batch and 1 epoch", 'yellow')
+        config_dict['verbose'] = 1
+        print(config_dict)
         
     if args.exp_idx and len(args.exp_idx)==1:
         config_dict['exp_index'] = config_dict['exp_index'][0]
-
     config_dict[TIMESTAMP] = os.environ[TIMESTAMP]
     
     job_execution(config_dict)

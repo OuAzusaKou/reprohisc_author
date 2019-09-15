@@ -8,6 +8,7 @@ from ..task.task_variedep    import *
 from ..task.task_varieddepth import *
 from ..task.task_sigmacomb   import *
 from ..task.task_varieddim   import *
+from ..task.task_resconv     import *
 
 def plot_execution(config_dict):
 
@@ -47,6 +48,9 @@ def plot_execution(config_dict):
     elif config_dict['task'] == 'varied-dim':
         plot_varieddim_result(config_dict)
 
+    elif config_dict['task'] == 'resconv':
+        plot_resconv_result(config_dict)
+ 
     else:
         raise ValueError("Unknown given task [{}], please check \
             hsicbt.dispatcher.job_execution".format(config_dict['task']))
@@ -90,6 +94,9 @@ def job_execution(config_dict):
 
     elif config_dict['task'] == 'varied-dim':
         task_varieddim_func(config_dict)
+
+    elif config_dict['task'] == 'resconv':
+        task_resconv_func(config_dict)
 
     else:
         raise ValueError("Unknown given task [{}], please check \

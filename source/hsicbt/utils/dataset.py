@@ -52,14 +52,14 @@ def get_mnist_data(data_folder_path, batch_size=64):
     train_data = datasets.MNIST(data_folder_path, train=True,  download=True, 
         transform=transforms.Compose([
             transforms.ToTensor(), 
-            transforms.Normalize((0.1307,), (0.3081,))
+            #transforms.Normalize((0.1307,), (0.3081,))
             ])
         )
 
     test_data  = datasets.MNIST(data_folder_path, train=False, download=True, 
         transform=transforms.Compose([
             transforms.ToTensor(), 
-            transforms.Normalize((0.1307,), (0.3081,))
+            #transforms.Normalize((0.1307,), (0.3081,))
             ])
         )
 
@@ -84,12 +84,12 @@ def get_cifar10_data(data_folder_path, batch_size=64):
         transforms.ToTensor(),
         # transforms.RandomCrop(32, padding=4),
         # transforms.RandomHorizontalFlip(),
-        transforms.Normalize((0.4913, 0.4821, 0.4465), (0.2470, 0.2434, 0.2615)),
+        #transforms.Normalize((0.4913, 0.4821, 0.4465), (0.2470, 0.2434, 0.2615)),
         
     ])
     transform_test = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Normalize((0.4913, 0.4821, 0.4465), (0.2470, 0.2434, 0.2615)),
+        #transforms.Normalize((0.4913, 0.4821, 0.4465), (0.2470, 0.2434, 0.2615)),
     ])
 
     train_data = datasets.CIFAR10(data_folder_path, train=True, 

@@ -227,6 +227,7 @@ def training_hsic(config_dict):
             config_dict['task'] == 'activation'     or \
             config_dict['task'] == 'sigma-combined' or \
             config_dict['task'] == 'varied-dim'     or \
+            config_dict['task'] == 'resconv'        or \
             config_dict['task'] == 'varied-epoch':
 
             # save with each indexed

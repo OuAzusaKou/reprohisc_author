@@ -27,7 +27,7 @@ def plot_variedact_result(config_dict):
         'label': label_list
     }
     plot.plot_batches_log(input_list, 'batch_hsic_hx', metadata)
-    filepath = get_exp_path("fig2a-varied-activation-hsic_xz-{}-{}.{}".format(config_dict['data_code'], config_dict['ext']))
+    filepath = get_exp_path("fig2a-varied-activation-hsic_xz-{}.{}".format(config_dict['data_code'], config_dict['ext']))
     save_experiment_fig(filepath)
 
     metadata = {
@@ -38,7 +38,7 @@ def plot_variedact_result(config_dict):
         'label': label_list
     }
     plot.plot_batches_log(input_list, 'batch_hsic_hy', metadata)
-    filepath = get_exp_path("fig2b-varied-activation-hsic_yz-{}-{}.{}".format(config_dict['data_code'], config_dict['ext']))
+    filepath = get_exp_path("fig2b-varied-activation-hsic_yz-{}.{}".format(config_dict['data_code'], config_dict['ext']))
     save_experiment_fig(filepath)
     
     metadata = {
@@ -49,7 +49,7 @@ def plot_variedact_result(config_dict):
         'label': label_list
     }
     plot.plot_batches_log(input_list, 'batch_acc', metadata)
-    filepath = get_exp_path("fig2c-varied-activation-acc-{}-{}.{}".format(config_dict['data_code'], config_dict['ext']))
+    filepath = get_exp_path("fig2c-varied-activation-acc-{}.{}".format(config_dict['data_code'], config_dict['ext']))
     save_experiment_fig(filepath)
 
 
