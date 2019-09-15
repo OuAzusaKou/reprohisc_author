@@ -35,6 +35,7 @@ def plot_varieddepth_result(config_dict):
     }
     plot.plot_batches_log(input_list, 'batch_hsic_hy', metadata)
     filepath = get_exp_path("fig2e-varied-depth-hsic_yz-{}.{}".format(config_dict['data_code'], config_dict['ext']))
+    save_experiment_fig(filepath)
 
     metadata = {
         'title':'',
