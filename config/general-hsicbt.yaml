@@ -10,7 +10,7 @@ lambda_y: 200.
 seed: 1234
 
 device: cuda
-model: resnet-conv
+model: linear
 atype: relu
 data_code: mnist
 model_file: hsic_weight_linear_mnist.pt
