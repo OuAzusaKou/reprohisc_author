@@ -5,7 +5,9 @@ from . import *
 
 def plot_needle_result(config_dict):
     try:
-        plot.plot_1d_activation_kde(get_tmp_path('activation-needle-{}.npy').format(config_dict['training_type']))
+        fig = plot.plot_1d_activation_kde(get_tmp_path('activation-needle-{}.npy').format(config_dict['training_type']))
+        plot.adding_footnote(fig, config_dict['footnote'])
+
         if config_dict['training_type'] == TTYPE_HSICTRAIN:
             filepath = get_experiment_fig_filename(config_dict, 'needle-1')
         elif config_dict['training_type'] == TTYPE_STANDARD:

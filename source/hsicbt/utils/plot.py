@@ -65,6 +65,8 @@ def plot_batches_log(curve_list, ptype, metadata):
     ax.set_xticklabels(xticks_val, fontsize=FONTSIZE_LEDEND)
     ax.set_xlabel(metadata['xlabel'], fontsize=FONTSIZE_XLABEL)
     ax.set_ylabel(metadata['ylabel'], fontsize=FONTSIZE_YLABEL)
+
+
     
 
 def plot_activation_distribution():
@@ -157,6 +159,11 @@ def plot_1d_activation_kde(datapath):
     ax.set_xlabel('tanh activation', fontsize=FONTSIZE_XLABEL)
     ax.set_ylabel('KDE density', fontsize=FONTSIZE_YLABEL)
 
+    return fig
+
+def adding_footnote(fig, text):
+    fig.text(0., 0., text, fontsize=FONTSIZE_FOOTNOTE)
+    
 def save_figure(filepath):
     plt.savefig(filepath, bbox_inches='tight')
     plt.clf()

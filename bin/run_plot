@@ -17,6 +17,8 @@ def get_args():
         type=str, help='training data name: [mnist|fmnist|cifar10]')
     parser.add_argument('-tt', '--training-type', default="hsictrain",
         type=str, help='training type name: [hsictrain|format|backprop]')
+    parser.add_argument('-ft', '--footnote', default="",
+        type=str, help='footnote for the bottom of exp image')
     args = parser.parse_args()
 
     return args
@@ -31,6 +33,7 @@ def main():
     config_dict['data_code'] = args.data_code
     config_dict['ext'] = args.ext
     config_dict['training_type'] = args.training_type
+    config_dict['footnote'] = args.footnote
         
     plot_execution(config_dict)
 
