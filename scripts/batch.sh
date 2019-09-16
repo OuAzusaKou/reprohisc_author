@@ -30,9 +30,9 @@ task_varied-dim.sh
 task_combsig.sh
 
 # fig8 `command [dataset] [hsictrain_epoch] [is_hsictrain]`
-#task_general-resconv.sh -d cifar10 -e 50 -t 1
-#task_general-resconv.sh -d mnist -e 30 -t 1
-#task_general-resconv.sh -d fmnist -e 50 -t 1
+task_general-resconv.sh -d cifar10 -e 50 -t 1
+task_general-resconv.sh -d mnist -e 30 -t 1
+task_general-resconv.sh -d fmnist -e 50 -t 1
 task_resconv.sh
 
 
