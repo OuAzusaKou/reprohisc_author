@@ -32,3 +32,7 @@ if not os.path.exists("./assets/models/raw"):
     os.makedirs("./assets/models/raw")
 if not os.path.exists("./assets/tmp"):
     os.makedirs("./assets/tmp")
+if not os.path.exists("./assets/activation"):
+    os.makedirs("./assets/activation")
+if not os.path.exists("./assets/activation/raw"):
+    os.makedirs("./assets/activation/raw")

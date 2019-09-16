@@ -1,7 +1,7 @@
 from .. import *
 
 def get_current_timestamp():
-    return strftime("%d%m%y_%H%M%S")
+    return strftime("%y%m%d_%H%M%S")
 
 def get_in_channels(data_code):
     in_ch = -1

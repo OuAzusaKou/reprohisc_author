@@ -5,10 +5,12 @@ from .train_misc     import *
 from .train_hsic     import *
 from .train_standard import *
 from ..utils.const   import *
+from ..utils.path    import *
 
 def training_standard(config_dict):
 
     print_emph("Standard training")
+    code_name = [config_dict['task'], TTYPE_STANDARD, config_dict['data_code'], config_dict['exp_index']]
 
     train_loader, test_loader = get_dataset_from_code(
         config_dict['data_code'], config_dict['batch_size'])
@@ -51,14 +53,16 @@ def training_standard(config_dict):
         print_highlight("Epoch - [{:04d}]: Testing  Acc: {:.2f}".format(cepoch, test_acc), 'green')
 
         if config_dict['task'] == 'needle':
-            activations_extraction(model, train_loader, get_tmp_path("activation-needle-{}.npy".format(config_dict['training_type'])), 1)
+            data = activations_extraction(model, train_loader, 1)
+            filepath = get_act_path(*code_name)
+            save_logs(data, filepath)
+
 
         log_dict = {}
         log_dict['batch_log_list'] = batch_log_list
         log_dict['epoch_log_dict'] = epoch_log_dict
         log_dict['config_dict'] = config_dict    
-        save_logs(log_dict, get_log_filepath(
-            config_dict['task'], TTYPE_STANDARD, config_dict['data_code'], config_dict['exp_index']))
+        save_logs(log_dict, get_log_filepath(*code_name))
 
 
     return batch_log_list, epoch_log_dict
@@ -190,6 +194,7 @@ def training_format(config_dict):
 def training_hsic(config_dict):
 
     print_emph("HSIC-Bottleneck training")
+    code_name = [config_dict['task'], TTYPE_HSICTRAIN, config_dict['data_code'], config_dict['exp_index']]
 
     train_loader, test_loader = get_dataset_from_code(
         config_dict['data_code'], config_dict['batch_size'])
@@ -248,15 +253,19 @@ def training_hsic(config_dict):
             epoch_log_dict['test_acc'].append(test_acc)
 
         if config_dict['task'] == 'hsic-solve':
-            activations_extraction(model, train_loader, "./assets/tmp/activation-onehot.npy")
+            data = activations_extraction(model, train_loader, "activation-onehot.npy")
+            filepath = get_act_path(*code_name)
+            save_logs(data, filepath)
+            
         if config_dict['task'] == 'needle':
-            activations_extraction(model, train_loader, "./assets/tmp/activation-needle-{}.npy".format(config_dict['training_type']), 1)
-    
+            data = activations_extraction(model, train_loader, out_dim=1)
+            filepath = get_act_path(*code_name)
+            save_logs(data, filepath)
+            
         log_dict = {}
         log_dict['batch_log_list'] = batch_log_list
         log_dict['epoch_log_dict'] = epoch_log_dict
         log_dict['config_dict'] = config_dict
-        save_logs(log_dict, get_log_filepath(
-            config_dict['task'], TTYPE_HSICTRAIN, config_dict['data_code'], config_dict['exp_index']))
+        save_logs(log_dict, get_log_filepath(*code_name))
     
     return batch_log_list, epoch_log_dict

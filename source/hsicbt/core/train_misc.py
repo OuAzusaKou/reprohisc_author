@@ -1,7 +1,7 @@
 from .. import *
 from .  import *
 
-def activations_extraction(model, data_loader, filepath, out_dim=10, hid_idx=-1,):
+def activations_extraction(model, data_loader, out_dim=10, hid_idx=-1,):
 
     out_activation = np.zeros([len(data_loader)*data_loader.batch_size, out_dim])
     out_label = np.zeros([len(data_loader)*data_loader.batch_size,])
@@ -19,10 +19,9 @@ def activations_extraction(model, data_loader, filepath, out_dim=10, hid_idx=-1,
         end = (batch_idx+1)*data_loader.batch_size
         out_activation[begin:end] = hiddens[hid_idx].detach().cpu().numpy()
         out_label[begin:end] = target.detach().cpu().numpy()
+        
+    return {"activation":out_activation, "label":out_label}
 
-    
-    np.save(filepath, {"activation":out_activation, "label":out_label})
-    print("Saved", filepath, out_activation.shape)
 
 def hsic_objective(hidden, h_target, h_data, sigma_hy, sigma_hx):
         

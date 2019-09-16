@@ -1,10 +1,11 @@
 #!/bin/bash
 
-export HSICBT_TIMESTAMP=`date +"%d%m%y_%H%M%S"`
+#export HSICBT_TIMESTAMP=`date +"%d%m%y_%H%M%S"`
 
 
-run_hsicbt -cfg config/needle.yaml -tt hsictrain -ep 5
-run_hsicbt -cfg config/needle.yaml -tt backprop -ep 5
+
+run_hsicbt -cfg config/needle.yaml -tt hsictrain -ep 1
+run_hsicbt -cfg config/needle.yaml -tt backprop -ep 1
 run_plot -t needle -dc mnist -e pdf -tt hsictrain
 run_plot -t needle -dc mnist -e pdf -tt backprop
 

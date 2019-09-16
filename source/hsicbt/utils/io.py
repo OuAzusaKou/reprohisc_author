@@ -37,3 +37,4 @@ def load_logs(filepath):
     logs = np.load(filepath, allow_pickle=True)[()]
     print_highlight("Loaded  [{}]".format(filepath), ctype="blue")
     return logs
+
