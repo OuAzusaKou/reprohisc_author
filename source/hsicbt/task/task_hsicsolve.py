@@ -35,7 +35,7 @@ def plot_hsicsolve_result(config_dict):
     filepath = get_exp_path("fig5-{}-train-acc.{}".format(get_plot_filename(config_dict), config_dict['ext']))
     save_experiment_fig(filepath)
     
-    plot.plot_activation_distribution()
+    plot.plot_activation_distribution(get_act_path(config_dict['task'], config_dict['training_type'], config_dict['data_code']))
     filepath = get_exp_path("fig4-hsic-solve-actdist-{}.{}".format(config_dict['data_code'], config_dict['ext']))
     save_experiment_fig(filepath)
 

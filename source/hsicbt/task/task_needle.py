@@ -6,7 +6,7 @@ def plot_needle_result(config_dict):
             filepath = get_act_raw_path(os.path.basename(config_dict['filepath']))
             fig = plot.plot_1d_activation_kde(filepath )
         else:
-            fig = plot.plot_1d_activation_kde(get_tmp_path('activation-needle-{}.npy').format(config_dict['training_type']))
+            fig = plot.plot_1d_activation_kde(get_act_path(config_dict['task'], config_dict['training_type'], config_dict['data_code']))
         plot.adding_footnote(fig, config_dict['footnote'])
 
         if config_dict['training_type'] == TTYPE_HSICTRAIN:

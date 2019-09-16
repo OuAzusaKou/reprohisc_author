@@ -253,7 +253,7 @@ def training_hsic(config_dict):
             epoch_log_dict['test_acc'].append(test_acc)
 
         if config_dict['task'] == 'hsic-solve':
-            data = activations_extraction(model, train_loader, "activation-onehot.npy")
+            data = activations_extraction(model, train_loader)
             filepath = get_act_path(*code_name)
             save_logs(data, filepath)
             
