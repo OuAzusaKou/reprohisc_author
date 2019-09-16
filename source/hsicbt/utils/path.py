@@ -18,7 +18,7 @@ def make_symlink(src_path, sym_path):
     os.symlink(src_path, sym_path)
     print_highlight("Symlink [{}]".format(sym_path), ctype="blue")
 
-def code_name(task, ttype, dtype, ext, idx=None):
+def code_name(task, ttype, dtype, idx):
     if idx:
         filename = "{}-{}-{}-{:04d}.npy".format(task, ttype, dtype, idx)
     else:
