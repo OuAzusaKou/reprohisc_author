@@ -11,6 +11,7 @@ atype: relu
 data_code: mnist
 model_file: hsic_weight_linear_mnist.pt
 task: general
+training_type: format
 
 log_batch_interval: 2
 verbose: 0 

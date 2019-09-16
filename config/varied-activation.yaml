@@ -12,10 +12,11 @@ seed: 1234
 
 device: cuda
 model: linear
-atype: null # determined by task.task_variedact
+atype: relu # determined by task.task_variedact
 data_code: mnist
 checkpoint: null
 task: varied-activation
+training_type: backprop
 
 verbose: 0
 log_batch_interval: 20

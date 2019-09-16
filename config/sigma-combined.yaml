@@ -1,7 +1,7 @@
 batch_size: 512
 learning_rate: 0.0001
-sigma_hx: null # determined by task.task_sigmacomb
-sigma_hy: null # determined by task.task_sigmacomb
+sigma_hx: 30. # determined by task.task_sigmacomb
+sigma_hy: 30. # determined by task.task_sigmacomb
 lambda_x: 1.
 lambda_y: 200.
 epochs: 5
@@ -17,8 +17,9 @@ atype: relu
 data_code: mnist
 model_file: hsic_weight_sigmacomb_mnist.pt # will be modified by task.task_sigmacomb
 task: sigma-combined
+training_type: hsictrain
 
 verbose: 0
 ext: pdf
 log_batch_interval: 20
-exp_index: null # determined by task.task_sigmacomb
+exp_index: 0 # determined by task.task_sigmacomb

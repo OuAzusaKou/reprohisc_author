@@ -16,6 +16,7 @@ data_code: mnist
 model_file: hsic_weight_linear_mnist.pt
 checkpoint: null
 task: hsic-train
+training_type: hsictrain
 
 log_batch_interval: 20
 verbose: 0

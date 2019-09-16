@@ -5,7 +5,7 @@ sigma_hy: 30.
 lambda_x: 1.
 lambda_y: 200.
 epochs: 5
-n_layers: null # determined by script/task_varieddepth.sh
+n_layers: 1 # determined by script/task_varieddepth.sh
 hidden_width: 64
 last_hidden_width: 64
 seed: 1234
