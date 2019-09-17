@@ -12,7 +12,7 @@ def plot_each_resconv_result(log_format, log_backprop, ext, fig_prefix, config_d
     }
 
     plot.plot_batches_log([log_backprop['batch_log_list'], log_format['batch_log_list']], 'batch_acc', metadata)
-    outpath = get_exp_path("fig8-{}-batch.{}".format(get_plot_filename(config_dict), ext))
+    outpath = get_exp_path("{}-batch.{}".format(get_plot_filename(config_dict), ext))
     save_experiment_fig(outpath)
 
     metadata = {
@@ -23,7 +23,7 @@ def plot_each_resconv_result(log_format, log_backprop, ext, fig_prefix, config_d
         'label': ['backprop-train', 'format-train']
     }
     plot.plot_epoch_log([log_backprop['epoch_log_dict'], log_format['epoch_log_dict']], 'train_acc', metadata)
-    filepath = get_exp_path("fig8-{}-epoch-train-acc.{}".format(get_plot_filename(config_dict), ext))
+    filepath = get_exp_path("{}-epoch-train-acc.{}".format(get_plot_filename(config_dict), ext))
     save_experiment_fig(filepath)
 
     metadata = {
@@ -34,7 +34,7 @@ def plot_each_resconv_result(log_format, log_backprop, ext, fig_prefix, config_d
         'label': ['backprop-train', 'format-train']
     }
     plot.plot_epoch_log([log_backprop['epoch_log_dict'], log_format['epoch_log_dict']], 'test_acc', metadata)
-    filepath = get_exp_path("fig8-{}-{}-epoch-test-acc.{}".format(fig_prefix, get_plot_filename(config_dict), ext))
+    filepath = get_exp_path("{}-{}-epoch-test-acc.{}".format(fig_prefix, get_plot_filename(config_dict), ext))
     save_experiment_fig(filepath)
 
 def plot_resconv_result(config_dict):
