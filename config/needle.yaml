@@ -1,7 +1,7 @@
 batch_size: 512
 learning_rate: 0.0001
-sigma_hx: 20.
-sigma_hy: 20.
+sigma_hx: 1.
+sigma_hy: 1.
 lambda_x: 1
 lambda_y: 200
 epochs: 5
@@ -17,6 +17,6 @@ task: needle
 training_type: backprop # hsictrain/backprop two options
 
 checkpoint: null
-verbose: 0
+verbose: 1
 exp_index: null
 do_training: True

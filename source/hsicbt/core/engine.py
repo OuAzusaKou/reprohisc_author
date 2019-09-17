@@ -261,6 +261,13 @@ def training_hsic(config_dict):
             data = activations_extraction(model, train_loader, out_dim=1)
             filepath = get_act_path(*code_name)
             save_logs(data, filepath)
+
+            out_list = [64, 32, 16, 8, 4, 2, 1]
+            for i, h in enumerate(out_list):
+                data = activations_extraction(model, train_loader, out_dim=h, hid_idx=i)
+                _code_name = [config_dict['task'], TTYPE_HSICTRAIN, config_dict['data_code'], (cepoch-1)*len(out_list)+i]
+                filepath = get_act_path(*_code_name)
+                save_logs(data, filepath)
             
         log_dict = {}
         log_dict['batch_log_list'] = batch_log_list

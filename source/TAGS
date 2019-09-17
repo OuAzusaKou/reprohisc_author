@@ -1,213 +1,0 @@
-
-hsicbt/math/hsic.py,253
-def sigma_estimation(5,75
-def distmat(19,391
-def kernelmat(28,615
-def distcorr(46,1230
-def compute_kernel(51,1345
-def mmd(62,1730
-def mmd_pxpy_pxy(89,2582
-def hsic_regular(114,3317
-def hsic_normalized(123,3536
-def hsic_normalized_cca(133,3850
-
-hsicbt/model/mensemble.py,73
-class ModelEnsemble(3,18
-    def __init__(5,51
-    def forward(11,282
-
-hsicbt/model/mhlinear.py,72
-class ModelLinear(5,66
-    def __init__(7,97
-    def forward(32,1012
-
-hsicbt/model/block.py,498
-def get_activation(4,19
-def get_activation_functional(17,290
-def get_primative_block(30,574
-def makeblock_dense(41,1035
-def makeblock_conv(52,1344
-class BasicBlockConv(61,1625
-    def __init__(63,1697
-    def forward(71,2011
-class BasicBlockDense(75,2120
-    def __init__(77,2194
-    def forward(84,2436
-class BasicResidualBlockDense(88,2539
-    def __init__(90,2582
-    def forward(100,2966
-class BasicResidualBlockConv(107,3166
-    def __init__(109,3208
-    def forward(121,3737
-
-hsicbt/model/mreslinear.py,76
-class ModelResLinear(5,66
-    def __init__(7,100
-    def forward(33,1024
-
-hsicbt/model/mhconv.py,70
-class ModelConv(5,66
-    def __init__(7,95
-    def forward(38,1125
-
-hsicbt/model/mresconv.py,73
-class ModelResConv(5,66
-    def __init__(7,98
-    def forward(40,1161
-
-hsicbt/model/mvanilla.py,72
-class ModelVanilla(3,18
-    def __init__(5,50
-    def forward(12,317
-
-hsicbt/model/mneedle.py,71
-class ModelNeedle(5,66
-    def __init__(7,97
-    def forward(32,964
-
-hsicbt/model/mensemblecomb.py,77
-class ModelEnsembleComb(3,18
-    def __init__(5,55
-    def forward(11,293
-
-hsicbt/utils/color.py,90
-def get_color(10,200
-def print_emph(28,565
-def print_highlight(35,766
-def test(39,889
-
-hsicbt/utils/meter.py,90
-class AverageMeter(3,2
-    def __init__(5,52
-    def reset(8,98
-    def update(16,242
-
-hsicbt/utils/plot.py,192
-def plot_epoch_log(10,174
-def plot_batches_log(42,1308
-def plot_activation_distribution(72,2244
-def plot_1d_activation_kde(126,4523
-def adding_footnote(164,5824
-def save_figure(167,5916
-
-hsicbt/utils/misc.py,239
-def get_current_timestamp(3,18
-def get_in_channels(6,85
-def get_in_dimensions(18,392
-def get_accuracy_epoch(30,717
-def get_accuracy(49,1430
-def get_accuracy_hsic(64,1956
-def get_layer_parameters(95,3148
-def to_categorical(107,3446
-
-hsicbt/utils/dataset.py,123
-def get_dataset_from_code(4,19
-def get_fasionmnist_data(28,979
-def get_mnist_data(43,1770
-def get_cifar10_data(74,2870
-
-hsicbt/utils/welcome.py,84
-def say_hello(4,44
-def hello_01(15,199
-def hello_02(25,671
-def hello_03(34,1029
-
-hsicbt/utils/path.py,427
-def attaching_timestamp_filepath(7,85
-def make_symlink(15,419
-def get_batch_log_filepath(21,621
-def get_epoch_log_filepath(28,923
-def get_log_filepath(35,1224
-def get_log_raw_filepath(42,1507
-def get_plot_filename(49,1802
-def get_exp_path(52,1912
-def get_exp_raw_path(55,2001
-def get_act_path(58,2098
-def get_act_raw_path(61,2194
-def get_model_path(64,2298
-def get_model_raw_path(72,2572
-def get_tmp_path(80,2858
-
-hsicbt/utils/io.py,112
-def load_yaml(9,135
-def save_model(19,403
-def load_model(25,662
-def save_logs(30,792
-def load_logs(36,1034
-
-hsicbt/core/dispatcher.py,54
-def plot_execution(13,361
-def job_execution(58,1826
-
-hsicbt/core/train_hsic.py,21
-def hsic_train(6,95
-
-hsicbt/core/train_misc.py,92
-def activations_extraction(4,35
-def hsic_objective(27,895
-def model_distribution(34,1156
-
-hsicbt/core/train_standard.py,25
-def standard_train(6,95
-
-hsicbt/core/engine.py,125
-def training_standard(9,156
-def training_format_combined(66,2460
-def training_format(128,4944
-def training_hsic(190,7271
-
-hsicbt/task/task_sigmacomb.py,65
-def plot_sigmacomb_result(3,17
-def task_sigmacomb_func(52,2713
-
-hsicbt/task/task_needle.py,58
-def plot_needle_result(6,20
-def task_needle_func(24,870
-
-hsicbt/task/task_resconv.py,99
-def plot_each_resconv_result(4,18
-def plot_resconv_result(40,1565
-def task_resconv_func(59,2849
-
-hsicbt/task/task_hsicsolve.py,65
-def plot_hsicsolve_result(3,17
-def task_hsicsolve_func(42,1693
-
-hsicbt/task/task_varieddepth.py,69
-def plot_varieddepth_result(4,18
-def task_varieddepth_func(51,2099
-
-hsicbt/task/task_varieddim.py,65
-def plot_varieddim_result(3,17
-def task_varieddim_func(83,3442
-
-hsicbt/task/utils.py,96
-def task_assigner(4,18
-def get_experiment_fig_filename(14,269
-def save_experiment_fig(22,657
-
-hsicbt/task/task_variedep.py,63
-def plot_variedep_result(3,17
-def task_variedep_func(80,3475
-
-hsicbt/task/task_variedact.py,65
-def plot_variedact_result(3,17
-def task_variedact_func(56,2290
-
-hsicbt/task/task_general.py,61
-def plot_general_result(4,18
-def task_general_func(52,2022
-
-hsicbt/task/__init__.py,0
-
-hsicbt/__init__.py,0
-
-hsicbt/core/__init__.py,0
-
-hsicbt/utils/__init__.py,0
-
-hsicbt/utils/const.py,0
-
-hsicbt/model/__init__.py,0
-
-hsicbt/math/__init__.py,0
