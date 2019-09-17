@@ -51,9 +51,11 @@ def plot_resconv_result(config_dict):
     except IOError as e:
         print_highlight("{}.\nNo plot produced unless all backprop/format training has been done. (by altering \'training_type\' in config)".format(e), 'red')
         quit()
-
+    config_dict['data_code'] = 'mnist' # sorry, i'm a bad programmer
     plot_each_resconv_result(log_format_mnist, log_backprop_mnist, config_dict['ext'], 'fig8a', config_dict)
+    config_dict['data_code'] = 'cifar10'
     plot_each_resconv_result(log_format_cifar10, log_backprop_cifar10, config_dict['ext'], 'fig8b', config_dict)
+    config_dict['data_code'] = 'fmnist'    
     plot_each_resconv_result(log_format_fmnist, log_backprop_fmnist, config_dict['ext'], 'fig8c', config_dict)        
 
 def task_resconv_func(config_dict):
